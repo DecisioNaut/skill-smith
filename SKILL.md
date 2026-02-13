@@ -1,6 +1,6 @@
 ---
 name: agent-builder-skill
-description: Build best-practice Agent Skills from online resources like documentation sites, repositories, and examples. Guides you through resource gathering, skill structure design, validation, and creating complete, specification-compliant skills ready for sharing.
+description: Build specification-compliant Agent Skills from documentation sites, GitHub repos, and APIs. Systematically gather resources, design SKILL.md structure, validate naming rules, and package for sharing. Use when user mentions creating skills, building agent capabilities, SKILL.md files, agent skills format, or skill development.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -14,12 +14,13 @@ This skill helps you create high-quality Agent Skills that follow the official [
 
 ## When to Use This Skill
 
-Activate this skill when the user wants to:
-- Create a new Agent Skill from online resources
-- Build skills based on documentation websites or GitHub repositories
-- Structure a skill following best practices and the official specification
-- Validate existing skill implementations against the spec
-- Package skills for sharing via GitHub or other platforms
+Activate this skill when the user mentions:
+- Creating a new Agent Skill or building agent capabilities
+- Converting documentation, repos, or APIs into skills
+- SKILL.md file format, frontmatter, or structure
+- Skill validation, naming rules, or specification compliance
+- Packaging skills for GitHub or sharing with others
+- Progressive disclosure, skill discovery, or agent integration
 
 ## Overview of Agent Skills
 
@@ -33,11 +34,13 @@ Agent Skills are folders containing a `SKILL.md` file with instructions that tea
 
 ```
 skill-name/
-├── SKILL.md          # Required: metadata + instructions
+├── SKILL.md          # Required: metadata + instructions (< 500 lines)
 ├── scripts/          # Optional: executable code
-├── references/       # Optional: detailed documentation
+├── references/       # Optional: detailed docs (loaded on demand)
 └── assets/           # Optional: templates, data, images
 ```
+
+**Key Principle**: Keep SKILL.md under 500 lines (~5000 tokens). Move detailed reference material to separate files for on-demand loading.
 
 ## Building a New Skill: Step-by-Step Process
 
@@ -52,42 +55,79 @@ Before building a skill, understand what you're building:
 3. **Who is the target user?** (developers, data analysts, specific domain experts)
 4. **What's the expected complexity?** (simple instructions-only vs. scripts/assets needed)
 
-**Use the Resource Gathering Templates** in `assets/resource-templates.md` to systematically collect:
-- Documentation sites to analyze
-- Example repositories to study
+**Systematically Gather Resources Using Available Tools:**
+
+For each resource URL provided, use `fetch_webpage` or similar tools to:
+
+1. **Fetch the initial page** and extract:
+   - Navigation links and site structure
+   - Table of contents or section links
+   - Links to key pages (Quick Start, API Reference, Examples, Tutorials)
+
+2. **Follow and fetch important linked pages**:
+   - Getting Started / Quick Start guides
+   - API Reference or technical documentation
+   - Examples and code samples
+   - Best practices or troubleshooting sections
+   - FAQ or common issues pages
+
+3. **For GitHub repositories**, explore:
+   - README.md (main overview)
+   - docs/ or documentation/ directories
+   - examples/ or samples/ directories
+   - Key source code files showing patterns
+   - CONTRIBUTING.md for development guidelines
+
+**Use the Resource Gathering Templates** in `assets/resource-templates.md` to systematically document:
+- Documentation sites analyzed (including multiple pages visited)
+- Example repositories studied
 - API references or technical specs
 - Existing similar skills for inspiration
 
-### 2. Analyze Resources
+### 2. Analyze Resources Thoroughly
 
-For each resource provided:
+For each resource provided, **fetch and read multiple pages** to get comprehensive understanding:
 
 **For GitHub Repositories:**
-- Examine README.md for overview and setup instructions
-- Review code structure and key files
-- Look for examples/ or docs/ directories
-- Note dependencies and requirements
-- Identify common patterns and best practices
+1. **Fetch and examine README.md** for overview and setup instructions
+2. **Navigate to and fetch examples/ or docs/ directories** - read actual example files
+3. **Fetch key source files** to understand code structure and patterns
+4. **Check for CONTRIBUTING.md, LICENSE, and other documentation files**
+5. Note dependencies, requirements, and prerequisites
+6. Identify common patterns and best practices from actual code
 
 **For Documentation Sites:**
-- Parse the navigation structure (what topics are covered?)
-- Identify the most frequently referenced sections
-- Extract code examples and common patterns
-- Note any prerequisites or setup steps
-- Look for quick-start guides vs. detailed references
+1. **Fetch the main/landing page** and identify navigation structure
+2. **Systematically fetch key sections** (don't rely on just the initial URL):
+   - Quick Start or Getting Started page
+   - Core concepts or fundamentals
+   - API Reference or technical details
+   - Code examples and tutorials
+   - Troubleshooting or FAQ
+3. **Extract from each page fetched**:
+   - Step-by-step procedures
+   - Code examples and patterns
+   - Prerequisites and setup requirements
+   - Common errors and solutions
+4. **Map the site structure** - which sections are foundational vs. advanced
 
 **For API References:**
-- Understand authentication and authorization
-- Identify core endpoints and methods
-- Note common request/response patterns
-- Look for rate limits or usage constraints
-- Find example code snippets
+1. **Fetch authentication/authorization documentation**
+2. **Fetch endpoint documentation** for core operations
+3. **Fetch examples page** if available
+4. **Gather from all fetched pages**:
+   - Authentication methods and credential requirements
+   - Core endpoints and their methods
+   - Request/response patterns and examples
+   - Rate limits, quotas, or usage constraints
+   - Error codes and handling strategies
 
 **Ask clarifying questions if:**
 - Resources conflict or show different approaches
-- Critical information is missing (authentication, error handling)
+- Critical information is missing after thorough exploration
 - The scope is unclear or too broad
 - Dependencies or prerequisites aren't documented
+- You need access to pages behind authentication
 
 ### 3. Design the Skill Structure
 
@@ -195,9 +235,11 @@ allowed-tools: Bash(curl:*) Bash(python3:*) Read Write
 
 5. **Be specific about edge cases**: Don't assume agents will infer error handling or special cases
 
-6. **Keep main SKILL.md under 500 lines**: Move detailed reference material to references/
+6. **Keep SKILL.md under 500 lines** (~5000 tokens recommended): Move detailed reference material to references/
 
 7. **Test readability**: Instructions should be clear if read by a human OR an agent
+
+8. **Keep file references shallow**: Reference files should be "one level deep" from SKILL.md. Avoid nested reference chains like SKILL.md → REF1.md → REF2.md
 
 ### 5. Validate the Skill
 
@@ -250,12 +292,20 @@ See `scripts/validate_skill.py` for automated validation against the specificati
 2. Follow instructions literally - don't assume implied steps
 3. Test with common use cases and edge cases
 4. Verify that referenced files are accessible and clear
+5. Check that SKILL.md is under 500 lines
 
 **Agent testing (if possible):**
 1. Give an agent access to the skill
 2. Ask it to perform relevant tasks
 3. Observe where it gets confused or stuck
 4. Refine instructions based on agent behavior
+
+**Security considerations:**
+- If skill includes scripts, consider sandboxing requirements
+- Document any dangerous operations that need user confirmation
+- Avoid hardcoding credentials or sensitive data
+- Note required network access in `compatibility` field
+- Consider allow-listing approach for tool execution
 
 ### 8. Document and Package
 
@@ -381,6 +431,45 @@ When building a skill, if you need more context or resources, **ask the user** t
 - **Missing validation**: Not checking naming rules and frontmatter format
 - **Implicit knowledge**: Assuming agents will "figure out" what to do
 
+## Troubleshooting
+
+### Problem: Validation fails with "name doesn't match directory"
+
+**Solution**: Ensure the directory name exactly matches the `name` field in SKILL.md frontmatter. Both must be lowercase with hyphens only.
+
+```bash
+# If validation says: "Directory name 'PDF-Processing' doesn't match skill name 'pdf-processing'"
+mv PDF-Processing pdf-processing
+```
+
+### Problem: SKILL.md is too large (> 500 lines)
+
+**Solution**: Move detailed content to references/:
+- API documentation → `references/API_REFERENCE.md`
+- Long examples → `references/EXAMPLES.md`
+- Technical details → `references/TECHNICAL.md`
+
+Keep SKILL.md focused on core instructions and reference these files.
+
+### Problem: Description too vague, agent doesn't activate skill
+
+**Solution**: Add specific keywords and use cases to description:
+- ❌ "Helps with PDFs"
+- ✅ "Extract text from PDF files, fill forms, merge documents. Use when working with PDF documents or user mentions PDFs, forms, extraction."
+
+### Problem: Can't fetch GitHub repository content
+
+**Solution**: 
+1. Check if repo is public (private repos need authentication)
+2. Use raw GitHub URLs for direct file access: `https://raw.githubusercontent.com/user/repo/main/file.md`
+3. Ensure fetch_webpage tool has network access
+
+### Problem: Resources conflict or show different approaches
+
+**Solution**: Ask user for clarification:
+- "I found two different authentication methods. Which should I use?"
+- "The documentation shows approach A but the examples use approach B. Which is preferred?"
+
 ## Detailed References
 
 For comprehensive information, see these reference files:
@@ -451,6 +540,58 @@ See the `examples/` directory for complete skill examples at different complexit
 
 1. **`examples/code-review/`**: Simple skill (SKILL.md only) for code review best practices
 2. **`examples/api-integration/`**: Medium complexity skill with references/ for REST API integration
+
+## Practical Walkthrough Example
+
+**Scenario**: User asks "Create a skill for working with the Stripe API"
+
+**Step 1 - Gather requirements:**
+```
+Agent: "I'll help you build a Stripe API skill. A few questions:
+1. What Stripe operations should this cover? (payments, subscriptions, customers, etc.)
+2. Do you have documentation URLs to analyze?
+3. Should this include example code or just guidance?"
+
+User provides: https://stripe.com/docs/api
+```
+
+**Step 2 - Resource gathering:**
+```
+Agent fetches:
+- https://stripe.com/docs/api (main page)
+- https://stripe.com/docs/api/authentication
+- https://stripe.com/docs/api/charges
+- Examples from docs
+
+Extracts: authentication patterns, common endpoints, error codes
+```
+
+**Step 3 - Design structure:**
+```
+Decision: Level 2 (SKILL.md + references/)
+- SKILL.md: Core instructions for authentication and common operations
+- references/API_REFERENCE.md: Full endpoint documentation
+- references/ERROR_CODES.md: Stripe error handling
+```
+
+**Step 4 - Create SKILL.md:**
+```yaml
+---
+name: stripe-api-integration
+description: Integrate with Stripe API for payments, subscriptions, and customer management. Use when working with Stripe, processing payments, or user mentions Stripe API, charges, subscriptions.
+compatibility: Requires Stripe API key, curl or HTTP client
+---
+```
+
+**Step 5 - Validate:**
+```bash
+python scripts/validate_skill.py stripe-api-integration/
+✓ Name valid: stripe-api-integration
+✓ Description includes keywords: API, payments, Stripe
+✓ Directory name matches
+```
+
+**Result**: Production-ready skill in ~367 lines, under 500 line limit, with references for detailed docs.
 
 ## Additional Resources
 
