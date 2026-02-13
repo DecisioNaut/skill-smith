@@ -179,8 +179,8 @@ allowed-tools: Bash(curl:*) Bash(python3:*) Read Write
 
 ## Reference Files
 
-- See [REFERENCE.md](references/REFERENCE.md) for detailed API documentation
-- See [FORMS.md](references/FORMS.md) for request/response templates
+- See `references/REFERENCE.md` for detailed API documentation
+- See `references/FORMS.md` for request/response templates
 ```
 
 **Writing Best Practices:**

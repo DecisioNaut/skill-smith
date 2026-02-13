@@ -483,8 +483,9 @@ print(f"Fetched {len(users)} users")
 
 For detailed API reference information, see:
 - [API Reference Documentation](references/API_REFERENCE.md) - Complete endpoint documentation
-- [Authentication Guide](references/AUTH.md) - Detailed authentication methods
 - [Error Codes](references/ERRORS.md) - Complete error code reference
+
+*See the main SKILL.md for authentication implementation details in Step 2.*
 
 ---
 

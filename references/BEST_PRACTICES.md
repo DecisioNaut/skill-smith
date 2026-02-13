@@ -20,7 +20,7 @@ Skills should reveal information gradually:
 **Implementation:**
 ```markdown
 <!-- In SKILL.md: Keep main instructions focused -->
-For detailed API reference, see [REFERENCE.md](references/REFERENCE.md)
+For detailed API reference, see `references/REFERENCE.md`
 
 <!-- In references/REFERENCE.md: Put exhaustive details here -->
 ```
@@ -278,9 +278,9 @@ references/
 ```markdown
 ## API Reference
 
-For the complete list of endpoints, see [REFERENCE.md](references/REFERENCE.md).
+For the complete list of endpoints, see `references/REFERENCE.md`.
 
-For request/response schemas, see [FORMS.md](references/FORMS.md).
+For request/response schemas, see `references/FORMS.md`.
 ```
 
 ### When to Use assets/

@@ -269,6 +269,14 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 - [GitHub Discussions](https://github.com/agentskills/agentskills/discussions)
 - [Contributing Guide](https://github.com/agentskills/agentskills/blob/main/CONTRIBUTING.md)
 
+## Troubleshooting
+
+Having issues? Check [KNOWN_ISSUES.md](KNOWN_ISSUES.md) for:
+- VS Code extension warnings (false positives)
+- Python version compatibility
+- Platform-specific issues
+- Common problems and solutions
+
 ## License
 
 MIT - See [LICENSE](LICENSE) for details.
@@ -289,7 +297,7 @@ This skill is designed to help build skills compatible with the open [Agent Skil
 python scripts/generate_skill.py --name my-first-skill --description "Your skill description here"
 ```
 
-Questions? Check the [FAQ](#faq) below or open an [issue](../../issues).
+Questions? Check the [FAQ](#faq) below, see [KNOWN_ISSUES.md](KNOWN_ISSUES.md), or open an [issue](../../issues).
 
 ## FAQ
 

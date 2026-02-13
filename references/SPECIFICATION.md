@@ -279,7 +279,7 @@ Skills use a three-stage loading pattern:
 
 ```markdown
 <!-- In SKILL.md -->
-See [API documentation](references/REFERENCE.md) for details.
+See API documentation in `references/REFERENCE.md` for details.
 
 Run the extraction script:
 ```bash
@@ -586,8 +586,8 @@ Run the script:
 python scripts/fetch_weather.py --city "San Francisco" --forecast
 ```
 
-See [REFERENCE.md](references/REFERENCE.md) for complete API documentation.
-See [ERRORS.md](references/ERRORS.md) for error handling.
+See `references/REFERENCE.md` for complete API documentation.
+See `references/ERRORS.md` for error handling.
 ```
 
 ## Compliance Checklist
