@@ -283,6 +283,31 @@ For the complete list of endpoints, see `references/REFERENCE.md`.
 For request/response schemas, see `references/FORMS.md`.
 ```
 
+### Keep File References Shallow (One Level Deep)
+
+**Important rule from the specification**: File references should be "one level deep" from SKILL.md. Avoid nested reference chains.
+
+**✅ Good (one level):**
+```markdown
+<!-- In SKILL.md -->
+For API details, see `references/API.md`
+For examples, see `references/EXAMPLES.md`
+```
+
+**❌ Bad (nested chain):**
+```markdown
+<!-- In SKILL.md -->
+See `references/OVERVIEW.md`
+
+<!-- In references/OVERVIEW.md -->
+See `references/details/API.md`  ← Agents may not follow this
+
+<!-- In references/details/API.md -->
+See `references/details/auth/OAUTH.md`  ← Too deep!
+```
+
+**Why:** Nested references create cognitive load and may not be followed reliably. Keep it flat and direct.
+
 ### When to Use assets/
 
 **Use assets/ when:**

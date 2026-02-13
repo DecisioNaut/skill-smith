@@ -2,6 +2,28 @@
 
 Use these templates to systematically collect information when building a new Agent Skill.
 
+## Important: Thorough Multi-Page Resource Gathering
+
+When analyzing resources, **don't stop at the initial URL**. Use `fetch_webpage` or similar tools to:
+
+1. **Fetch the landing page** → Extract navigation links
+2. **Follow key links** → Fetch Quick Start, API Reference, Examples, Troubleshooting
+3. **Document all pages visited** → Track what you learned from each page
+4. **For GitHub repos** → Fetch README.md, then navigate to docs/, examples/, key source files
+
+**Example workflow:**
+```
+1. Fetch https://example.com/docs
+2. Extract links: /docs/quickstart, /docs/api, /docs/examples
+3. Fetch each of those pages
+4. Extract code examples, patterns, and procedures from all pages
+5. Document findings using templates below
+```
+
+This thorough approach ensures you don't miss critical information that's only on secondary pages.
+
+---
+
 ## Template 1: GitHub Repository Analysis
 
 Use this when analyzing an open-source repository as a resource for building a skill.
