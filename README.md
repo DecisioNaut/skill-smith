@@ -2,7 +2,7 @@
 
 **Build best-practice Agent Skills from online resources with systematic guidance and validation.**
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Agent Skills](https://img.shields.io/badge/Agent%20Skills-Compatible-green.svg)](https://agentskills.io)
 
 ## Overview
@@ -120,7 +120,7 @@ When working with an AI agent:
 agent-builder-skill/
 ├── SKILL.md                    # Main skill instructions
 ├── README.md                   # This file
-├── LICENSE                     # Apache 2.0 license
+├── LICENSE                     # MIT license
 ├── CONTRIBUTING.md             # Contribution guidelines
 ├── CHANGELOG.md                # Version history
 ├── scripts/
@@ -223,7 +223,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ## License
 
-Apache 2.0 - See [LICENSE](LICENSE) for details.
+MIT - See [LICENSE](LICENSE) for details.
 
 This skill is designed to help build skills compatible with the open [Agent Skills specification](https://agentskills.io), originally developed by [Anthropic](https://www.anthropic.com/) and maintained as an open standard.
 
@@ -258,7 +258,7 @@ A: The best way is to give your skill to an agent and ask it to perform relevant
 A: Update the SKILL.md, increment the version in metadata, document changes in a CHANGELOG.md, and tag the release in git.
 
 **Q: Can I sell or commercialize skills built with this?**  
-A: Yes! Skills you create are yours. This builder skill is Apache 2.0 licensed, so you're free to use it commercially.
+A: Yes! Skills you create are yours. This builder skill is MIT licensed, so you're free to use it commercially.
 
 **Q: My skill needs to access external services. How do I handle that?**  
 A: Document prerequisites clearly in SKILL.md. Never hardcode credentials - use environment variables. Consider adding a `compatibility` field noting requirements.

@@ -1,7 +1,7 @@
 ---
 name: agent-builder-skill
 description: Build best-practice Agent Skills from online resources like documentation sites, repositories, and examples. Guides you through resource gathering, skill structure design, validation, and creating complete, specification-compliant skills ready for sharing.
-license: Apache-2.0
+license: MIT
 metadata:
   version: "1.0.0"
   author: agent-builder-skill contributors

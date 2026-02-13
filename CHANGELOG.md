@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Project Infrastructure:**
 - README.md with quick start and usage examples
-- LICENSE (Apache 2.0)
+- LICENSE (MIT)
 - CONTRIBUTING.md with contribution guidelines
 - .gitignore for common files
 - GitHub-ready structure

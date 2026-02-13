@@ -67,4 +67,4 @@ Feel free to open an issue for discussion or clarification before starting major
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the Apache 2.0 License.
+By contributing, you agree that your contributions will be licensed under the MIT License.
