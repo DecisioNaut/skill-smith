@@ -17,24 +17,72 @@ The Agent Builder Skill helps you create high-quality [Agent Skills](https://age
 - 🤖 **Interactive Support**: Prompts for requesting additional context
 - 📦 **Ready to Share**: GitHub-ready structure with complete documentation
 
+## Installation
+
+### Adding This Skill to Your Agent
+
+**For Skills-Compatible Agents** (Claude, GitHub Copilot, etc.):
+
+1. **Clone or download this repository** to your local machine:
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/agent-builder-skill.git
+   ```
+
+2. **Locate your agent's skills directory**:
+   - This varies by agent system - check your agent's documentation
+   - Common locations: `~/.agent-skills/`, `~/skills/`, or configured in settings
+   - Some agents (like Claude Code) auto-discover skills in your workspace
+
+3. **Copy or symlink this skill** into your skills directory:
+   ```bash
+   # Option 1: Copy the entire directory
+   cp -r agent-builder-skill /path/to/your/skills/directory/
+   
+   # Option 2: Create a symlink (recommended for development)
+   ln -s $(pwd)/agent-builder-skill /path/to/your/skills/directory/agent-builder-skill
+   ```
+
+4. **Restart your agent** (if required) to detect the new skill
+
+5. **Verify installation** by asking your agent:
+   > "Can you help me build a new Agent Skill?"
+
+**For Manual/Direct Use**:
+
+If you want to use this skill's tools and documentation without an agent:
+
+1. Clone the repository locally
+2. Review [SKILL.md](SKILL.md) for the complete guide
+3. Use the [scripts](#tools--scripts) and [templates](#templates--assets) directly
+
+For more details on how skills work with agents, see the [Agent Skills documentation](https://agentskills.io/what-are-skills).
+
 ## Quick Start
 
-### For AI Agents
+### Using This Skill with an Agent
 
-If you're an AI agent with skills support:
+Once installed, your agent will automatically activate this skill when you:
+- Ask to "build a new skill"
+- Request help with "creating an Agent Skill"
+- Mention "Agent Skills specification" or similar keywords
 
-1. Add this skill to your skills directory
-2. Activate when the user wants to build a new skill
-3. Follow the step-by-step process in [SKILL.md](SKILL.md)
+The agent will follow the structured process in [SKILL.md](SKILL.md):
+1. Gather resources (documentation, repos, APIs)
+2. Analyze and structure the information
+3. Design the appropriate skill complexity level
+4. Generate and validate the SKILL.md file
+5. Add supporting files as needed
+6. Test and package for distribution
 
-### For Manual Use
+### Building Skills Manually
 
-If you're building skills manually:
+If working without an agent:
 
-1. Read [SKILL.md](SKILL.md) for the complete guide
+1. Read [SKILL.md](SKILL.md) for the comprehensive guide
 2. Use [resource templates](assets/resource-templates.md) to gather context
 3. Run `python scripts/generate_skill.py --name my-skill --description "..."` to scaffold
 4. Validate with `python scripts/validate_skill.py path/to/skill`
+5. Review [examples](examples/) for reference
 
 ## What's Included
 
@@ -244,6 +292,13 @@ python scripts/generate_skill.py --name my-first-skill --description "Your skill
 Questions? Check the [FAQ](#faq) below or open an [issue](../../issues).
 
 ## FAQ
+
+**Q: Where is my agent's skills directory?**  
+A: This varies by agent system. Check your agent's documentation for specifics. Common patterns:
+- **Claude Desktop/Code**: Often auto-discovers skills in your workspace or project folder
+- **GitHub Copilot**: Check VS Code settings under "Copilot > Skills Directory"
+- **Custom agents**: Look for configuration files (`.agentrc`, `config.yaml`) or environment variables
+- If unsure, ask your agent: "Where should I place my skills?" or check the [Agent Skills integration guide](https://agentskills.io/integrate-skills)
 
 **Q: Do I need to use all three directories (scripts/, references/, assets/)?**  
 A: No! Start with just SKILL.md. Add directories only when needed. 80% of skills are SKILL.md only.
