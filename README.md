@@ -1,4 +1,4 @@
-# Agent Builder Skill
+# Skill Smith
 
 Build specification-compliant Agent Skills from documentation sites, GitHub repos, and APIs. Systematically gather resources, design SKILL.md structure, validate naming rules, and package for sharing.
 
@@ -30,12 +30,12 @@ This skill helps AI agents (and developers) create high-quality [Agent Skills](h
    ```bash
    # Clone or copy this skill to your workspace
    mkdir -p .agents/skills
-   cp -r agent-builder-skill .agents/skills/
+   cp -r skill-smith .agents/skills/
    ```
 
 2. **Verify installation**:
    ```bash
-   ls .agents/skills/agent-builder-skill/SKILL.md
+   ls .agents/skills/skill-smith/SKILL.md
    ```
 
 3. **Install validation tool** (optional):
@@ -59,7 +59,7 @@ The agent will follow the 8-step process defined in `SKILL.md`.
 
 1. **Read the main instructions**:
    ```bash
-   cat .agents/skills/agent-builder-skill/SKILL.md
+   cat .agents/skills/skill-smith/SKILL.md
    ```
 
 2. **Review examples**:
@@ -84,7 +84,7 @@ The agent will follow the 8-step process defined in `SKILL.md`.
 ## Skill Structure
 
 ```
-agent-builder-skill/
+skill-smith/
 ├── SKILL.md                    # Main instructions (< 500 lines)
 ├── references/                 # Detailed references
 │   ├── SPECIFICATION.md        # Agent Skills spec summary

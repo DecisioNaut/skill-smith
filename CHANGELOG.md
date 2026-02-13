@@ -1,11 +1,11 @@
 # Changelog
 
-All notable changes to the Agent Builder Skill will be documented in this file.
+All notable changes to Skill Smith will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2024-01-XX
+## [2.0.0] - 2026-02-13
 
 ### Changed
 - **BREAKING**: Updated validation approach to use official skills-ref library instead of custom scripts
@@ -38,10 +38,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Description now includes comprehensive "when to use" keywords
 - Better distinction between references/ (docs) and assets/ (templates)
 
-## [1.0.0] - 2024-01-XX
+## [1.0.0] - 2026-02-13
 
 ### Added
-- Initial release of Agent Builder Skill
+- Initial release of Skill Smith
 - Complete 7-step process for building agent skills
 - SKILL.md with basic instructions
 - Basic references directory

@@ -1,6 +1,6 @@
-# Contributing to Agent Builder Skill
+# Contributing to Skill Smith
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to the Agent Builder Skill project.
+Thank you for your interest in contributing! This document provides guidelines for contributing to the Skill Smith project.
 
 ## How to Contribute
 
@@ -35,9 +35,8 @@ For new features or improvements:
 1. **Fork the repository**
 2. **Clone your fork**:
    ```bash
-   git clone https://github.com/your-username/agent-builder-skill.git
-   cd agent-builder-skill
-   ```
+git clone https://github.com/your-username/skill-smith.git
+cd skill-smith
 
 3. **Create a branch**:
    ```bash

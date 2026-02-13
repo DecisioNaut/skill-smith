@@ -1,14 +1,14 @@
 ---
-name: agent-builder-skill
+name: skill-smith
 description: Build specification-compliant Agent Skills from documentation sites, GitHub repos, and APIs. Systematically gather resources, design SKILL.md structure, validate naming rules, and package for sharing. Use when user mentions creating skills, building agent capabilities, SKILL.md files, agent skills format, or skill development.
 license: MIT
 metadata:
   version: "1.0.0"
-  author: agent-builder-skill contributors
+  author: skill-smith contributors
 compatibility: Designed for filesystem-based agents with web access
 ---
 
-# Agent Builder Skill
+# Skill Smith
 
 This skill helps you create high-quality Agent Skills that follow the official [Agent Skills specification](https://agentskills.io/specification). Use this when you need to build new skills from online resources like documentation websites, open source repositories, API references, or example code.
 
