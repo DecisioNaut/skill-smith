@@ -28,18 +28,20 @@ The Agent Builder Skill helps you create high-quality [Agent Skills](https://age
    git clone https://github.com/YOUR-USERNAME/agent-builder-skill.git
    ```
 
-2. **Locate your agent's skills directory**:
-   - This varies by agent system - check your agent's documentation
-   - Common locations: `~/.agent-skills/`, `~/skills/`, or configured in settings
-   - Some agents (like Claude Code) auto-discover skills in your workspace
+2. **Create the skills directory** in your workspace (if it doesn't exist):
+   ```bash
+   mkdir -p .agents/skills
+   ```
+   
+   **Note**: The standard convention is `.agents/skills/` in your workspace root. Some agent systems may use different locations like `~/.agent-skills/` or `~/skills/` - check your agent's documentation.
 
-3. **Copy or symlink this skill** into your skills directory:
+3. **Copy or symlink this skill** into the skills directory:
    ```bash
    # Option 1: Copy the entire directory
-   cp -r agent-builder-skill /path/to/your/skills/directory/
+   cp -r agent-builder-skill .agents/skills/
    
    # Option 2: Create a symlink (recommended for development)
-   ln -s $(pwd)/agent-builder-skill /path/to/your/skills/directory/agent-builder-skill
+   ln -s $(pwd)/agent-builder-skill .agents/skills/agent-builder-skill
    ```
 
 4. **Restart your agent** (if required) to detect the new skill
@@ -302,10 +304,12 @@ Questions? Check the [FAQ](#faq) below, see [KNOWN_ISSUES.md](KNOWN_ISSUES.md), 
 ## FAQ
 
 **Q: Where is my agent's skills directory?**  
-A: This varies by agent system. Check your agent's documentation for specifics. Common patterns:
-- **Claude Desktop/Code**: Often auto-discovers skills in your workspace or project folder
+A: The standard convention is `.agents/skills/` in your workspace root. However, this varies by agent system:
+- **Standard**: `.agents/skills/` in your workspace (recommended)
+- **Claude Desktop/Code**: Auto-discovers skills in `.agents/skills/` or workspace root
 - **GitHub Copilot**: Check VS Code settings under "Copilot > Skills Directory"
 - **Custom agents**: Look for configuration files (`.agentrc`, `config.yaml`) or environment variables
+- **Global**: Some systems use `~/.agent-skills/` or `~/skills/` for system-wide skills
 - If unsure, ask your agent: "Where should I place my skills?" or check the [Agent Skills integration guide](https://agentskills.io/integrate-skills)
 
 **Q: Do I need to use all three directories (scripts/, references/, assets/)?**  
