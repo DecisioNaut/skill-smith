@@ -266,11 +266,69 @@ See `scripts/validate_skill.py` for automated validation against the specificati
 - Include examples of tasks it can help with
 - Credit sources and provide relevant links
 
+**Choose and Verify LICENSE:**
+
+1. **Check for licensing constraints:**
+   - Review licenses of any resources you used (repos, documentation, code samples)
+   - If you used Apache 2.0 or MIT licensed sources, you can use any license (no restrictions on derivative works)
+   - If you used GPL or other copyleft licenses, you may need to use compatible licenses
+   - AI-generated content is owned by you with no restrictions
+   - Documentation under CC-BY only requires attribution if copied verbatim
+
+2. **Select the appropriate license:**
+   
+   **MIT License** ⭐ Most permissive and simple:
+   - ✅ Very short and clear (19 lines)
+   - ✅ Only requires preserving copyright notice
+   - ✅ No requirement to document changes
+   - ✅ Widely recognized across all platforms
+   - ✅ Best for maximum adoption and use
+   - Use when: You want the simplest, most permissive option
+   
+   **Apache 2.0**:
+   - ✅ Includes explicit patent grant (protects users from patent claims)
+   - ✅ Well-established for larger projects
+   - ⚠️ More complex (191 lines)
+   - ⚠️ Requires documenting changes to modified files
+   - Use when: Patent protection is important for your domain
+   
+   **CC0 / Unlicense** (Public Domain):
+   - ✅ Maximum permissiveness - waives all rights
+   - ⚠️ Less common, may concern enterprise users
+   - ⚠️ No warranty protection language
+   - Use when: You want to dedicate work to public domain
+   
+   **Other considerations:**
+   - Most Agent Skills in the ecosystem use MIT or Apache 2.0
+   - Match your organization's preferred license if relevant
+   - Consider your target users' preferences (enterprises often prefer MIT or Apache 2.0)
+
+3. **Verify license text against official sources:**
+   - **MIT**: Check against [opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
+   - **Apache 2.0**: Check against [apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
+   - **Other licenses**: Verify at [spdx.org/licenses](https://spdx.org/licenses/)
+   - Ensure you use the complete, official text
+   - Replace placeholders: `<year>` → current year, `<copyright holders>` → your name/org
+
+4. **Add LICENSE file:**
+   ```bash
+   # Copy official license text to LICENSE file
+   # Update year and copyright holder
+   # Verify it matches the license: field in SKILL.md frontmatter
+   ```
+
+5. **Update related files:**
+   - Set `license:` field in SKILL.md frontmatter (e.g., `license: MIT`)
+   - Add license badge to README.md
+   - Document license in CONTRIBUTING.md if present
+   - Note in CHANGELOG.md if changing licenses
+
 **Prepare for sharing:**
-- Ensure LICENSE file is present
-- Add .gitignore for temporary files
+- Add .gitignore for temporary files (.pyc, .DS_Store, __pycache__, etc.)
 - Write CONTRIBUTING.md if accepting contributions
+- Create CHANGELOG.md to track versions and changes
 - Tag version if using git: `git tag v1.0.0`
+- Verify all validation checks pass
 
 ## Interactive Resource Gathering
 

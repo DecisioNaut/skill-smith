@@ -315,6 +315,13 @@ A: Update the SKILL.md, increment the version in metadata, document changes in a
 **Q: Can I sell or commercialize skills built with this?**  
 A: Yes! Skills you create are yours. This builder skill is MIT licensed, so you're free to use it commercially.
 
+**Q: What license should I use for my skill?**  
+A: **MIT** is recommended for maximum adoption (simple, permissive, widely recognized). Use **Apache 2.0** if patent protection is important. Before choosing, check that resources you used (docs, code examples) don't have licensing constraints. The [SKILL.md](SKILL.md) includes a complete licensing guide in Step 8 that covers:
+- Checking for constraints from source materials
+- Comparing license options (MIT vs Apache 2.0 vs others)
+- Verifying license text against official sources
+- Proper license file setup and documentation
+
 **Q: My skill needs to access external services. How do I handle that?**  
 A: Document prerequisites clearly in SKILL.md. Never hardcode credentials - use environment variables. Consider adding a `compatibility` field noting requirements.
 

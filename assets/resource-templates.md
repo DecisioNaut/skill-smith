@@ -21,7 +21,7 @@ Use this when analyzing an open-source repository as a resource for building a s
 - [ ] **docs/** - Documentation directory
 - [ ] **examples/** - Example code and use cases
 - [ ] **tests/** - Test files (show edge cases and error handling)
-- [ ] **LICENSE** - Licensing information
+- [ ] **LICENSE** - Licensing information (note: MIT/Apache 2.0/GPL/etc. - affects what license you can use)
 
 ### Questions to Answer
 
@@ -516,6 +516,36 @@ Feel free to adapt these templates based on:
 - Available resources
 - Time constraints
 - Complexity of the skill being built
+
+### Licensing Considerations
+
+**Track licenses as you gather resources to choose an appropriate license for your skill:**
+
+1. **Document the licenses of your sources:**
+   - What license does the repository use? (Check LICENSE or README)
+   - What license covers the documentation? (Often found in footer or about pages)
+   - Are code examples explicitly licensed, or covered by general terms?
+
+2. **Common licenses and implications:**
+   - **MIT / Apache 2.0**: Permissive - you can use any license for derivative work
+   - **BSD**: Similar to MIT/Apache - permissive
+   - **GPL / AGPL**: Copyleft - may require your skill to use compatible license if using GPL code
+   - **CC-BY**: Attribution required if copying content verbatim
+   - **Proprietary / All Rights Reserved**: May restrict what you can do - verify terms
+   - **No explicit license**: Copyrighted by default - seek clarification or avoid
+
+3. **Making your decision:**
+   - If all sources are permissive (MIT/Apache/BSD) → Choose any license
+   - If sources include GPL → Consider GPL or compatible license
+   - If unsure → Use MIT (most permissive and simplest)
+   - When in doubt → Consult LICENSE section in SKILL.md Step 8
+
+4. **Verification checklist:**
+   - [ ] All source licenses documented
+   - [ ] No conflicting license requirements
+   - [ ] Chosen license is compatible with all sources
+   - [ ] License text verified against official source (opensource.org or spdx.org)
+   - [ ] COPYRIGHT holder and year updated in LICENSE file
 
 ---
 
