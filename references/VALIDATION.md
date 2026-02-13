@@ -1,414 +1,260 @@
 # Agent Skills Validation Rules
 
-This document provides a complete reference for validating Agent Skills against the official specification.
+This document details validation requirements for Agent Skills based on the [official specification](https://agentskills.io/specification).
 
-## SKILL.md Requirements
+## Required: SKILL.md File
 
-### File Location
+Every skill MUST contain a `SKILL.md` file at the root of the skill directory.
 
-- Must be named `SKILL.md` (uppercase preferred) or `skill.md` (lowercase accepted)
-- Must be located in the root of the skill directory
-- File must be UTF-8 encoded text
+## YAML Frontmatter Requirements
 
-### YAML Frontmatter
+### Format
 
-**Structure:**
 ```yaml
 ---
-name: skill-name
-description: Description text
+[YAML content]
 ---
 ```
 
-**Rules:**
-- Must start with `---` on the first line
+- Must start with `---` on first line
 - Must end with `---` on its own line
-- Must contain valid YAML (use YAML parsers to validate)
-- Must be a YAML mapping (dictionary/object), not a list or scalar
-- Content between `---` markers is parsed as YAML
+- Must be valid YAML syntax
 
-**Common YAML Errors:**
-```yaml
-# ❌ Invalid: missing closing ---
----
-name: test
-description: test
+### Required Fields
 
-# ❌ Invalid: list instead of mapping
----
-- name: test
-- description: test
----
+#### name
 
-# ✅ Valid: proper mapping structure
----
-name: test
-description: test
----
-```
-
-## Required Fields
-
-### `name` Field
-
-**Format Rules:**
-- **Required**: Must be present
-- **Length**: 1-64 characters (after NFKC normalization)
-- **Characters**: Unicode lowercase letters, numbers, and hyphens only
-  - Valid: `a-z`, `0-9`, `-`
-  - Invalid: uppercase, spaces, underscores, special characters
-- **Hyphens**: Cannot start or end with hyphen
-- **Consecutive hyphens**: Cannot contain `--`
-- **Normalization**: Names are NFKC normalized before validation
+**Requirements:**
+- **Type**: String
+- **Length**: 1-64 characters
+- **Format**: Lowercase letters (`a-z`), numbers (`0-9`), and hyphens (`-`) only
+- **Constraints**:
+  - Cannot start with hyphen
+  - Cannot end with hyphen
+  - Cannot contain consecutive hyphens (`--`)
+  - Must be NFKC normalized
+- **Directory Match**: Directory name must exactly match the skill name
 
 **Valid Examples:**
 ```yaml
 name: pdf-processing
-name: data-analysis
-name: code-review
-name: api-integration-v2
-name: café  # Unicode characters allowed (normalized to NFC)
+name: data-analysis-v2
+name: api-client
 ```
 
 **Invalid Examples:**
 ```yaml
-name: PDF-Processing        # ❌ Uppercase not allowed
-name: -my-skill            # ❌ Cannot start with hyphen
-name: my-skill-            # ❌ Cannot end with hyphen
-name: my--skill            # ❌ Consecutive hyphens not allowed
-name: my_skill             # ❌ Underscores not allowed
-name: my skill             # ❌ Spaces not allowed
-name: my.skill             # ❌ Dots not allowed
-name:                      # ❌ Empty name not allowed
-name: a-really-long-skill-name-that-exceeds-the-maximum-allowed-length  # ❌ Too long (>64 chars)
+name: PDF-Processing      # Uppercase not allowed
+name: -my-skill           # Cannot start with hyphen
+name: my-skill-           # Cannot end with hyphen
+name: my--skill           # Consecutive hyphens not allowed
+name: my_skill            # Underscores not allowed
 ```
 
-**Directory Name Matching:**
-- The skill directory name MUST match the `name` field
-- Both are NFKC normalized before comparison
-- Example: If `name: my-skill`, directory must be named `my-skill/`
+#### description
 
-### `description` Field
-
-**Format Rules:**
-- **Required**: Must be present
+**Requirements:**
+- **Type**: String
 - **Length**: 1-1024 characters
-- **Type**: Non-empty string
-- **Content**: Should describe what the skill does AND when to use it
-
-**Good Descriptions:**
-```yaml
-# ✅ Specific and keyword-rich
-description: Extracts text and tables from PDF files, fills PDF forms, and merges multiple PDFs. Use when working with PDF documents or when the user mentions PDFs, forms, or document extraction.
-
-# ✅ Clear scope and triggers
-description: Analyzes Python code for common bugs, security vulnerabilities, and style issues. Use when reviewing Python code, performing security audits, or enforcing coding standards.
-
-# ✅ Includes context keywords
-description: Creates professional slide presentations with charts and diagrams. Use when generating presentations, creating pitch decks, or visualizing data in slide format.
-```
-
-**Poor Descriptions:**
-```yaml
-# ❌ Too vague
-description: Helps with PDFs.
-
-# ❌ Doesn't explain when to use
-description: This skill processes data and generates reports.
-
-# ❌ Too technical/internal
-description: Implements the PDF extraction pipeline using pdfplumber backend.
-
-# ❌ Too long (over 1024 characters)
-description: [1100 character rambling description...]
-
-# ❌ Empty
-description: 
-```
-
-## Optional Fields
-
-### `license` Field
-
-**Rules:**
-- Optional
-- String value
-- No length limit specified
-- Should reference a commonly known license identifier OR point to a bundled license file
-
-**Examples:**
-```yaml
-license: Apache-2.0
-license: MIT
-license: Proprietary. See LICENSE.txt
-license: BSD-3-Clause
-```
-
-### `compatibility` Field
-
-**Rules:**
-- Optional
-- String value
-- Maximum 500 characters
-- Should describe environment requirements, platform needs, or tool dependencies
-
-**When to Use:**
-Use this field ONLY if your skill has specific requirements like:
-- Specific agent products (e.g., "Designed for Claude Code")
-- System dependencies (e.g., "Requires docker and jq")
-- Network access needs
-- Specific OS requirements
-
-**Examples:**
-```yaml
-# ✅ Clear requirements
-compatibility: Requires Python 3.8+, requests library, internet access
-
-# ✅ Platform specification
-compatibility: Designed for Claude Code (or similar products with filesystem access)
-
-# ✅ System dependencies
-compatibility: Requires git, docker, jq, and access to the internet
-
-# ✅ Combined requirements
-compatibility: macOS or Linux. Requires Python 3.9+, ollama installed, and GPU with 8GB+ VRAM
-```
-
-**Invalid:**
-```yaml
-# ❌ Too long (>500 chars)
-compatibility: [550 character description...]
-```
-
-### `metadata` Field
-
-**Rules:**
-- Optional
-- Must be a YAML mapping (dictionary)
-- Keys must be strings
-- Values must be strings
-- Use for client-specific or custom properties not in the Agent Skills spec
-
-**Examples:**
-```yaml
-metadata:
-  author: john-doe
-  version: "1.0.0"
-  created: "2026-02-13"
-  tags: api, integration, rest
-  
-metadata:
-  org: example-corp
-  team: platform-engineering
-  cost-center: "12345"
-  internal-id: skill-098
-```
+- **Content**: Non-empty string
 
 **Best Practices:**
-- Use reasonably unique key names to avoid conflicts
-- Store version info here if tracking versions
-- Add tags or categories for organization
-- Include author/maintainer information
+- Describe BOTH what the skill does AND when to use it
+- Include specific keywords that help agents identify relevant tasks
+- Be concise but comprehensive
 
-### `allowed-tools` Field
-
-**Rules:**
-- Optional and **experimental**
-- Space-delimited list of tool patterns
-- Support varies between agent implementations
-- Specifies pre-approved tools the skill may use
-
-**Format:**
+**Good Example:**
 ```yaml
-allowed-tools: Bash(git:*) Bash(python3:*) Read Write
+description: Extract text and tables from PDF files, fill PDF forms, merge documents. Use when working with PDFs, forms, or document extraction.
 ```
 
-**Note:** This field is experimental. Most skills should not use it. Only include if you have specific tool restrictions to declare.
-
-## Field Validation Summary
-
-| Field | Required | Max Length | Valid Characters | Notes |
-|-------|----------|------------|------------------|-------|
-| `name` | Yes | 64 | `a-z`, `0-9`, `-` | Lowercase, no leading/trailing/consecutive hyphens |
-| `description` | Yes | 1024 | Any | Non-empty string |
-| `license` | No | None | Any | License identifier or file reference |
-| `compatibility` | No | 500 | Any | Only if specific requirements exist |
-| `metadata` | No | N/A | Mapping of string→string | Custom key-value pairs |
-| `allowed-tools` | No | None | Space-delimited | Experimental, rarely used |
-
-## Unknown Fields
-
-**Rule:** Only the fields listed above are allowed in frontmatter.
-
-**Invalid:**
+**Poor Example:**
 ```yaml
----
-name: my-skill
-description: My skill
-author: Someone          # ❌ Use metadata.author instead
-version: 1.0              # ❌ Use metadata.version instead
-tags:                     # ❌ Use metadata.tags instead
-  - api
-  - integration
----
+description: Helps with PDFs.  # Too vague, missing keywords
 ```
 
-**Valid:**
+### Optional Fields
+
+#### license
+
+**Requirements:**
+- **Type**: String
+- **No length limit**
+
+**Examples:**
 ```yaml
----
-name: my-skill
-description: My skill
+license: MIT
+license: Apache-2.0
+license: Proprietary. See LICENSE.txt
+```
+
+#### compatibility
+
+**Requirements:**
+- **Type**: String  
+- **Length**: 1-500 characters (if provided)
+
+**When to Use:**
+- Only include if skill has specific environment requirements
+- Most skills do not need this field
+
+**Examples:**
+```yaml
+compatibility: Requires Python 3.8+, requests library
+compatibility: Designed for Claude Code (or similar products)
+compatibility: Requires git, docker, jq, and internet access
+```
+
+#### metadata
+
+**Requirements:**
+- **Type**: Map (string keys to string values)
+- Keys should be reasonably unique to avoid conflicts
+
+**Example:**
+```yaml
 metadata:
-  author: Someone
-  version: "1.0"
+  author: example-org
+  version: "1.0.0"
   tags: api, integration
----
+```
+
+#### allowed-tools
+
+**Requirements:**
+- **Type**: Space-delimited list of tools
+- **Status**: Experimental - support may vary
+
+**Example:**
+```yaml
+allowed-tools: Bash(git:*) Bash(jq:*) Read Write
 ```
 
 ## Directory Structure Validation
 
-### Required
+### Skill Root
 
-- `SKILL.md` (or `skill.md`) must exist in the skill root
+- **Required**: Directory name must match `name` field exactly
+- **Required**: Must contain `SKILL.md` file
 
 ### Optional Directories
 
-If present, these should follow conventions:
+These are allowed but not required:
 
-**`scripts/`**
-- Contains executable code
-- Scripts should have clear names
-- Include error handling and documentation
+- `scripts/` - Executable code
+- `references/` - Additional documentation
+- `assets/` - Templates, images, data files
 
-**`references/`**
-- Contains additional documentation files
-- Common files: `REFERENCE.md`, `FORMS.md`
-- Keep files focused and under 1000 lines
+**No restrictions** on file organization within optional directories.
 
-**`assets/`**
-- Contains templates, images, data files
-- Should be referenced from SKILL.md or scripts/
+## File References
 
-### Forbidden
+When referencing other files from SKILL.md:
 
-- No deeply nested skill directories
-- No duplicate SKILL.md files in subdirectories
-- Referenced files must exist (don't reference `scripts/missing.py`)
+- Use relative paths from skill root
+- Keep references "one level deep" - avoid nested chains
+- Ensure referenced files exist
 
-## Validation Checklist
-
-Use this checklist when creating or reviewing a skill:
-
-### Frontmatter
-- [ ] File starts with `---`
-- [ ] Frontmatter ends with `---`
-- [ ] Valid YAML syntax
-- [ ] `name` field present and valid format
-- [ ] `description` field present and 1-1024 chars
-- [ ] No unknown/disallowed fields (unless in `metadata`)
-
-### Name Validation
-- [ ] Name is 1-64 characters
-- [ ] Name is all lowercase
-- [ ] Name uses only letters, numbers, hyphens
-- [ ] Name doesn't start or end with hyphen
-- [ ] Name has no `--` consecutive hyphens
-- [ ] Directory name matches frontmatter name
-
-### Description Validation
-- [ ] Description is non-empty
-- [ ] Description explains what skill does
-- [ ] Description explains when to use skill
-- [ ] Description includes relevant keywords
-- [ ] Description is under 1024 characters
-
-### Optional Fields
-- [ ] `license` is appropriate (if present)
-- [ ] `compatibility` is under 500 chars (if present)
-- [ ] `metadata` is a string→string mapping (if present)
-- [ ] `allowed-tools` is space-delimited (if present)
-
-### File Structure
-- [ ] SKILL.md exists in root
-- [ ] Referenced files exist
-- [ ] Directory structure is clean and organized
-
-## Automated Validation
-
-Use the reference library or provided validation script:
-
-**Python (skills-ref library):**
-```python
-from skills_ref import validate
-
-errors = validate("path/to/skill")
-if errors:
-    for error in errors:
-        print(f"❌ {error}")
-else:
-    print("✅ Valid skill!")
+**Examples:**
+```markdown
+See `references/API.md` for details.          ✓ Good
+Run `scripts/process.py` to extract data.     ✓ Good
+See `scripts/helpers/utils.py`                 ⚠ Acceptable but deeper
 ```
 
-**Command Line:**
-```bash
-python scripts/validate_skill.py path/to/skill
-```
+## Validation Tool
 
-**Reference Library Tool:**
+Use the official [skills-ref library](https://github.com/agentskills/agentskills/tree/main/skills-ref):
+
 ```bash
-skills-ref validate path/to/skill
+# Install
+pip install -e git+https://github.com/agentskills/agentskills.git#egg=skills-ref&subdirectory=skills-ref
+
+# Validate
+skills-ref validate /path/to/skill
+
+# Read properties
+skills-ref read-properties /path/to/skill
+
+# Generate prompt XML
+skills-ref to-prompt /path/to/skill
 ```
 
 ## Common Validation Errors
 
-### Error: "Missing required field in frontmatter: name"
-- **Cause**: No `name` field in YAML frontmatter
-- **Fix**: Add `name: your-skill-name` to frontmatter
+### Error: Name doesn't match directory
 
-### Error: "Skill name 'MySkill' must be lowercase"
-- **Cause**: Name contains uppercase letters
-- **Fix**: Change to `my-skill` (all lowercase)
+```
+Error: Directory name 'PDF-Processing' doesn't match skill name 'pdf-processing'
+```
 
-### Error: "Skill name cannot start or end with a hyphen"
-- **Cause**: Name is `-my-skill` or `my-skill-`
-- **Fix**: Remove leading/trailing hyphens
+**Fix**: Rename directory to match the `name` field exactly.
 
-### Error: "Skill name cannot contain consecutive hyphens"
-- **Cause**: Name contains `--` like `my--skill`
-- **Fix**: Use single hyphens only: `my-skill`
+### Error: Invalid name format
 
-### Error: "Directory name doesn't match skill name"
-- **Cause**: Directory is `my_skill/` but name is `my-skill`
-- **Fix**: Rename directory to match: `my-skill/`
+```
+Error: Name 'my_skill' contains invalid characters
+```
 
-### Error: "Description exceeds 1024 character limit"
-- **Cause**: Description is too long
-- **Fix**: Shorten description, move details to SKILL.md body
+**Fix**: Use only lowercase letters, numbers, and hyphens.
 
-### Error: "SKILL.md must start with YAML frontmatter (---)"
-- **Cause**: File doesn't start with `---`
-- **Fix**: Add frontmatter at the top of the file
+### Error: Description too long
 
-### Error: "SKILL.md frontmatter not properly closed with ---"
-- **Cause**: Missing closing `---` line
-- **Fix**: Add `---` after your frontmatter fields
+```
+Error: Description exceeds 1024 characters
+```
 
-### Error: "Invalid YAML in frontmatter"
-- **Cause**: YAML syntax error (indentation, colons, quotes)
-- **Fix**: Validate YAML syntax, check for proper colons and indentation
+**Fix**: Shorten description or move details to SKILL.md body.
 
-## Testing Your Skill
+### Error: Missing required field
 
-After validation, test your skill:
+```
+Error: Missing required field 'description'
+```
 
-1. **Read through as a human**: Does it make sense?
-2. **Follow instructions literally**: Can you complete the task?
-3. **Check examples**: Do they work as shown?
-4. **Test edge cases**: What if inputs are unusual?
-5. **Verify references**: Do linked files exist and help?
+**Fix**: Add the missing field to frontmatter.
 
-## Further Reading
+### Error: Invalid YAML
+
+```
+Error: YAML frontmatter is not valid
+```
+
+**Fix**: Check for:
+- Proper indentation (use spaces, not tabs)
+- Unclosed quotes
+- Invalid characters
+- Missing closing `---`
+
+## Progressive Disclosure Guidelines
+
+While not strictly validated, follow these for performance:
+
+- **Metadata**: ~50-100 tokens (name + description)
+- **SKILL.md**: < 500 lines recommended (~5000 tokens)
+- **References**: < 1000 lines each
+- Keep file references shallow (one level from SKILL.md)
+
+## Validation Checklist
+
+Use this checklist before sharing your skill:
+
+- [ ] SKILL.md exists at root
+- [ ] YAML frontmatter starts and ends with `---`
+- [ ] `name` field matches directory name
+- [ ] `name` is 1-64 chars, lowercase, hyphens only
+- [ ] `name` doesn't start/end with hyphen
+- [ ] `name` has no consecutive hyphens
+- [ ] `description` is 1-1024 characters
+- [ ] `description` explains what and when
+- [ ] `description` includes relevant keywords
+- [ ] All referenced files exist
+- [ ] SKILL.md is under 500 lines (recommended)
+- [ ] Reference files are under 1000 lines (recommended)
+- [ ] Runs `skills-ref validate` without errors
+
+## Resources
 
 - [Agent Skills Specification](https://agentskills.io/specification)
-- [Reference Library](https://github.com/agentskills/agentskills/tree/main/skills-ref)
-- [Validation Source Code](https://github.com/agentskills/agentskills/tree/main/skills-ref/src/skills_ref/validator.py)
+- [skills-ref Library](https://github.com/agentskills/agentskills/tree/main/skills-ref)
+- [Integration Guide](https://agentskills.io/integrate-skills)

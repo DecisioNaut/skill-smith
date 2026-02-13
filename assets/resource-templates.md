@@ -1,574 +1,580 @@
 # Resource Gathering Templates
 
-Use these templates to systematically collect information when building a new Agent Skill.
+Templates for systematically collecting information when building Agent Skills.
 
-## Important: Thorough Multi-Page Resource Gathering
+## GitHub Repository Analysis Template
 
-When analyzing resources, **don't stop at the initial URL**. Use `fetch_webpage` or similar tools to:
+When analyzing a GitHub repository to build a skill:
 
-1. **Fetch the landing page** → Extract navigation links
-2. **Follow key links** → Fetch Quick Start, API Reference, Examples, Troubleshooting
-3. **Document all pages visited** → Track what you learned from each page
-4. **For GitHub repos** → Fetch README.md, then navigate to docs/, examples/, key source files
+### Initial Exploration
 
-**Example workflow:**
+1. **Fetch main README**:
+   ```
+   https://github.com/owner/repo
+   ```
+   Look for: Overview, features, installation, usage examples, links to docs
+
+2. **Fetch repository structure**:
+   ```
+   https://github.com/owner/repo/tree/main
+   ```
+   Identify: Main source directories, example folders, documentation folders
+
+3. **Fetch documentation index** (if exists):
+   ```
+   https://github.com/owner/repo/tree/main/docs
+   ```
+   Look for: Index.md, README.md, navigation structure
+
+### Deep Dive Areas
+
+4. **Installation/setup documentation**:
+   ```
+   https://github.com/owner/repo/blob/main/docs/installation.md
+   https://github.com/owner/repo/blob/main/docs/getting-started.md
+   ```
+   Extract: Prerequisites, installation commands, initial setup steps
+
+5. **API/usage documentation**:
+   ```
+   https://github.com/owner/repo/blob/main/docs/api.md
+   https://github.com/owner/repo/blob/main/docs/usage.md
+   https://github.com/owner/repo/blob/main/docs/reference.md
+   ```
+   Extract: Core functions, parameters, return values, examples
+
+6. **Examples directory**:
+   ```
+   https://github.com/owner/repo/tree/main/examples
+   ```
+   Look for complete examples showing typical usage patterns
+
+7. **Source code samples** (if needed):
+   ```
+   https://github.com/owner/repo/blob/main/src/main.py
+   https://github.com/owner/repo/blob/main/lib/core.js
+   ```
+   Use for: Understanding implementation patterns when docs are sparse
+
+### Quality Checks
+
+- [ ] README fetched and reviewed
+- [ ] Installation instructions extracted
+- [ ] Core API/usage patterns identified
+- [ ] At least 2-3 examples found
+- [ ] Error handling patterns noted
+- [ ] Dependencies/prerequisites listed
+- [ ] Common troubleshooting documented
+
+## Documentation Website Analysis Template
+
+When analyzing a documentation site to build a skill:
+
+### Navigation Mapping
+
+1. **Fetch homepage**:
+   ```
+   https://docs.example.com/
+   ```
+   Look for: Navigation structure, key sections, getting started links
+
+2. **Identify main navigation sections**:
+   ```
+   https://docs.example.com/overview
+   https://docs.example.com/guides
+   https://docs.example.com/reference
+   https://docs.example.com/examples
+   ```
+   Map out complete structure - **don't stop at homepage!**
+
+### Systematic Page Fetching
+
+3. **Fetch "Getting Started" section** (typically multiple pages):
+   ```
+   https://docs.example.com/getting-started
+   https://docs.example.com/getting-started/installation
+   https://docs.example.com/getting-started/quick-start
+   https://docs.example.com/getting-started/first-steps
+   ```
+   Extract: Installation, setup, basic configuration
+
+4. **Fetch core guides/tutorials** (follow navigation links):
+   ```
+   https://docs.example.com/guides/authentication
+   https://docs.example.com/guides/data-operations
+   https://docs.example.com/guides/error-handling
+   https://docs.example.com/guides/best-practices
+   ```
+   Extract: Step-by-step processes, common patterns
+
+5. **Fetch API reference** (comprehensive):
+   ```
+   https://docs.example.com/reference/api
+   https://docs.example.com/reference/classes
+   https://docs.example.com/reference/functions
+   https://docs.example.com/reference/methods
+   ```
+   Extract: Function signatures, parameters, return types
+
+6. **Fetch examples/recipes**:
+   ```
+   https://docs.example.com/examples
+   https://docs.example.com/examples/basic
+   https://docs.example.com/examples/advanced
+   https://docs.example.com/recipes
+   ```
+   Extract: Complete working code examples
+
+7. **Fetch troubleshooting/FAQ**:
+   ```
+   https://docs.example.com/troubleshooting
+   https://docs.example.com/faq
+   https://docs.example.com/common-issues
+   ```
+   Extract: Common problems and solutions
+
+### Multi-Page Exploration Strategy
+
+**Key principle**: Documentation sites have nested pages. Always explore navigation links!
+
+**Pattern to follow**:
 ```
-1. Fetch https://example.com/docs
-2. Extract links: /docs/quickstart, /docs/api, /docs/examples
-3. Fetch each of those pages
-4. Extract code examples, patterns, and procedures from all pages
-5. Document findings using templates below
-```
-
-This thorough approach ensures you don't miss critical information that's only on secondary pages.
-
----
-
-## Template 1: GitHub Repository Analysis
-
-Use this when analyzing an open-source repository as a resource for building a skill.
-
-### Repository Information
-
-**Repository URL:** _________________
-
-**Primary Language(s):** _________________
-
-**Purpose/Domain:** _________________
-
-### Key Files to Examine
-
-- [ ] **README.md** - Overview, installation, usage
-- [ ] **CONTRIBUTING.md** - Development guidelines
-- [ ] **docs/** - Documentation directory
-- [ ] **examples/** - Example code and use cases
-- [ ] **tests/** - Test files (show edge cases and error handling)
-- [ ] **LICENSE** - Licensing information (note: MIT/Apache 2.0/GPL/etc. - affects what license you can use)
-
-### Questions to Answer
-
-1. **What problem does this tool/library solve?**
-   
-   Answer: _________________
-
-2. **What are the 3-5 most common use cases?**
-   
-   - _________________
-   - _________________
-   - _________________
-   - _________________
-   - _________________
-
-3. **What are the prerequisites? (dependencies, tools, access)**
-   
-   Requirements: _________________
-
-4. **What are the key concepts or terminology to understand?**
-   
-   - _________________
-   - _________________
-   - _________________
-
-5. **What does the typical workflow look like? (step-by-step)**
-   
-   1. _________________
-   2. _________________
-   3. _________________
-   4. _________________
-
-6. **What are common errors or failure modes?**
-   
-   - _________________
-   - _________________
-   - _________________
-
-7. **Are there good code examples to reference?**
-   
-   Location: _________________
-
-8. **What authentication or configuration is needed?**
-   
-   Details: _________________
-
-### Files/Sections to Reference in Skill
-
-| Source File | Content Type | Include in Skill Where? |
-|-------------|--------------|-------------------------|
-| Example: README.md#Installation | Setup steps | SKILL.md Prerequisites |
-| | | |
-| | | |
-
----
-
-## Template 2: Documentation Website Analysis
-
-Use this when analyzing a documentation website as a resource.
-
-### Website Information
-
-**Website URL:** _________________
-
-**Product/Service Name:** _________________
-
-**Documentation Type:** (API Reference / Tutorial / User Guide / Mixed) _________________
-
-### Site Structure Analysis
-
-**Main Navigation Sections:**
-- _________________
-- _________________
-- _________________
-- _________________
-
-**Quick Start / Getting Started URL:** _________________
-
-**API Reference URL:** _________________
-
-**Examples/Tutorials URL:** _________________
-
-### Content Extraction
-
-1. **Core Concepts (what users need to understand first)**
-   
-   - Concept 1: _________________
-   - Concept 2: _________________
-   - Concept 3: _________________
-
-2. **Authentication/Authorization (if applicable)**
-   
-   Method: _________________
-   
-   Steps: _________________
-
-3. **Most Common Operations (top 5)**
-   
-   - Operation 1: _________________
-   - Operation 2: _________________
-   - Operation 3: _________________
-   - Operation 4: _________________
-   - Operation 5: _________________
-
-4. **Code Examples Available?**
-   
-   - [ ] Yes, in multiple languages
-   - [ ] Yes, single language: _________________
-   - [ ] No code examples
-   - [ ] Interactive playground/sandbox available
-
-5. **Error Codes / Troubleshooting Section?**
-   
-   URL: _________________
-   
-   Key errors: _________________
-
-6. **Rate Limits / Quotas / Constraints?**
-   
-   Details: _________________
-
-7. **Best Practices Section?**
-   
-   URL: _________________
-   
-   Key practices: _________________
-
-### Pages to Deep-Link in Skill
-
-| Topic | URL | Use in Skill For |
-|-------|-----|------------------|
-| Example: Authentication | https://... | Setup instructions |
-| | | |
-| | | |
-
----
-
-## Template 3: API Reference Analysis
-
-Use this when the resource is primarily an API (REST, GraphQL, etc.).
-
-### API Information
-
-**Base URL:** _________________
-
-**API Type:** (REST / GraphQL / SOAP / gRPC / Other) _________________
-
-**Documentation URL:** _________________
-
-**API Version:** _________________
-
-### Authentication
-
-**Method:** (API Key / OAuth / JWT / Basic Auth / Other) _________________
-
-**How to obtain credentials:**
-
-1. _________________
-2. _________________
-3. _________________
-
-**How credentials are used:**
-
-```
-Example: Authorization: Bearer YOUR_TOKEN
+1. Fetch homepage → Find navigation structure
+2. For each major section in navigation:
+   a. Fetch section index
+   b. Identify sub-pages from navigation/links
+   c. Fetch each sub-page systematically
+3. Continue until all relevant pages fetched
 ```
 
-### Core Endpoints/Operations
-
-| Endpoint/Operation | Method | Purpose | Example |
-|-------------------|--------|---------|---------|
-| Example: /api/users | GET | Fetch users | `curl https://api.../users` |
-| | | | |
-| | | | |
-| | | | |
-| | | | |
-
-### Request/Response Formats
-
-**Common Request Structure:**
-```json
-{
-  "field1": "type",
-  "field2": "type"
-}
+**Example navigation flow**:
+```
+Homepage
+  ├─ Getting Started (INDEX)
+  │   ├─ Installation (FETCH)
+  │   ├─ Configuration (FETCH)
+  │   └─ Quick Start (FETCH)
+  ├─ Guides (INDEX)
+  │   ├─ Authentication (FETCH)
+  │   ├─ Data Processing (FETCH)
+  │   ├─ Error Handling (FETCH)
+  │   └─ Advanced Topics (FETCH)
+  └─ Reference (INDEX)
+      ├─ API Methods (FETCH)
+      ├─ Configuration (FETCH)
+      └─ CLI Commands (FETCH)
 ```
 
-**Common Response Structure:**
-```json
-{
-  "status": "...",
-  "data": {},
-  "errors": []
-}
-```
+**Don't stop at the index page - fetch each linked page!**
 
-### Error Handling
+### Quality Checks
 
-| Error Code | Meaning | How to Handle |
-|------------|---------|---------------|
-| 401 | Unauthorized | Check API key |
-| 429 | Rate limited | Wait and retry |
-| | | |
-| | | |
+- [ ] Homepage and navigation structure fetched
+- [ ] All major sections identified
+- [ ] Installation/setup pages fetched (not just overview)
+- [ ] Core guides/tutorials fetched (multiple pages)
+- [ ] API reference fetched (comprehensive)
+- [ ] Examples/recipes fetched
+- [ ] Troubleshooting/FAQ fetched
+- [ ] Followed links at least 2 levels deep
 
-### Special Considerations
+## API Service Analysis Template
 
-- **Rate Limits:** _________________
-- **Pagination:** _________________
-- **Filtering/Sorting:** _________________
-- **Webhooks/Callbacks:** _________________
-- **Batch Operations:** _________________
+When analyzing an API service to build an integration skill:
 
----
+### API Documentation
 
-## Template 4: Comprehensive Resource Checklist
+1. **Fetch API overview**:
+   ```
+   https://api-docs.example.com/
+   https://api-docs.example.com/introduction
+   ```
+   Look for: Base URL, authentication methods, rate limits
 
-Use this holistic checklist to ensure you have all necessary context before building the skill.
+2. **Fetch authentication documentation**:
+   ```
+   https://api-docs.example.com/authentication
+   https://api-docs.example.com/auth/api-keys
+   https://api-docs.example.com/auth/oauth
+   ```
+   Extract: How to authenticate, where to get credentials, example requests
 
-### ✅ Scope Definition
+3. **Fetch endpoint documentation** (each major resource):
+   ```
+   https://api-docs.example.com/endpoints/users
+   https://api-docs.example.com/endpoints/projects
+   https://api-docs.example.com/endpoints/data
+   ```
+   Extract: HTTP methods, paths, parameters, request/response examples
 
-- [ ] I clearly understand what the skill should do
-- [ ] I have identified 3-5 concrete use cases
-- [ ] I know what success looks like
-- [ ] I understand the target user's expertise level
+4. **Fetch error documentation**:
+   ```
+   https://api-docs.example.com/errors
+   https://api-docs.example.com/error-codes
+   ```
+   Extract: Error codes, meanings, how to handle
 
-### ✅ Resources Gathered
+5. **Fetch rate limits/quotas**:
+   ```
+   https://api-docs.example.com/rate-limits
+   https://api-docs.example.com/quotas
+   ```
+   Extract: Request limits, how to check remaining quota, backoff strategies
 
-- [ ] Official documentation reviewed
-- [ ] Example repositories examined
-- [ ] Code samples collected
-- [ ] API/technical specs obtained
-- [ ] Existing similar skills reviewed (if any)
+### SDK/Client Libraries (if available)
 
-### ✅ Prerequisites Identified
+6. **Fetch SDK documentation**:
+   ```
+   https://api-docs.example.com/sdks
+   https://api-docs.example.com/libraries/python
+   https://api-docs.example.com/libraries/javascript
+   ```
+   Look for: Installation, initialization, example usage
 
-- [ ] Required tools/software listed
-- [ ] Dependencies documented
-- [ ] Authentication/access requirements clear
-- [ ] System/environment requirements noted
-- [ ] Estimated setup time: _________
+7. **Fetch code examples**:
+   ```
+   https://api-docs.example.com/examples
+   https://api-docs.example.com/code-samples
+   https://api-docs.example.com/tutorials
+   ```
+   Extract: Complete working examples in target language
 
-### ✅ Core Knowledge Extracted
+### Quality Checks
 
-- [ ] Key terminology defined
-- [ ] Core concepts understood
-- [ ] Common workflow mapped out
-- [ ] Edge cases identified
+- [ ] Base URL and API version identified
+- [ ] Authentication method documented with examples
+- [ ] Core endpoints documented (at least 3-5)
+- [ ] Request/response formats shown
+- [ ] Error codes and handling documented
+- [ ] Rate limits documented
+- [ ] Code examples in at least one language
+- [ ] SDK/library information (if available)
+
+## Tool/CLI Documentation Analysis Template
+
+When analyzing a command-line tool to build a skill:
+
+### Core Documentation
+
+1. **Fetch README/overview**:
+   ```
+   https://tool-docs.example.com/
+   ```
+   Look for: What the tool does, installation, basic usage
+
+2. **Fetch installation instructions**:
+   ```
+   https://tool-docs.example.com/installation
+   https://tool-docs.example.com/getting-started
+   ```
+   Extract: How to install (package managers, binary, source)
+
+3. **Fetch command reference** (comprehensive):
+   ```
+   https://tool-docs.example.com/commands
+   https://tool-docs.example.com/cli-reference
+   https://tool-docs.example.com/reference/commands
+   ```
+   Extract: All commands, flags, arguments, descriptions
+
+4. **Fetch configuration documentation**:
+   ```
+   https://tool-docs.example.com/configuration
+   https://tool-docs.example.com/config-file
+   ```
+   Extract: Config file format, environment variables, precedence
+
+5. **Fetch usage examples** (multiple pages):
+   ```
+   https://tool-docs.example.com/examples
+   https://tool-docs.example.com/tutorials
+   https://tool-docs.example.com/guides
+   ```
+   Extract: Common workflows, typical use cases
+
+### Quality Checks
+
+- [ ] Installation methods documented
+- [ ] All major commands listed with flags
+- [ ] Configuration options documented
+- [ ] At least 3 usage examples extracted
+- [ ] Error messages and troubleshooting noted
+- [ ] Prerequisites and dependencies listed
+
+## Library/Package Analysis Template
+
+When analyzing a library/package to build a skill:
+
+### Package Information
+
+1. **Fetch package page**:
+   ```
+   https://pypi.org/project/package-name/
+   https://www.npmjs.com/package/package-name
+   https://crates.io/crates/package-name
+   ```
+   Look for: Current version, installation command, description
+
+2. **Fetch official documentation**:
+   ```
+   https://package-name.readthedocs.io/
+   https://docs.package-name.org/
+   ```
+   Navigate through all major sections
+
+3. **Fetch quickstart/tutorial**:
+   ```
+   https://docs.package-name.org/quickstart
+   https://docs.package-name.org/tutorial
+   https://docs.package-name.org/getting-started
+   ```
+   Extract: Minimal working example, first steps
+
+4. **Fetch API documentation** (all classes/functions):
+   ```
+   https://docs.package-name.org/api
+   https://docs.package-name.org/reference
+   ```
+   Note: May span multiple pages - fetch them all!
+
+5. **Fetch usage guides** (all topics):
+   ```
+   https://docs.package-name.org/guides/topic1
+   https://docs.package-name.org/guides/topic2
+   https://docs.package-name.org/how-to
+   ```
+   Extract: Common patterns, best practices
+
+### Quality Checks
+
+- [ ] Installation command extracted
+- [ ] Import/initialization documented
+- [ ] Core classes/functions documented
+- [ ] Working examples fetched (3+ scenarios)
+- [ ] Configuration options noted
+- [ ] Common usage patterns extracted
 - [ ] Error handling patterns noted
 
-### ✅ Examples Prepared
+## Specification/Standard Analysis Template
 
-- [ ] At least 2 complete, working examples ready
-- [ ] Examples cover common use case
-- [ ] Examples show expected input and output
-- [ ] Edge case example available
-- [ ] All examples have been tested
+When analyzing a specification or standard to build a skill:
 
-### ✅ Structure Planned
+### Specification Gathering
 
-- [ ] Skill complexity level decided (simple/medium/full)
-- [ ] SKILL.md outline drafted
-- [ ] Need for scripts/ directory determined
-- [ ] Need for references/ directory determined
-- [ ] Need for assets/ directory determined
+1. **Fetch specification overview**:
+   ```
+   https://spec.example.org/
+   https://spec.example.org/intro
+   ```
+   Look for: Purpose, scope, version, structure
 
-### ✅ Validation Ready
+2. **Fetch each section systematically**:
+   ```
+   https://spec.example.org/section-1
+   https://spec.example.org/section-2
+   https://spec.example.org/section-3
+   ```
+   Read through entire specification
 
-- [ ] Skill name follows rules (lowercase, kebab-case, 1-64 chars)
-- [ ] Description written (includes what + when + keywords)
-- [ ] Description is 1-1024 characters
-- [ ] Instructions are actionable and clear
-- [ ] No assumed knowledge remains undefined
+3. **Fetch examples/samples**:
+   ```
+   https://spec.example.org/examples
+   https://spec.example.org/samples
+   ```
+   Extract: Valid examples, common patterns
 
----
+4. **Fetch validation rules**:
+   ```
+   https://spec.example.org/validation
+   https://spec.example.org/conformance
+   ```
+   Extract: Rules that implementations must follow
 
-## Template 5: Interactive Resource Request
+5. **Fetch implementation notes**:
+   ```
+   https://spec.example.org/implementation
+   https://spec.example.org/notes
+   ```
+   Extract: Practical guidance for implementers
 
-Use this template when you need to ask the user for more resources or clarification.
+### Quality Checks
 
-### Initial Understanding
+- [ ] Complete specification read
+- [ ] Key concepts extracted
+- [ ] Validation rules documented
+- [ ] Examples collected
+- [ ] Implementation guidance noted
+- [ ] Edge cases identified
 
-Based on what I know so far, here's my understanding of the skill:
+## Resource Collection Checklist
 
-**Purpose:** [What you understand the skill should do]
+After gathering resources for a skill, verify:
 
-**Target Users:** [Who would use this]
+### Coverage
+- [ ] Installation/setup process clear
+- [ ] Core functionality documented
+- [ ] Common use cases covered (3-5 examples minimum)
+- [ ] Error handling documented
+- [ ] Prerequisites/dependencies listed
 
-**Complexity:** [Simple/Medium/Complex based on initial impression]
+### Multi-Page Exploration
+- [ ] Didn't stop at just the homepage
+- [ ] Followed navigation links to sub-pages
+- [ ] Fetched at least 5-10 distinct pages
+- [ ] Explored guides/tutorials section completely
+- [ ] Fetched reference/API documentation thoroughly
 
-### Gaps in Knowledge
+### Quality
+- [ ] Instructions are concrete and actionable
+- [ ] Code examples are complete and runnable
+- [ ] Configuration options are explained
+- [ ] Troubleshooting guidance available
+- [ ] Version/compatibility noted
 
-To build an effective skill, I need more information about:
+### Synthesis Readiness
+- [ ] Enough info to write SKILL.md without guessing
+- [ ] Can write concrete examples from gathered info
+- [ ] Can create troubleshooting section
+- [ ] Can list prerequisites accurately
+- [ ] Can explain when to use the skill
 
-1. **[Topic/Area where you need more info]**
+## Common Resource Gathering Mistakes
+
+### ❌ Stopping Too Early
+
+**Mistake**: Fetching only the homepage
+```
+✗ Fetch https://docs.example.com/ only
+✗ Read README only
+✗ Check homepage and stop
+```
+
+**Fix**: Follow navigation systematically
+```
+✓ Fetch homepage
+✓ Identify navigation sections
+✓ Fetch each section's pages
+✓ Continue until comprehensive
+```
+
+### ❌ Missing Critical Pages
+
+**Mistake**: Skipping important sections
+```
+✗ Skip installation docs (assume obvious)
+✗ Skip error handling docs (will figure out)
+✗ Skip examples (can make them up)
+```
+
+**Fix**: Be exhaustive
+```
+✓ Fetch installation (all methods)
+✓ Fetch error docs (all codes)
+✓ Fetch examples (all scenarios)
+```
+
+### ❌ Shallow Navigation
+
+**Mistake**: Not exploring links
+```
+✗ See "Guides" section → don't click
+✗ See "API Reference" → assume simple
+✗ See "Examples" → skip it
+```
+
+**Fix**: Click through systematically
+```
+✓ Guides → Fetch all guide pages
+✓ API Reference → Fetch all endpoint docs
+✓ Examples → Collect all examples
+```
+
+### ❌ Incomplete API Coverage
+
+**Mistake**: Documenting only one endpoint
+```
+✗ Focus on /users endpoint only
+✗ Ignore other resources
+✗ Miss authentication variations
+```
+
+**Fix**: Cover all major operations
+```
+✓ Document all CRUD operations
+✓ Cover all major resources
+✓ Include auth variations
+```
+
+## Quick Reference: fetch_webpage Flow
+
+For documentation sites with good navigation:
+
+```
+1. fetch_webpage(homepage)
+   ↓
+2. Identify navigation structure
+   ↓
+3. For each major section:
+   fetch_webpage(section_index)
+   ↓
+4. For each sub-page in section:
+   fetch_webpage(sub_page)
+   ↓
+5. Continue until comprehensive
+   ↓
+6. Verify coverage against checklist
+```
+
+## Example: Complete Resource Gathering
+
+**Task**: Build skill for "ExampleAPI" service
+
+**Execution**:
+```
+1. fetch_webpage("https://docs.exampleapi.com/")
+   → Found sections: Intro, Auth, Endpoints, Errors, Examples
+
+2. fetch_webpage("https://docs.exampleapi.com/introduction")
+   → Extracted: Base URL, version, overview
+
+3. fetch_webpage("https://docs.exampleapi.com/authentication")
+   → Found sub-pages: API Keys, OAuth, JWT
    
-   Specifically: [What exactly you need to know]
-   
-   Why: [How this will be used in the skill]
+4. fetch_webpage("https://docs.exampleapi.com/authentication/api-keys")
+   → Extracted: How to get key, where to add it in requests
 
-2. **[Another topic/area]**
-   
-   Specifically: [What you need]
-   
-   Why: [How this helps]
+5. fetch_webpage("https://docs.exampleapi.com/authentication/oauth")
+   → Extracted: OAuth flow, redirect URLs, token refresh
 
-### Requested Resources
+6. fetch_webpage("https://docs.exampleapi.com/endpoints")
+   → Found: /users, /projects, /data endpoints
 
-Can you provide:
+7. fetch_webpage("https://docs.exampleapi.com/endpoints/users")
+   → Extracted: GET /users, POST /users, PUT /users/:id, DELETE /users/:id
 
-- [ ] **Documentation Links**
-  - [ ] Official docs: [URL]
-  - [ ] API reference: [URL]
-  - [ ] Tutorials: [URL]
+8. fetch_webpage("https://docs.exampleapi.com/endpoints/projects")
+   → Extracted: Project CRUD operations
 
-- [ ] **Example Repositories**
-  - [ ] Repository 1: [URL] - [What it demonstrates]
-  - [ ] Repository 2: [URL] - [What it demonstrates]
+9. fetch_webpage("https://docs.exampleapi.com/errors")
+   → Extracted: Error codes 400, 401, 403, 404, 429, 500
 
-- [ ] **Specific Information**
-  - [ ] How authentication works: [Details]
-  - [ ] Common error scenarios: [Details]
-  - [ ] Performance considerations: [Details]
+10. fetch_webpage("https://docs.exampleapi.com/examples")
+    → Found examples: Basic auth, Create user, List projects
 
-- [ ] **Validation**
-  - [ ] Can you provide a real example task I can test against?
-  - [ ] What does successful output look like?
-  - [ ] Are there any dealbreakers or must-haves?
+11. Verify coverage:
+    ✓ Auth methods: 3 pages fetched
+    ✓ Endpoints: 2 resources documented
+    ✓ Errors: All codes documented
+    ✓ Examples: 3+ scenarios collected
+    
+12. Proceed to writing SKILL.md with comprehensive understanding
+```
 
-### Alternative Approach
+**Key**: Fetched 10+ pages, not just 1-2. This ensures the skill has solid foundation.
 
-If some resources aren't available, I can:
+## Resources
 
-- [ ] Build a basic version and iterate
-- [ ] Focus on a subset of functionality
-- [ ] Make reasonable assumptions and document them
-- [ ] Other: _________________
-
----
-
-## Template 6: Example-Driven Resource Gathering
-
-Use this when you want to build the skill based on concrete examples provided by the user.
-
-### Example Request Template
-
-To build this skill effectively, please provide 2-3 real examples:
-
-#### Example 1: [Common/Basic Case]
-
-**Task Description:** What needs to be accomplished?
-
-**Context:** What information is available at the start?
-
-**Steps Taken:** What actions are performed?
-1. 
-2. 
-3. 
-
-**Result:** What's the end state or output?
-
-**Common Issues:** Were there any challenges or errors?
-
----
-
-#### Example 2: [More Complex Case]
-
-**Task Description:** 
-
-**Context:** 
-
-**Steps Taken:**
-1. 
-2. 
-3. 
-
-**Result:** 
-
-**Common Issues:** 
-
----
-
-#### Example 3: [Edge Case or Variation]
-
-**Task Description:** 
-
-**Context:** 
-
-**Steps Taken:**
-1. 
-2. 
-3. 
-
-**Result:** 
-
-**Common Issues:** 
-
----
-
-### Analysis After Examples
-
-After receiving examples:
-
-1. **Common patterns identified:**
-   - _________________
-   - _________________
-
-2. **Variations to handle:**
-   - _________________
-   - _________________
-
-3. **Error handling needs:**
-   - _________________
-   - _________________
-
-4. **Additional resources needed:**
-   - _________________
-   - _________________
-
----
-
-## Template 7: Quick Resource Assessment
-
-Use this for a rapid initial assessment of whether you have enough information to proceed.
-
-### Quick Checklist (5-Minute Assessment)
-
-Answer YES/NO/PARTIAL:
-
-- [ ] I know what problem this skill solves: _____
-- [ ] I have at least one working example: _____
-- [ ] I understand the main workflow: _____
-- [ ] I know what tools/libraries are involved: _____
-- [ ] I have access to documentation or code: _____
-- [ ] I understand prerequisites and setup: _____
-- [ ] I know what errors commonly occur: _____
-- [ ] I have identified 3-5 keywords for the description: _____
-
-### Decision Matrix
-
-**Score:** (Count YES = 1, PARTIAL = 0.5, NO = 0) = _____ / 8
-
-| Score | Decision | Action |
-|-------|----------|--------|
-| 6-8 | ✅ Sufficient | Proceed with building the skill |
-| 4-5 | ⚠️ Gaps exist | Request specific resources (use Template 5) |
-| 0-3 | ❌ Insufficient | Need substantial more information |
-
-### Next Steps
-
-Based on score: _________________
-
----
-
-## Using These Templates
-
-### When Building a Skill
-
-1. **Start with Template 7** (Quick Assessment) to determine readiness
-2. **Use Templates 1-3** based on resource type (repo/docs/API)
-3. **Apply Template 4** (Comprehensive Checklist) before starting SKILL.md
-4. **Use Template 5** (Interactive Request) if gaps remain
-5. **Try Template 6** (Example-Driven) if resources are sparse but examples are available
-
-### Template Selection Guide
-
-| Resource Type | Recommended Template |
-|---------------|---------------------|
-| GitHub Repository | Template 1 |
-| Documentation Site | Template 2 |
-| API Reference | Template 3 |
-| Mixed/Multiple | Template 4 |
-| Incomplete Info | Template 5 |
-| User Examples | Template 6 |
-| Initial Assessment | Template 7 |
-
-### Tips for Effective Resource Gathering
-
-1. **Be systematic**: Work through templates methodically
-2. **Take notes**: Document what you learn as you explore resources
-3. **Test examples**: Try running code samples to verify they work
-4. **Ask specific questions**: If requesting more info, be precise about what you need
-5. **Focus on user needs**: Gather what will help users accomplish tasks, not just reference material
-6. **Look for patterns**: Similar operations often follow similar patterns
-7. **Document gaps**: Note what's missing so you can fill it later
-
-### Customizing Templates
-
-Feel free to adapt these templates based on:
-- Domain-specific needs
-- Organizational requirements
-- Available resources
-- Time constraints
-- Complexity of the skill being built
-
-### Licensing Considerations
-
-**Track licenses as you gather resources to choose an appropriate license for your skill:**
-
-1. **Document the licenses of your sources:**
-   - What license does the repository use? (Check LICENSE or README)
-   - What license covers the documentation? (Often found in footer or about pages)
-   - Are code examples explicitly licensed, or covered by general terms?
-
-2. **Common licenses and implications:**
-   - **MIT / Apache 2.0**: Permissive - you can use any license for derivative work
-   - **BSD**: Similar to MIT/Apache - permissive
-   - **GPL / AGPL**: Copyleft - may require your skill to use compatible license if using GPL code
-   - **CC-BY**: Attribution required if copying content verbatim
-   - **Proprietary / All Rights Reserved**: May restrict what you can do - verify terms
-   - **No explicit license**: Copyrighted by default - seek clarification or avoid
-
-3. **Making your decision:**
-   - If all sources are permissive (MIT/Apache/BSD) → Choose any license
-   - If sources include GPL → Consider GPL or compatible license
-   - If unsure → Use MIT (most permissive and simplest)
-   - When in doubt → Consult LICENSE section in SKILL.md Step 8
-
-4. **Verification checklist:**
-   - [ ] All source licenses documented
-   - [ ] No conflicting license requirements
-   - [ ] Chosen license is compatible with all sources
-   - [ ] License text verified against official source (opensource.org or spdx.org)
-   - [ ] COPYRIGHT holder and year updated in LICENSE file
-
----
-
-**Remember:** The goal is to gather enough information to write clear, actionable instructions. It's better to spend time understanding the domain deeply than to rush into writing incomplete or unclear skill instructions.
+- Use `fetch_webpage` tool to retrieve documentation pages
+- Follow links systematically - don't stop at homepage
+- Verify coverage with checklists above
+- When in doubt, fetch more pages rather than fewer

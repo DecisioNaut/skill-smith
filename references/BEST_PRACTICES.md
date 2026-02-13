@@ -1,320 +1,234 @@
 # Agent Skills Best Practices
 
-This guide provides best practices for writing effective Agent Skills that work reliably with AI agents.
+Guide for writing effective Agent Skills that work reliably with AI agents.
 
 ## Core Principles
 
 ### 1. Progressive Disclosure
 
-Skills should reveal information gradually:
+Reveal information gradually to manage context efficiently:
 
-- **First contact (name + description)**: ~50-100 tokens
-- **Activation (full SKILL.md)**: ~500-5000 tokens recommended
-- **Deep dive (references, scripts)**: Loaded only when needed
+- **Discovery** (~50-100 tokens): Just name and description
+- **Activation** (~5000 tokens): Full SKILL.md
+- **Deep dive** (on-demand): References, scripts, assets
 
-**Why this matters:**
-- Agents start faster (don't load everything at once)
-- Context is used efficiently (load only what's needed)
-- Skills scale better (can have many skills without overhead)
+**Why**: Agents start faster, use context efficiently, scale better.
 
-**Implementation:**
+**Implementation**:
 ```markdown
-<!-- In SKILL.md: Keep main instructions focused -->
-For detailed API reference, see `references/REFERENCE.md`
+<!-- In SKILL.md: Keep focused -->
+For detailed API reference, see `references/API.md`
+For error codes, see `references/ERRORS.md`
 
-<!-- In references/REFERENCE.md: Put exhaustive details here -->
+<!-- In references/: Put exhaustive details -->
 ```
 
 ### 2. Clarity Over Cleverness
 
 Write for an AI that follows instructions literally.
 
-**❌ Avoid:**
+**❌ Avoid vague suggestions:**
 ```markdown
-You might want to consider checking if the file exists before proceeding.
+You might want to check if the file exists before proceeding.
 ```
 
-**✅ Prefer:**
+**✅ Prefer clear steps:**
 ```markdown
-1. Check if the file exists using `test -f filename`
-2. If the file doesn't exist, create it with `touch filename`
-3. Then proceed with the next steps
+1. Check if file exists: `test -f filename`
+2. If missing, create it: `touch filename`
+3. Then proceed with next steps
 ```
 
-**Why:** Agents execute instructions as written. Vague suggestions lead to inconsistent behavior.
+**Why**: Vague guidance leads to inconsistent behavior.
 
 ### 3. Self-Documenting Structure
 
 A skill should be understandable by reading SKILL.md alone.
 
 **Good indicators:**
-- Headings reveal the logical flow
-- Examples show expected inputs and outputs
-- Prerequisites are stated upfront
-- Troubleshooting addresses common issues
+- New users can understand the skill without external docs
+- Instructions are complete and unambiguous
+- Examples show actual inputs and outputs
+- Edge cases are explicitly noted
 
-**Bad indicators:**
-- You need to read external docs to understand basics
-- Instructions reference concepts without explaining them
-- No examples of successful execution
-- Error messages aren't mentioned
+### 4. File References One Level Deep
 
-## Writing Effective Descriptions
+Reference files directly from SKILL.md. Avoid nested chains.
 
-The `description` field is critical for skill discovery.
-
-### Formula for Good Descriptions
-
-**Structure:** `[What it does] + [When to use it] + [Keywords]`
-
-**Examples:**
-
-```yaml
-# API Integration
-description: Connects to REST APIs, handles authentication, and processes JSON responses. Use when integrating with web services, APIs, or webhooks, or when the user mentions REST, HTTP requests, or API calls.
-
-# Data Analysis
-description: Analyzes CSV and Excel files with statistical summaries, correlations, and visualizations. Use when analyzing datasets, generating reports, or when the user mentions data analysis, statistics, or spreadsheets.
-
-# Code Review
-description: Reviews code for bugs, security issues, style violations, and best practices. Use when reviewing pull requests, auditing code quality, or when the user mentions code review, linting, or security scanning.
-```
-
-### Description Anti-Patterns
-
-**Too vague:**
-```yaml
-description: Helps with files  # ❌ What kind of files? How?
-```
-
-**Too technical:**
-```yaml
-description: Implements file I/O operations using buffered streams  # ❌ Internal details, not user benefits
-```
-
-**Missing "when to use":**
-```yaml
-description: Processes PDF files  # ❌ Agents won't know when to activate
-```
-
-**Missing keywords:**
-```yaml
-description: Handles documents  # ❌ No specific terms (PDF, extract, form, etc.)
-```
-
-### Keyword Strategy
-
-Include terms that:
-- Users naturally say ("merge PDFs", "create slides", "analyze data")
-- Describe the domain ("REST API", "OAuth", "JSON")
-- Indicate the task type ("extract", "generate", "validate", "format")
-
-## Structuring Instructions
-
-### Use Action-Oriented Headings
-
-**❌ Avoid:**
-```markdown
-## About Authentication
-## Understanding the API
-## Discussion of Error Handling
-```
-
-**✅ Prefer:**
-```markdown
-## Authenticate with API Key
-## Make API Requests
-## Handle API Errors
-```
-
-### Write Step-by-Step Instructions
-
-Break complex tasks into sequential steps.
-
-**❌ Avoid:**
-```markdown
-Use the API to fetch data and process it accordingly. Make sure to handle errors and log the results.
-```
-
-**✅ Prefer:**
-```markdown
-1. Set the API key in an environment variable:
-   ```bash
-   export API_KEY="your-key-here"
-   ```
-
-2. Make a GET request to fetch data:
-   ```bash
-   curl -H "Authorization: Bearer $API_KEY" https://api.example.com/data
-   ```
-
-3. Check the response status:
-   - If 200 OK: Parse the JSON response (see example below)
-   - If 401: API key is invalid, check the key and retry
-   - If 429: Rate limited, wait 60 seconds and retry
-
-4. Process the JSON data:
-   ```python
-   import json
-   data = json.loads(response_text)
-   for item in data['results']:
-       print(f"ID: {item['id']}, Name: {item['name']}")
-   ```
-
-5. Log the result:
-   ```bash
-   echo "Processed $(echo $data | jq '.results | length') items" >> log.txt
-   ```
-```
-
-### Include Concrete Examples
-
-Show complete, working examples with real data.
-
-**❌ Avoid:**
-```markdown
-Call the API endpoint with the appropriate parameters and parse the response.
-```
-
-**✅ Prefer:**
-```markdown
-### Example: Fetch User Data
-
-**Request:**
-```bash
-curl -X GET "https://api.example.com/users/123" \
-  -H "Authorization: Bearer abc123xyz"
-```
-
-**Expected Response:**
-```json
-{
-  "id": 123,
-  "name": "Alice Smith",
-  "email": "alice@example.com",
-  "created_at": "2026-01-15T10:30:00Z"
-}
-```
-
-**Processing:**
-```python
-import requests
-response = requests.get('https://api.example.com/users/123',
-                       headers={'Authorization': 'Bearer abc123xyz'})
-user = response.json()
-print(f"User: {user['name']} ({user['email']})")
-# Output: User: Alice Smith (alice@example.com)
-```
-```
-
-### Address Edge Cases Explicitly
-
-Don't assume agents will infer error handling.
-
-**❌ Avoid:**
-```markdown
-Fetch the data from the API.
-```
-
-**✅ Prefer:**
-```markdown
-Fetch the data from the API:
-
-1. Make the request (see example above)
-2. If the response status is 404: The resource doesn't exist, inform the user
-3. If the response status is 500: Server error, retry up to 3 times with exponential backoff
-4. If the request times out: Check network connection and retry
-5. If successful (200): Parse the JSON and continue
-```
-
-## Organizing Skill Content
-
-### When to Use scripts/
-
-**Use scripts/ when:**
-- Logic is too complex for step-by-step instructions
-- Multiple languages or tools are involved
-- Reusable components exist (parsers, validators, formatters)
-- Error handling requires sophisticated control flow
-
-**Example:**
-```
-scripts/
-├── extract_data.py      # Data extraction logic
-├── validate_schema.py   # JSON schema validation
-└── generate_report.sh   # Combines scripts into workflow
-```
-
-**In SKILL.md:**
-```markdown
-## Extract Data from API
-
-Run the extraction script:
-```bash
-python scripts/extract_data.py --endpoint users --output users.json
-```
-
-This script handles authentication, pagination, and rate limiting automatically.
-```
-
-### When to Use references/
-
-**Use references/ when:**
-- Main SKILL.md is getting long (>500 lines)
-- Detailed technical specs exist (API docs, schemas)
-- Domain knowledge requires depth (glossary, domain concepts)
-- Multiple related topics need organization
-
-**Example structure:**
-```
-references/
-├── REFERENCE.md    # Complete API documentation
-├── FORMS.md        # JSON schemas, request/response templates
-├── GLOSSARY.md     # Domain-specific terminology
-└── ERRORS.md       # Complete error code reference
-```
-
-**In SKILL.md:**
-```markdown
-## API Reference
-
-For the complete list of endpoints, see `references/REFERENCE.md`.
-
-For request/response schemas, see `references/FORMS.md`.
-```
-
-### Keep File References Shallow (One Level Deep)
-
-**Important rule from the specification**: File references should be "one level deep" from SKILL.md. Avoid nested reference chains.
-
-**✅ Good (one level):**
+**✅ Good (flat)**:
 ```markdown
 <!-- In SKILL.md -->
-For API details, see `references/API.md`
-For examples, see `references/EXAMPLES.md`
+See `references/API.md` for authentication
+See `references/EXAMPLES.md` for code samples
 ```
 
-**❌ Bad (nested chain):**
+**❌ Bad (nested chain)**:
 ```markdown
 <!-- In SKILL.md -->
 See `references/OVERVIEW.md`
 
 <!-- In references/OVERVIEW.md -->
-See `references/details/API.md`  ← Agents may not follow this
+See `details/API.md`  ← Agent may not follow
 
 <!-- In references/details/API.md -->
-See `references/details/auth/OAUTH.md`  ← Too deep!
+See `auth/OAUTH.md`  ← Too deep!
 ```
 
-**Why:** Nested references create cognitive load and may not be followed reliably. Keep it flat and direct.
+**Why**: Nested references create cognitive load and unreliable navigation.
+
+## File Size Guidelines
+
+| File Type | Recommended | Reason |
+|-----------|-------------|--------|
+| SKILL.md | < 500 lines | Loaded on activation, should be scannable |
+| reference files | < 1000 lines each | Loaded on demand, stay focused |
+| name + description | ~50-100 tokens | Loaded at startup for all skills |
+
+## Writing Agent-Friendly Instructions
+
+### Use Imperative, Active Voice
+
+**❌ Passive/vague:**
+```markdown
+The configuration file should be edited...
+```
+
+**✅ Active:**
+```markdown
+Edit the configuration file:
+1. Open `config.yaml`
+2. Set `api_key` to your key
+3. Save the file
+```
+
+### Provide Concrete Examples
+
+**❌ Abstract:**
+```markdown
+Call the API with appropriate parameters.
+```
+
+**✅ Concrete:**
+```markdown
+Call the API:
+```bash
+curl -H "Authorization: Bearer YOUR_TOKEN" \
+     https://api.example.com/v1/users
+```
+Expected response:
+```json
+{"users": [...]}
+```
+```
+
+### Break Down Complex Tasks
+
+**❌ Too high-level:**
+```markdown
+Set up the database and configure authentication.
+```
+
+**✅ Step-by-step:**
+```markdown
+### Setup Database
+
+1. Install PostgreSQL: `brew install postgresql`
+2. Start service: `brew services start postgresql`
+3. Create database: `createdb myapp`
+4. Run migrations: `psql myapp < schema.sql`
+
+### Configure Authentication
+
+1. Generate secret key: `openssl rand -hex 32`
+2. Add to `.env`: `SECRET_KEY=<generated-key>`
+3. Test: `python test_auth.py`
+```
+
+### Handle Edge Cases Explicitly
+
+**❌ Assumes happy path:**
+```markdown
+Read the file and process it.
+```
+
+**✅ Handles errors:**
+```markdown
+1. Check if file exists:
+   ```bash
+   if [ ! -f "data.json" ]; then
+     echo "Error: data.json not found"
+     exit 1
+   fi
+   ```
+
+2. Validate JSON format:
+   ```bash
+   jq empty data.json || {
+     echo "Error: Invalid JSON"
+     exit 1
+   }
+   ```
+
+3. Process the file:
+   ```bash
+   jq '.items[]' data.json
+   ```
+```
+
+## Structure Patterns
+
+### When to Use scripts/
+
+**Use scripts/ for:**
+- Complex executable logic
+- Reusable utilities
+- Data processing pipelines
+- API client wrappers  
+
+**Don't use scripts/ for:**
+- Spec validation (use `skills-ref` library)
+- Simple commands (put inline in SKILL.md)
+- One-off examples (put in SKILL.md examples section)
+
+**Example structure:**
+```
+scripts/
+├── process_data.py     # Data transformation
+├── fetch_api.sh        # API client wrapper
+└── generate_report.py  # Report generator
+```
+
+### When to Use references/
+
+**Use references/ when:**
+- SKILL.md exceeds 500 lines
+- Detailed technical specs exist
+- Multiple related topics need organization
+- Domain knowledge requires depth
+
+**Common files:**
+```
+references/
+├── API.md              # Complete API documentation
+├── EXAMPLES.md         # Extended code examples
+├── ERRORS.md           # Error codes reference
+├── AUTH.md             # Authentication details
+└── GLOSSARY.md         # Domain terminology
+```
+
+**In SKILL.md, reference with context:**
+```markdown
+For the complete API reference, see `references/API.md`.
+For error code meanings, see `references/ERRORS.md`.
+```
 
 ### When to Use assets/
 
-**Use assets/ when:**
-- Template files are needed (config templates, document templates)
-- Diagrams or images clarify complex concepts
-- Sample data helps with testing or examples
-- Lookup tables or reference data exist
+**Use assets/ for:**
+- Template files (config, documents)
+- Diagrams or visual aids
+- Sample data or test files
+- Lookup tables or reference data
 
 **Example:**
 ```
@@ -323,522 +237,302 @@ assets/
 │   ├── config.yaml.template
 │   └── report.md.template
 ├── diagrams/
-│   └── workflow.png
+│   └── architecture.png
 └── sample_data/
     └── test_dataset.json
 ```
 
-### Keep Files Focused
+## Description Writing
 
-**One file, one purpose:**
+The `description` field is crucial for skill discovery.
 
-```
-references/
-├── api_auth.md          # ✅ Just authentication
-├── api_endpoints.md     # ✅ Just endpoint docs
-└── api_examples.md      # ✅ Just examples
+### Include Both What and When
 
-# ❌ Avoid: mega_api_docs.md (3000 lines of everything)
+**❌ Only "what":**
+```yaml
+description: Analyzes CSV files and generates reports
 ```
 
-## Agent-Friendly Language
-
-### Be Direct and Specific
-
-**❌ Avoid:**
-```markdown
-- You should probably validate the input
-- Consider using error handling
-- It might be a good idea to check permissions
+**✅ "What" + "When":**
+```yaml
+description: Analyzes CSV files, calculates statistics, generates reports. Use when working with tabular data, analyzing datasets, or when user mentions CSV, data analysis, or reports.
 ```
 
-**✅ Prefer:**
-```markdown
-- Validate the input using the schema in FORMS.md
-- Wrap the API call in a try-except block
-- Check file permissions with `test -r filename`
-```
+### Add Specific Keywords
 
-### Use Consistent Terminology
-
-Pick one term and stick with it throughout the skill.
-
-**❌ Inconsistent:**
-```markdown
-1. Fetch the data from the API
-2. Retrieve the response and validate it
-3. Get the results and process them
-```
-*(Using "fetch", "retrieve", "get" interchangeably is confusing)*
-
-**✅ Consistent:**
-```markdown
-1. Fetch the data from the API
-2. Fetch the response and validate it
-3. Fetch the results and process them
-```
-
-### Avoid Ambiguous Pronouns
-
-**❌ Avoid:**
-```markdown
-Parse the JSON response and extract the ID. If it is null, use the fallback value. Then process it accordingly.
-```
-*(What does "it" refer to? The ID? The response?)*
-
-**✅ Prefer:**
-```markdown
-Parse the JSON response and extract the ID. If the ID is null, use the fallback value. Then process the ID accordingly.
-```
-
-## Examples and Testing
-
-### Provide Complete Examples
-
-An example should be self-contained and runnable.
-
-**❌ Incomplete:**
-```markdown
-### Example
-```python
-result = process_data(data)
-```
-```
-
-**✅ Complete:**
-```markdown
-### Example: Process User Data
-
-Given this input file `users.json`:
-```json
-[
-  {"id": 1, "name": "Alice", "active": true},
-  {"id": 2, "name": "Bob", "active": false}
-]
-```
-
-Run this script:
-```python
-import json
-
-with open('users.json', 'r') as f:
-    users = json.load(f)
-
-active_users = [u for u in users if u['active']]
-print(f"Found {len(active_users)} active users")
-for user in active_users:
-    print(f"  - {user['name']} (ID: {user['id']})")
-```
-
-Expected output:
-```
-Found 1 active users
-  - Alice (ID: 1)
-```
-```
-
-### Show Edge Cases
-
-**Include examples for:**
-- Empty inputs
-- Invalid data
-- Error conditions
-- Boundary cases
-
-**Example:**
-```markdown
-### Example: Empty Input
-
-When the input file is empty:
-```json
-[]
-```
-
-The script should output:
-```
-Found 0 active users
-(no users to display)
-```
-
-### Example: Invalid Data
-
-When a user record is missing the 'active' field:
-```json
-[{"id": 1, "name": "Charlie"}]
-```
-
-The script treats missing 'active' as false and outputs:
-```
-Found 0 active users
-```
-```
-
-### Test Your Instructions
-
-**Before finalizing a skill:**
-
-1. **Literal reading test**: Follow your own instructions exactly. Don't fill in gaps.
-2. **Fresh eyes test**: Have someone unfamiliar with the domain try to use it.
-3. **Agent test**: If possible, give your skill to an agent and observe behavior.
-4. **Edge case test**: Try unusual inputs, empty data, error conditions.
-
-## Common Mistakes and Fixes
-
-### Mistake 1: Assuming Implicit Knowledge
-
-**❌ Problem:**
-```markdown
-Use the standard authentication flow.
-```
-
-**✅ Fix:**
-```markdown
-Authenticate using OAuth 2.0:
-
-1. Obtain client credentials from the API dashboard
-2. Request an access token:
-   ```bash
-   curl -X POST https://auth.example.com/token \
-     -d "client_id=YOUR_ID" \
-     -d "client_secret=YOUR_SECRET" \
-     -d "grant_type=client_credentials"
-   ```
-3. Use the token in API requests:
-   ```bash
-   curl -H "Authorization: Bearer YOUR_TOKEN" https://api.example.com/resource
-   ```
-```
-
-### Mistake 2: Overloading One Skill
-
-**❌ Problem:**
-A single skill tries to do:
-- API integration
-- Data analysis
-- Report generation
-- Email sending
-- Database storage
-
-**✅ Fix:**
-Split into focused skills:
-- `api-data-fetcher` - Fetches data from APIs
-- `data-analyzer` - Analyzes datasets
-- `report-generator` - Creates reports
-- `email-sender` - Sends emails
-- `database-writer` - Writes to databases
-
-### Mistake 3: Burying Important Info
-
-**❌ Problem:**
-```markdown
-## Introduction
-[500 words of background]
-
-## History
-[300 words of context]
-
-## Prerequisites
-You need Python 3.8 and an API key  # ← Important info buried
-```
-
-**✅ Fix:**
-```markdown
-## Prerequisites
-
-- Python 3.8 or higher
-- API key from https://example.com/keys
-
-## Overview
-[Brief intro]
-
-[Rest of content...]
-```
-
-### Mistake 4: Vague Error Guidance
-
-**❌ Problem:**
-```markdown
-If you encounter errors, check the logs and try again.
-```
-
-**✅ Fix:**
-```markdown
-## Troubleshooting
-
-**Error: "Authentication failed (401)"**
-- **Cause**: Invalid or expired API key
-- **Solution**: 
-  1. Verify your API key at https://example.com/dashboard
-  2. Check for trailing spaces in the key
-  3. Generate a new key if needed
-
-**Error: "Rate limit exceeded (429)"**
-- **Cause**: Too many requests in a short time
-- **Solution**: Wait 60 seconds and retry. Consider implementing exponential backoff.
-
-**Error: "Connection timeout"**
-- **Cause**: Network issues or slow API
-- **Solution**: 
-  1. Check your internet connection
-  2. Try increasing timeout: `timeout=30` in your request
-  3. Check API status at https://status.example.com
-```
-
-### Mistake 5: Missing Context in Examples
-
-**❌ Problem:**
-```python
-# Example
-data = fetch_data()
-result = process(data)
-print(result)
-```
-
-**✅ Fix:**
-```python
-# Example: Fetch and process user activity data
-#
-# This example:
-# 1. Fetches user activity from the API
-# 2. Filters for active users
-# 3. Formats output as a summary report
-
-import requests
-
-# Step 1: Fetch data
-response = requests.get('https://api.example.com/users/activity',
-                        headers={'Authorization': 'Bearer YOUR_KEY'})
-data = response.json()
-
-# Step 2: Filter for active users (last_activity within 7 days)
-from datetime import datetime, timedelta
-cutoff = datetime.now() - timedelta(days=7)
-active_users = [
-    user for user in data['users']
-    if datetime.fromisoformat(user['last_activity']) > cutoff
-]
-
-# Step 3: Format and print summary
-print(f"Active users (last 7 days): {len(active_users)}")
-for user in active_users:
-    print(f"  - {user['name']}: last seen {user['last_activity']}")
-
-# Expected output:
-# Active users (last 7 days): 3
-#   - Alice Smith: last seen 2026-02-12T15:30:00Z
-#   - Bob Jones: last seen 2026-02-13T09:15:00Z
-#   - Carol White: last seen 2026-02-11T18:45:00Z
-```
-
-## Version Control and Maintenance
-
-### Semantic Versioning
-
-Use semantic versioning in metadata:
+Include terms that users might mention:
 
 ```yaml
-metadata:
-  version: "1.0.0"  # Major.Minor.Patch
+description: Extract text from PDF files, fill forms, merge documents. Use when working with PDFs, forms, document extraction, PDF processing, or mentions PDFLib, PyPDF2.
 ```
 
-**Increment:**
-- **Major (1.x.x → 2.x.x)**: Breaking changes (changed interfaces, removed features)
-- **Minor (1.0.x → 1.1.x)**: New features, backwards compatible
-- **Patch (1.0.0 → 1.0.1)**: Bug fixes, documentation improvements
+**Keywords help agents match tasks to skills.**
 
-### Document Changes
+### Length Sweet Spot
 
-Keep a CHANGELOG.md:
+- **Too short** (< 50 chars): Not enough context
+- **Just right** (100-300 chars): Comprehensive, scannable
+- **Too long** (> 500 chars): Verbose, harder to parse
+
+## Common Patterns
+
+### Pattern: API Integration Skill
 
 ```markdown
-# Changelog
+# API Integration Skill
 
-## [1.1.0] - 2026-02-13
-### Added
-- Support for pagination in API requests
-- New example for batch processing
+## Prerequisites
+- API key from service.com
+- curl or HTTP client
 
-### Fixed
-- Authentication timeout error handling
-- Typo in error message
+## Authentication
+1. Export your API key:
+   ```bash
+   export API_KEY="sk-..."
+   ```
 
-## [1.0.0] - 2026-01-15
-### Initial Release
-- Basic API integration
-- Authentication support
-- Data extraction and processing
-```
+## Common Operations
 
-### Git Tagging
-
-Tag releases in git:
+### Fetch Resource
 ```bash
-git tag -a v1.0.0 -m "Initial release"
-git push origin v1.0.0
+curl -H "Authorization: Bearer $API_KEY" \
+     https://api.service.com/v1/resource/123
 ```
 
-## Performance Considerations
+### Create Resource
+```bash
+curl -X POST \
+     -H "Authorization: Bearer $API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{"name":"value"}' \
+     https://api.service.com/v1/resource
+```
 
-### Keep SKILL.md Concise
+## Error Handling
+- 401: Invalid API key
+- 429: Rate limited - wait and retry
+- 500: Service error - check status page
 
-**Target:** Under 500 lines in SKILL.md
+For complete API reference, see `references/API.md`.
+```
 
-**Why:** Agents load the full SKILL.md into context. Shorter = faster activation.
+### Pattern: Data Processing Skill
 
-**How:**
-- Move detailed API docs to `references/REFERENCE.md`
-- Move examples to `references/EXAMPLES.md`
-- Link to external resources for background reading
-
-### Optimize for Scanning
-
-Agents scan for relevant sections using headings.
-
-**Good structure:**
 ```markdown
-# Skill Name
-## When to Use
-## Prerequisites
-## Core Tasks
-### Task 1: [Clear Name]
-### Task 2: [Clear Name]
+# Data Processing Skill
+
+## Input Format
+Expects CSV with columns: id, name, value
+
+## Processing Steps
+
+1. Validate input:
+   ```python
+   import pandas as pd
+   df = pd.read_csv('input.csv')
+   required = ['id', 'name', 'value']
+   assert all(col in df.columns for col in required)
+   ```
+
+2. Transform data:
+   ```python
+   df['value'] = df['value'].astype(float)
+   df['normalized'] = (df['value'] - df['value'].mean()) / df['value'].std()
+   ```
+
+3. Generate output:
+   ```python
+   df.to_csv('output.csv', index=False)
+   print(f"Processed {len(df)} rows")
+   ```
+
 ## Examples
-## Troubleshooting
+
+Input:
+```csv
+id,name,value
+1,Alpha,10
+2,Beta,20
 ```
 
-**Agents can quickly jump to:**
-- "Task 2" if that's what's needed
-- "Examples" to see working code
-- "Troubleshooting" if errors occur
-
-## Security Considerations
-
-### Don't Hardcode Secrets
-
-**❌ Never:**
-```python
-API_KEY = "sk-abc123xyz789"  # ❌ Hardcoded secret
+Output:
+```csv
+id,name,value,normalized
+1,Alpha,10.0,-0.707
+2,Beta,20.0,0.707
+```
 ```
 
-**✅ Always:**
-```python
-import os
-API_KEY = os.environ.get('API_KEY')
-if not API_KEY:
-    raise ValueError("API_KEY environment variable not set")
-```
+## Anti-Patterns to Avoid
 
-### Warn About Dangerous Operations
+### ❌ Vague Instructions
 
-**Example:**
 ```markdown
-## Delete Data (⚠️ Destructive Operation)
-
-**Warning:** This permanently deletes data and cannot be undone. Always backup first.
-
-To delete:
-1. Create a backup: `cp data.json data.backup.json`
-2. Verify the backup: `cat data.backup.json`
-3. Run deletion: `python scripts/delete_data.py --confirm`
+Process the data appropriately based on the context.
 ```
 
-### Validate User Input
+**Why bad**: "Appropriately" is subjective, "context" is unclear.
 
-**Example:**
+### ❌ Monolithic Skills
+
 ```markdown
-## Process User Input
-
-1. Validate input format:
-   ```python
-   import re
-   if not re.match(r'^[a-zA-Z0-9_-]+$', user_input):
-       raise ValueError("Invalid input: only alphanumeric, dash, underscore allowed")
-   ```
-
-2. Sanitize for shell commands:
-   ```python
-   import shlex
-   safe_input = shlex.quote(user_input)
-   ```
-
-3. Then proceed with processing
+# Everything Skill
+This skill handles file processing, API calls, database operations, reporting, and email...
 ```
 
-## Accessibility and Internationalization
+**Why bad**: Too broad, hard to maintain, unclear activation triggers.
 
-### Use Clear, Simple Language
+**Better**: Split into focused skills (file-processing, api-client, database-ops, etc.)
 
-- Avoid jargon unless defined
-- Use common English words
-- Define acronyms on first use: "REST (Representational State Transfer) API"
+### ❌ Missing Examples
 
-### Support International Characters
+```markdown
+## Usage
+Use the tool to process your files.
+```
+
+**Why bad**: No concrete guidance on inputs/outputs.
+
+### ❌ Heavy SKILL.md
+
+```markdown
+# API Skill
+
+[2000 lines of complete API documentation inline]
+```
+
+**Why bad**: Loads too much on activation. Use `references/`.
+
+### ❌ Nested References
+
+```markdown
+<!-- SKILL.md -->
+See overview.md
+
+<!-- overview.md -->
+See details/api.md
+
+<!-- details/api.md -->
+See auth/oauth.md
+```
+
+**Why bad**: Agent may not follow chains reliably.
+
+## Testing Your Skill
+
+### Manual Testing Checklist
+
+- [ ] Follow instructions literally (don't assume steps)
+- [ ] Test happy path with typical inputs
+- [ ] Test edge cases (empty input, missing files, etc.)
+- [ ]Test error conditions (invalid input, network errors, etc.)
+- [ ] Verify all referenced files exist
+- [ ] Check that examples actually work
+- [ ] Confirm SKILL.md is under 500 lines
+
+### Agent Testing (if possible)
+
+1. Give agent access to the skill
+2. Ask it to perform typical tasks
+3. Observe where it gets confused or stuck
+4. Note which instructions were misinterpreted
+5. Refine based on observations
+
+### Validation
+
+Use official tool:
+```bash
+skills-ref validate /path/to/skill
+```
+
+Checks:
+- Name format and directory match
+- Required frontmatter fields
+- Description within limits
+- Valid YAML syntax
+
+## Progressive Disclosure in Practice
+
+### Level 1: Name + Description Only
 
 ```yaml
-# ✅ Skill names support Unicode
-name: café-reviews
-name: 日本語-skill
+name: pdf-processing
+description: Extract text from PDF files, fill forms, merge documents. Use when working with PDFs, forms, or document extraction.
 ```
 
-But remember: names must be lowercase after NFKC normalization.
+**Loaded**: At agent startup  
+**Size**: ~50 tokens  
+**Purpose**: Skill discovery
 
-### Provide Context for Code Examples
-
-Don't assume users know the language:
+### Level 2: Full SKILL.md
 
 ```markdown
-### Python Example
+---
+name: pdf-processing
+description: ...
+---
 
-This Python script (requires Python 3.8+) demonstrates...
+# PDF Processing
+
+## When to Use
+- Extracting text from PDFs
+- Filling PDF forms
+- Merging multiple PDFs
+
+## Prerequisites
+[...]
+
+## Instructions
+[...]
+
+## Examples
+[...]
+
+For detailed API reference, see `references/PDF_API.md`.
 ```
+
+**Loaded**: When skill activated  
+**Size**: ~3000 tokens  
+**Purpose**: Core instructions
+
+### Level 3: References (On-Demand)
 
 ```markdown
-### Bash Example
+<!-- references/PDF_API.md -->
+# Complete PDF API Reference
 
-This bash command (works on Linux/macOS) will...
+## PyPDF2 Methods
+
+### PdfReader
+- `PdfReader(filename)` - Opens PDF file
+- `.pages` - List of page objects
+- `.metadata` - PDF metadata dict
+
+[... 800 more lines of detailed API docs ...]
 ```
 
-## Summary Checklist
+**Loaded**: When agent reads reference  
+**Size**: Variable (< 1000 lines each)  
+**Purpose**: Deep technical details
 
-When creating or reviewing a skill, verify:
+## Summary: Quick Wins
 
-### Content Quality
-- [ ] Instructions are clear, direct, and actionable
-- [ ] Examples are complete and runnable
-- [ ] Edge cases are addressed explicitly
-- [ ] Troubleshooting covers common errors
-- [ ] No assumed knowledge or implicit steps
+To improve any skill instantly:
 
-### Structure
-- [ ] Description includes what + when + keywords
-- [ ] SKILL.md is under 500 lines
-- [ ] Headings are action-oriented
-- [ ] Progressive disclosure is used (references/ for details)
-- [ ] Files are organized and focused
+1. **Add concrete examples** with actual inputs/outputs
+2. **Break complex instructions** into numbered steps
+3. **Handle errors explicitly** (don't assume success)
+4. **Keep SKILL.md focused** (< 500 lines)
+5. **Use progressive disclosure** (move details to references/)
+6. **Write for literal interpretation** (no vague language)
+7. **Include specific keywords** in description
+8. **Keep file references flat** (one level deep)
+9. **Validate with skills-ref** before sharing
+10. **Test by following literally** (don't assume steps)
 
-### Agent-Friendliness
-- [ ] Language is direct (no "might", "could", "consider")
-- [ ] Terminology is consistent
-- [ ] Pronouns are clear (avoid ambiguous "it", "this")
-- [ ] Steps are numbered and sequential
-- [ ] Examples show expected input and output
-
-### Technical Quality
-- [ ] Code examples are tested and work
-- [ ] Commands are shown with full syntax
-- [ ] Error handling is explicit
-- [ ] Security best practices are followed
-- [ ] Dependencies are documented
-
-### Maintenance
-- [ ] Version is tracked in metadata
-- [ ] Changes are documented
-- [ ] Git tags match versions
-- [ ] README is up to date
-
-## Further Reading
+## Resources
 
 - [Agent Skills Specification](https://agentskills.io/specification)
-- [Anthropic's Best Practices Guide](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
-- [Example Skills](https://github.com/anthropics/skills)
 - [Integration Guide](https://agentskills.io/integrate-skills)
+- [Example Skills](https://github.com/anthropics/skills)
+- [skills-ref Library](https://github.com/agentskills/agentskills/tree/main/skills-ref)

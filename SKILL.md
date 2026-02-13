@@ -5,7 +5,7 @@ license: MIT
 metadata:
   version: "1.0.0"
   author: agent-builder-skill contributors
-  compatibility: Designed for filesystem-based agents with web access
+compatibility: Designed for filesystem-based agents with web access
 ---
 
 # Agent Builder Skill
@@ -26,8 +26,8 @@ Activate this skill when the user mentions:
 
 Agent Skills are folders containing a `SKILL.md` file with instructions that teach agents how to perform specific tasks. They use **progressive disclosure**:
 
-1. **Discovery**: Agents load only name and description at startup
-2. **Activation**: When relevant, agents read the full SKILL.md
+1. **Discovery**: Agents load only name and description at startup (~50-100 tokens)
+2. **Activation**: When relevant, agents read the full SKILL.md (~500-5000 tokens)
 3. **Execution**: Agents follow instructions and access bundled resources as needed
 
 ### Directory Structure
@@ -45,8 +45,6 @@ skill-name/
 ## Building a New Skill: Step-by-Step Process
 
 ### 1. Gather Context and Requirements
-
-Before building a skill, understand what you're building:
 
 **Ask the user these questions:**
 
@@ -162,7 +160,7 @@ description: Clear description of what this skill does and when to use it. Inclu
 **Optional Frontmatter Fields:**
 
 ```yaml
-license: Apache-2.0            # or path to LICENSE.txt
+license: MIT                   # or Apache-2.0, or path to LICENSE.txt
 compatibility: Requires Python 3.8+, requests library, internet access
 metadata:
   author: your-name
@@ -261,29 +259,49 @@ allowed-tools: Bash(curl:*) Bash(python3:*) Read Write
 - Frontmatter includes required fields: `name`, `description`
 - All referenced files actually exist (scripts, references, assets)
 
-**Use validation script:**
-See `scripts/validate_skill.py` for automated validation against the specification.
+**Use the official validation tool:**
+
+Instead of creating custom validation scripts, use the official [skills-ref library](https://github.com/agentskills/agentskills/tree/main/skills-ref):
+
+```bash
+# Install skills-ref
+pip install -e git+https://github.com/agentskills/agentskills.git#egg=skills-ref&subdirectory=skills-ref
+
+# Validate your skill
+skills-ref validate path/to/your-skill
+
+# Generate agent prompt XML
+skills-ref to-prompt path/to/your-skill
+```
+
+**For custom skill-specific validation** (beyond spec compliance), you may add scripts/ directory with domain-specific checks.
 
 ### 6. Add Optional Components
 
-**scripts/ directory:**
-- Create executable code that agents can run
+Most skills (95%) only need SKILL.md and optionally references/. Only add these directories if your skill genuinely needs them.
+
+**scripts/ directory** (only if you have domain-specific executable code):
+- **When to create**: Only if your skill needs data processing, API wrappers, or complex automation that's better as executable code
+- **Examples**: Data transformation pipelines, API client libraries, file converters
+- **NOT for**: Spec validation (use skills-ref library), simple commands (put inline in SKILL.md)
 - Include clear error messages and help text
 - Document dependencies at the top of each script
 - Use common scripting languages (Python, Bash, JavaScript)
 - Name scripts descriptively: `extract_data.py`, not `script1.py`
 
-**references/ directory:**
+**Note**: For Agent Skills specification validation, always use the official `skills-ref` library rather than custom scripts. Don't create an empty scripts/ directory "just in case" - add it only when you have actual code to include.
+
+**references/ directory** (create if SKILL.md exceeds ~400 lines):
+- **When to create**: When you have detailed documentation that would make SKILL.md too long
 - `REFERENCE.md`: Detailed technical reference (API docs, function signatures)
 - `FORMS.md`: Templates for structured data (JSON schemas, API request formats)
 - Domain-specific files: `database.md`, `authentication.md`, etc.
 - Keep files focused and under 1000 lines each
 
-**assets/ directory:**
-- Document templates (.md, .txt, .json)
-- Configuration examples
-- Diagrams or visual aids (.png, .svg)
-- Sample data for testing
+**assets/ directory** (only if you have template files or static resources):
+- **When to create**: Only if your skill needs config templates, diagrams, or sample data files
+- **Examples**: Document templates (.md, .txt, .json), configuration examples, diagrams (.png, .svg), sample data for testing
+- **NOT for**: Text documentation (use references/), examples (put in SKILL.md or references/)
 
 ### 7. Test the Skill
 
@@ -309,127 +327,25 @@ See `scripts/validate_skill.py` for automated validation against the specificati
 
 ### 8. Document and Package
 
-**Update README.md:** (see examples in `examples/`)
-- Describe what the skill does
-- Show installation/usage instructions
-- Link to the main SKILL.md
-- Include examples of tasks it can help with
-- Credit sources and provide relevant links
+**Create supporting files:**
 
-**Choose and Verify LICENSE:**
+- **README.md**: Installation instructions, usage examples, links to SKILL.md
+- **LICENSE**: Choose MIT (most permissive), Apache 2.0 (patent protection), or other
+- **CHANGELOG.md**: Track versions and changes
+- **CONTRIBUTING.md**: Guidelines for contributors (if accepting contributions)
+- **.gitignore**: Exclude .vscode/, __pycache__/, .DS_Store, etc.
 
-1. **Check for licensing constraints:**
-   - Review licenses of any resources you used (repos, documentation, code samples)
-   - If you used Apache 2.0 or MIT licensed sources, you can use any license (no restrictions on derivative works)
-   - If you used GPL or other copyleft licenses, you may need to use compatible licenses
-   - AI-generated content is owned by you with no restrictions
-   - Documentation under CC-BY only requires attribution if copied verbatim
-
-2. **Select the appropriate license:**
-   
-   **MIT License** ⭐ Most permissive and simple:
-   - ✅ Very short and clear (19 lines)
-   - ✅ Only requires preserving copyright notice
-   - ✅ No requirement to document changes
-   - ✅ Widely recognized across all platforms
-   - ✅ Best for maximum adoption and use
-   - Use when: You want the simplest, most permissive option
-   
-   **Apache 2.0**:
-   - ✅ Includes explicit patent grant (protects users from patent claims)
-   - ✅ Well-established for larger projects
-   - ⚠️ More complex (191 lines)
-   - ⚠️ Requires documenting changes to modified files
-   - Use when: Patent protection is important for your domain
-   
-   **CC0 / Unlicense** (Public Domain):
-   - ✅ Maximum permissiveness - waives all rights
-   - ⚠️ Less common, may concern enterprise users
-   - ⚠️ No warranty protection language
-   - Use when: You want to dedicate work to public domain
-   
-   **Other considerations:**
-   - Most Agent Skills in the ecosystem use MIT or Apache 2.0
-   - Match your organization's preferred license if relevant
-   - Consider your target users' preferences (enterprises often prefer MIT or Apache 2.0)
-
-3. **Verify license text against official sources:**
-   - **MIT**: Check against [opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
-   - **Apache 2.0**: Check against [apache.org/licenses/LICENSE-2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
-   - **Other licenses**: Verify at [spdx.org/licenses](https://spdx.org/licenses/)
-   - Ensure you use the complete, official text
-   - Replace placeholders: `<year>` → current year, `<copyright holders>` → your name/org
-
-4. **Add LICENSE file:**
-   ```bash
-   # Copy official license text to LICENSE file
-   # Update year and copyright holder
-   # Verify it matches the license: field in SKILL.md frontmatter
-   ```
-
-5. **Update related files:**
-   - Set `license:` field in SKILL.md frontmatter (e.g., `license: MIT`)
-   - Add license badge to README.md
-   - Document license in CONTRIBUTING.md if present
-   - Note in CHANGELOG.md if changing licenses
+**Verify license compliance:**
+- Check licenses of resources you used
+- Ensure your chosen license is compatible
+- Include proper attribution if required
+- See SKILL.md for detailed licensing guidance
 
 **Prepare for sharing:**
-- Add .gitignore for temporary files (.pyc, .DS_Store, __pycache__, etc.)
-- Write CONTRIBUTING.md if accepting contributions
-- Create CHANGELOG.md to track versions and changes
 - Tag version if using git: `git tag v1.0.0`
 - Verify all validation checks pass
-
-## Interactive Resource Gathering
-
-When building a skill, if you need more context or resources, **ask the user** these structured questions:
-
-### About the Skill Scope
-
-- "What specific tasks should this skill enable? Please list 3-5 concrete examples."
-- "Are there existing skills or tools that do something similar?"
-- "What level of expertise should users have? (beginner, intermediate, expert)"
-
-### About Resources
-
-- "Can you provide links to:
-  - Official documentation website
-  - GitHub repositories with examples
-  - API references or technical specifications
-  - Tutorials or guides"
-- "Are there any required accounts, API keys, or paid services?"
-- "What programming languages or tools does this skill involve?"
-
-### About Constraints
-
-- "Are there platform requirements? (OS, specific agents, network access)"
-- "Should this skill create files, run commands, or just provide guidance?"
-- "Are there security considerations? (API keys, sensitive data, sandboxing)"
-
-### About Validation
-
-- "Can I test this skill with a real example?"
-- "What would success look like? Can you describe an ideal outcome?"
-- "Are there common mistakes or failure modes to watch for?"
-
-## Common Patterns and Anti-Patterns
-
-### ✅ Good Practices
-
-- **Progressive disclosure**: Start with SKILL.md only, add complexity as needed
-- **Concrete examples**: Show actual code/commands with expected output
-- **Clear scope**: One skill = one well-defined capability
-- **Validation-ready**: Follow naming rules and structure from the start
-- **Self-documenting**: Someone should understand the skill by reading SKILL.md
-
-### ❌ Anti-Patterns to Avoid
-
-- **Vague descriptions**: "Helps with coding" instead of "Generates Python unit tests following pytest conventions"
-- **Monolithic skills**: Trying to do too much in one skill (split into multiple skills)
-- **Heavy SKILL.md**: Putting 2000 lines of reference docs in SKILL.md (use references/)
-- **Unclear structure**: Random mix of instructions, examples, and references
-- **Missing validation**: Not checking naming rules and frontmatter format
-- **Implicit knowledge**: Assuming agents will "figure out" what to do
+- Test installation instructions
+- Write clear README with examples
 
 ## Troubleshooting
 
@@ -470,6 +386,25 @@ Keep SKILL.md focused on core instructions and reference these files.
 - "I found two different authentication methods. Which should I use?"
 - "The documentation shows approach A but the examples use approach B. Which is preferred?"
 
+## Common Patterns and Anti-Patterns
+
+### ✅ Good Practices
+
+- **Progressive disclosure**: Start with SKILL.md only, add complexity as needed
+- **Concrete examples**: Show actual code/commands with expected output
+- **Clear scope**: One skill = one well-defined capability
+- **Validation-ready**: Follow naming rules and structure from the start
+- **Self-documenting**: Someone should understand the skill by reading SKILL.md
+
+### ❌ Anti-Patterns to Avoid
+
+- **Vague descriptions**: "Helps with coding" instead of "Generates Python unit tests following pytest conventions"
+- **Monolithic skills**: Trying to do too much in one skill (split into multiple skills)
+- **Heavy SKILL.md**: Putting 2000 lines of reference docs in SKILL.md (use references/)
+- **Unclear structure**: Random mix of instructions, examples, and references
+- **Missing validation**: Not checking naming rules and frontmatter format
+- **Implicit knowledge**: Assuming agents will "figure out" what to do
+
 ## Detailed References
 
 For comprehensive information, see these reference files:
@@ -477,62 +412,6 @@ For comprehensive information, see these reference files:
 - **[VALIDATION.md](references/VALIDATION.md)**: Complete validation rules and requirements
 - **[BEST_PRACTICES.md](references/BEST_PRACTICES.md)**: Writing effective skills and agent-friendly instructions
 - **[SPECIFICATION.md](references/SPECIFICATION.md)**: Full Agent Skills specification summary
-
-## Quick Reference: SKILL.md Template
-
-Use this as a starting point:
-
-```markdown
----
-name: my-skill-name
-description: What this skill does and when agents should use it. Be specific and include keywords.
----
-
-# My Skill Name
-
-Brief overview of what this skill enables.
-
-## When to Use This Skill
-
-Use this skill when:
-- [Clear criterion 1]
-- [Clear criterion 2]
-
-## Prerequisites
-
-- [Required tool or access]
-- [Another requirement]
-
-## Instructions
-
-### Step 1: [Action Name]
-
-1. [Specific step]
-2. [Another specific step]
-
-### Step 2: [Next Action]
-
-[Continue...]
-
-## Examples
-
-### Example: [Common Use Case]
-
-Input:
-\`\`\`
-[Sample input]
-\`\`\`
-
-Output:
-\`\`\`
-[Expected output]
-\`\`\`
-
-## Troubleshooting
-
-**Issue:** [Common problem]
-**Solution:** [How to fix]
-```
 
 ## Example Skills
 
@@ -585,10 +464,11 @@ compatibility: Requires Stripe API key, curl or HTTP client
 
 **Step 5 - Validate:**
 ```bash
-python scripts/validate_skill.py stripe-api-integration/
+skills-ref validate stripe-api-integration/
 ✓ Name valid: stripe-api-integration
 ✓ Description includes keywords: API, payments, Stripe
 ✓ Directory name matches
+✓ Frontmatter valid
 ```
 
 **Result**: Production-ready skill in ~367 lines, under 500 line limit, with references for detailed docs.
@@ -599,7 +479,6 @@ python scripts/validate_skill.py stripe-api-integration/
 - [Specification](https://agentskills.io/specification)
 - [Example Skills Repository](https://github.com/anthropics/skills)
 - [Reference Library](https://github.com/agentskills/agentskills/tree/main/skills-ref)
-- [Best Practices Guide](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
 
 ---
 
