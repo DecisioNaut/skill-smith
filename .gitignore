@@ -35,3 +35,6 @@ temp/
 # Node (if adding JavaScript tooling)
 node_modules/
 package-lock.json
+
+# Ignore .agents
+.agents/
