@@ -305,7 +305,8 @@ Most skills (95%) only need SKILL.md and optionally references/. Only add these 
 - `REFERENCE.md`: Detailed technical reference (API docs, function signatures)
 - `FORMS.md`: Templates for structured data (JSON schemas, API request formats)
 - Domain-specific files: `database.md`, `authentication.md`, etc.
-- Keep files focused and under 1000 lines each
+- **Keep files focused**: Target 200-800 lines, warn at 800, split before 1000
+- **Proactive management**: Check file sizes during creation, split early rather than late
 
 **assets/ directory** (only if you have template files or static resources):
 - **When to create**: Only if your skill needs config templates, diagrams, or sample data files

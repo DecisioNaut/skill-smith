@@ -178,11 +178,17 @@ See `auth/OAUTH.md`  ← Too deep!
 
 ## File Size Guidelines
 
-| File Type | Recommended | Reason |
-|-----------|-------------|--------|
-| SKILL.md | < 500 lines | Loaded on activation, should be scannable |
-| reference files | < 1000 lines each | Loaded on demand, stay focused |
-| name + description | ~50-100 tokens | Loaded at startup for all skills |
+| File Type | Target Size | Warning Threshold | Hard Limit | Reason |
+|-----------|-------------|-------------------|------------|--------|
+| SKILL.md | < 500 lines | 450 lines | 500 lines | Loaded on activation, should be scannable |
+| reference files | 200-800 lines | 800 lines | 1000 lines | Loaded on demand, stay focused |
+| name + description | ~50-100 tokens | - | 1024 chars | Loaded at startup for all skills |
+
+**Proactive File Size Management:**
+- Monitor file sizes during creation
+- Warn when approaching thresholds (800 lines for references, 450 for SKILL.md)
+- Proactively split before hitting hard limits
+- Don't wait until files exceed 1000 lines to consider splitting
 
 ## Writing Agent-Friendly Instructions
 

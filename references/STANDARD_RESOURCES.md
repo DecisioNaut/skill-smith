@@ -24,13 +24,15 @@ When creating or validating skills, use these official external resources to ens
 
 **Agent Behavior:**
 1. Fetch official template from OSI
-2. Replace `[year]` with current year
+2. Replace `[year]` with **actual current year** (e.g., if today is February 2026, use 2026 - NOT 2024 or any past year)
 3. Replace `[fullname]` with author name
 4. **Do NOT** modify license text in any other way
 5. Verify complete text present (not abbreviated)
 
+**Critical:** Always use the CURRENT year when creating a new skill, not a hardcoded or past year.
+
 **Verification:**
-- [ ] Year is actual year (not `[year]` placeholder)
+- [ ] Year matches the CURRENT year (e.g., 2026 if created in 2026, not 2024)
 - [ ] Author name filled in (not `[fullname]` placeholder)
 - [ ] Complete MIT text present
 - [ ] No modifications to standard text

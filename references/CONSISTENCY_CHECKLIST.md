@@ -44,7 +44,8 @@ This checklist ensures consistency across ALL skill files: SKILL.md, references/
 
 - [ ] Author name consistent in SKILL.md frontmatter and LICENSE
 - [ ] License type in SKILL.md matches LICENSE file content
-- [ ] Copyright year in LICENSE is current or creation year
+- [ ] Copyright year in LICENSE matches current year (e.g., 2026 if created in 2026, not past years)
+- [ ] Copyright holder name specified (not placeholder)
 - [ ] LICENSE contains complete, unmodified standard text
 - [ ] All placeholders ([year], [fullname]) replaced in LICENSE
 

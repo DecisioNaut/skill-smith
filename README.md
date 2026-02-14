@@ -163,9 +163,10 @@ See [references/BEST_PRACTICES.md](references/BEST_PRACTICES.md) for more patter
 
 ### File Size Guidelines
 
-- **SKILL.md**: < 500 lines (~5000 tokens)
-- **Reference files**: < 1000 lines each
+- **SKILL.md**: < 500 lines (~5000 tokens) - warn at 450 lines
+- **Reference files**: 200-800 lines optimal, warn at 800, hard limit 1000 lines
 - **Name + description**: ~50-100 tokens
+- **Proactive management**: Split files before exceeding limits, don't wait until 1000+
 
 ### File References (One Level Deep)
 

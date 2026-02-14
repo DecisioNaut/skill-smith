@@ -29,17 +29,28 @@ When skills grow complex, organize reference files systematically based on real-
 ### Size Guidelines
 
 **Target Range:** 200-800 lines (optimal for readability)
-**Acceptable Range:** 150-1000 lines
-**Consider Splitting:** Over 1000 lines (evaluate case-by-case)
+**Warning Threshold:** 800 lines (proactively consider splitting)
+**Hard Limit:** 1000 lines (must split or justify)
+
+**Proactive Management:**
+- ✅ **At 700-800 lines**: Evaluate if content can be logically split
+- ⚠️  **At 800-900 lines**: Actively plan split before reaching 1000
+- 🚫 **At 1000+ lines**: Must split immediately or provide strong justification
 
 **Real-world data from production skills:**
-- devcontainer-expert: 9 files, 365-574 lines each
-- uv-expert: 11 files, 155-1026 lines (1 slightly over, acceptable)
+- devcontainer-expert: 9 files, 365-574 lines each (all well under limit)
+- uv-expert: 11 files, 155-1026 lines (1 at 1026 should have been split earlier)
+
+**Agent Behavior During Creation:**
+- Check file size after each major content addition
+- Warn user when approaching 800 lines
+- Proactively suggest split strategies at 850+ lines
+- Do not create files over 1000 lines without explicit user approval
 
 **When NOT to split:**
 - Topic is cohesive and splitting would fragment understanding
-- File is only slightly over (1000-1200 range often acceptable)
-- Content needs to be referenced together
+- Content needs to be referenced together as a unit
+- User explicitly approves keeping larger file with justification
 
 ### Splitting Strategies
 
@@ -143,9 +154,14 @@ Agent automatically checks → Identifies issues → Presents recommendations �
 
 **After content additions:**
 - ✅ Check if SKILL.md approaching/exceeding 500 lines
+- ✅ Check if ANY reference file approaching 800 lines (warn at 800, require split at 1000)
 - ✅ Suggest where new content should go
 - ✅ Check version number needs update
 - ✅ Remind about CHANGELOG.md entry
+
+**File Size Thresholds:**
+- SKILL.md: Warn at 450 lines, recommend split at 500+
+- Reference files: Warn at 800 lines, require split/justification at 1000+
 
 **Before committing:**
 - ✅ Full compliance check
@@ -202,6 +218,48 @@ Refactoring Recommendations:
 This would bring SKILL.md to ~337 lines.
 
 Shall I proceed with these changes?
+```
+
+**During skill creation (LICENSE validation):**
+```
+User: "Create LICENSE file"
+
+Agent:
+✅ Creating MIT License...
+
+Current date: February 14, 2026
+
+Generated LICENSE:
+- Copyright (c) 2026 [Your Project Name] Contributors
+- Full MIT License text from official source
+
+✅ Verification:
+- [ ] Year is CURRENT year (2026, not 2024 or other past year)
+- [ ] Author name specified
+- [ ] Complete MIT text present
+
+LICENSE created successfully with correct current year.
+```
+
+**During content creation (proactive file size check):**
+```
+User: "Add data validation examples to API_REFERENCE.md"
+
+Agent:
+✅ Adding examples...
+
+⚠️ File Size Check:
+- API_REFERENCE.md was 687 lines
+- After additions: 843 lines
+- Status: Approaching warning threshold (800 lines)
+
+Recommendation:
+This file is getting large. Consider splitting before reaching 1000 lines:
+• Option A: Split now (API_BASICS.md + API_ADVANCED.md)
+• Option B: Continue but monitor (57 lines until warning at 900)
+• Option C: Keep unified (acceptable if content is cohesive)
+
+What's your preference?
 ```
 
 ### Compliance Overview Pattern

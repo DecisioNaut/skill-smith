@@ -231,9 +231,10 @@ Error: YAML frontmatter is not valid
 While not strictly validated, follow these for performance:
 
 - **Metadata**: ~50-100 tokens (name + description)
-- **SKILL.md**: < 500 lines recommended (~5000 tokens)
-- **References**: < 1000 lines each
+- **SKILL.md**: < 500 lines recommended (~5000 tokens), warn at 450
+- **References**: 200-800 lines optimal, warn at 800, hard limit 1000
 - Keep file references shallow (one level from SKILL.md)
+- Proactively split files before exceeding limits
 
 ## Validation Checklist
 
@@ -249,8 +250,9 @@ Use this checklist before sharing your skill:
 - [ ] `description` explains what and when
 - [ ] `description` includes relevant keywords
 - [ ] All referenced files exist
-- [ ] SKILL.md is under 500 lines (recommended)
-- [ ] Reference files are under 1000 lines (recommended)
+- [ ] SKILL.md is under 500 lines (warn at 450)
+- [ ] Reference files under 1000 lines (warn at 800, split proactively)
+- [ ] No files exceed 1000 lines without justification
 - [ ] Runs `skills-ref validate` without errors
 
 ## Resources
