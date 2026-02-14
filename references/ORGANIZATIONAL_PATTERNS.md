@@ -125,6 +125,63 @@ Clear hierarchical organization with examples...
 - Natural boundaries (basics vs. advanced)
 - Topic-based organization
 
+## Planning Document Best Practice
+
+### Why Create PLANNING.md?
+
+**Benefits:**
+- **Session continuity**: Maintain context if work spans multiple interactions
+- **Decision tracking**: Record *why* decisions were made, not just *what* was decided
+- **Progress visibility**: Clear checklist prevents missed steps
+- **Documentation source**: Use for CHANGELOG.md entries and commit messages
+- **Debugging**: If something goes wrong, reference helps identify root cause
+
+### Recommended for:
+- ✅ Creating new skills (always)
+- ✅ Refactoring existing skills
+- ✅ Major feature additions
+- ✅ Any multi-step work
+- ✅ Work that might span sessions
+
+### Example PLANNING.md
+
+```markdown
+# TM1py Expert Skill Planning
+
+**Workflow Mode**: CREATE
+**Goal**: Build comprehensive TM1py expert skill for IBM Planning Analytics
+**Created**: February 14, 2026
+
+## Requirements Analysis
+- [x] TM1py package version 2.0+
+- [x] Connection patterns (SSL, MDX, performance)
+- [x] Real-world examples from documentation
+
+## Implementation Checklist
+- [ ] SKILL.md outline (core concepts)
+- [ ] Create API_REFERENCE.md from TM1py docs
+- [ ] Create CONNECTION_GUIDE.md with examples
+- [ ] Create DATA_OPERATIONS.md (MDX, views)
+- [ ] Review file sizes (warn at 800 lines)
+- [ ] Validate with skills-ref
+- [ ] Remove PLANNING.md before commit
+
+## Decisions
+1. **Split references by functional area** rather than by complexity
+   - Rationale: Users think about connection/data/metadata separately
+   - Prevents artificial "part 1" / "part 2" splits
+
+2. **Include both sync and async patterns**
+   - Rationale: TM1py supports both, real work uses both
+
+## Notes
+- File size warning at line 800 triggered for EXAMPLES.md
+- Suggested split: BASIC_EXAMPLES.md + ADVANCED_EXAMPLES.md
+- User approved keeping as single file (1094 lines acceptable)
+```
+
+**Remember:** Delete PLANNING.md before final commit. Add to .gitignore if creating in template.
+
 ## Proactive Agent Behavior
 
 When skill-smith is active, agents should automatically check best practices and offer recommendations. Don't wait for users to ask - be proactive!
