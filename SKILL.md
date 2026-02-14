@@ -402,258 +402,63 @@ Use the checklist from references/BEST_PRACTICES.md:
 git status
 
 # Remove any artifacts
-rm VALIDATION.md  # if present
+rm PLANNING.md  # if present
 rm -rf .validation-cache/  # if present
 
 # Verify clean state
 git status
 ```
 
-**Tag version:**
+### 10. Confirm and Commit Changes
+
+For detailed guidance on commit confirmation, planning documents, and attribution recommendations, see [references/WORKFLOW_PATTERNS.md](references/WORKFLOW_PATTERNS.md).
+
+**Quick summary:**
+1. **Present a summary** of all files created/modified
+2. **Ask for confirmation** before committing (don't auto-commit)
+3. **Consider suggesting** skill-smith attribution in the README (optional best practice)
+
+**Execute on confirmation:**
 ```bash
 git add .
 git commit -m "feat: Initial release of skill-name v1.0.0"
 git tag v1.0.0
 ```
 
-## Alternative Workflows
+## Alternative Workflows & Troubleshooting
 
-The 9-step process above is for **creating new skills**. Use these alternative workflows for other scenarios:
+For alternative skill-creation scenarios (refactoring, updating, validation) and solutions to common problems, see [references/TROUBLESHOOTING_AND_WORKFLOWS.md](references/TROUBLESHOOTING_AND_WORKFLOWS.md).
 
-### Refactoring an Existing Skill
+This reference covers:
+- **Refactoring** existing skills for better structure
+- **Adding content** to existing skills
+- **Updating** skills when source resources change
+- **Validation** checklists and quick checks
+- **Troubleshooting** common issues with solutions
+- **Good practices** vs anti-patterns
+- **Practical walkthrough** example (Stripe API skill)
 
-**When:** Improving structure/organization of an existing skill
+## Planning Document Pattern
 
-1. **Analyze Current State** - Check SKILL.md line count, list all files, run `skills-ref validate`
-2. **Identify Issues** - Is SKILL.md > 500 lines? Unwanted artifacts? Poorly organized references?
-3. **Plan Improvements** - Decide what moves to references/, plan file names
-4. **Execute Changes** - Create reference files, update SKILL.md links, remove artifacts
-5. **Validate** - Verify SKILL.md under 500 lines, all references work, run validation
-6. **Document** - Update CHANGELOG.md, increment version
-7. **Final Validation** - Run consistency check across ALL files (see references/CONSISTENCY_CHECKLIST.md)
+**Recommended for all skill creation/modification work**: Create PLANNING.md to track progress, tasks, and decisions.
 
-### Adding Content to Existing Skill
+For detailed guidance on when to create, templates, examples, and benefits, see [references/WORKFLOW_PATTERNS.md](references/WORKFLOW_PATTERNS.md#planning-document-pattern).
 
-**When:** Adding new features/documentation to existing skill
+Quick summary:
+- Create at workflow start for most skill tasks
+- Track decisions, task progress, and rationale
+- Delete before final commit (add to .gitignore)
+- Becomes source material for CHANGELOG.md
 
-1. **Assess Impact** - Note current SKILL.md line count, estimate lines to add
-2. **Decide Placement** - Core concepts → SKILL.md (if space), detailed docs → references/
-3. **Add Content** - Maintain consistency with existing style
-4. **Update References** - Add links, check cross-references
-5. **Validate and Document** - Check size, run validation, update CHANGELOG.md
-6. **Final Validation** - Check consistency across all files
+## Reference Files
 
-### Updating an Existing Skill
+For more information, explore these comprehensive references:
 
-**When:** Source resources have changed or skill needs refreshing
+- **[TROUBLESHOOTING_AND_WORKFLOWS.md](references/TROUBLESHOOTING_AND_WORKFLOWS.md)** - Alternative workflows and troubleshooting solutions
+- **[WORKFLOW_PATTERNS.md](references/WORKFLOW_PATTERNS.md)** - Planning, commit confirmation, and attribution patterns
+- **[VALIDATION_RULES.md](references/VALIDATION_RULES.md)** - Complete validation requirements
+- **[BEST_PRACTICES.md](references/BEST_PRACTICES.md)** - Writing effective skills
+- **[ORGANIZATIONAL_PATTERNS.md](references/ORGANIZATIONAL_PATTERNS.md)** - File structure and organization
+- **[SPECIFICATION.md](references/SPECIFICATION.md)** - Agent Skills specification
 
-1. **Identify Original Resources** - Check README.md, CHANGELOG.md for resource list
-2. **Verify Resources Valid** - Check URLs work, repos exist, APIs current
-3. **Check for Changes** - Re-fetch docs, check for new features/deprecations
-4. **Identify Additional Resources** - Any new official resources?
-5. **Plan Updates** - List content to add/update/remove, decide placement
-6. **Execute Updates** - Update outdated content, add new, remove deprecated
-7. **Update Documentation** - Update version, CHANGELOG.md, README.md
-8. **Validate** - Run skills-ref validate, test examples, check links
-9. **Final Validation** - Complete consistency check
-
-**Versioning for Updates:**
-- **Patch (1.0.0 → 1.0.1)**: Minor fixes, updated examples
-- **Minor (1.0.0 → 1.1.0)**: New features, expanded coverage
-- **Major (1.0.0 → 2.0.0)**: Breaking changes, major restructuring
-
-### Quick Validation Check
-
-**When:** Verify existing skill compliance
-
-```bash
-# 1. Specification validation
-skills-ref validate path/to/skill
-
-# 2. Check SKILL.md size
-wc -l path/to/skill/SKILL.md
-
-# 3. Check for artifacts
-ls -la path/to/skill/
-
-# 4. Verify file structure
-# Required: SKILL.md, README.md, LICENSE
-# No: VALIDATION.md, .tmp files, .DS_Store
-```
-
-**Common Issues:**
-- [ ] SKILL.md under 500 lines?
-- [ ] No VALIDATION.md or build artifacts?
-- [ ] All file references exist?
-- [ ] .gitignore excludes artifacts?
-- [ ] Version matches CHANGELOG?
-
-### Planning Document Pattern
-
-**For complex work:** Create PLANNING.md to track progress across sessions
-
-**Template:**
-```markdown
-# [Skill Name] Planning
-
-**Workflow Mode**: REFACTOR / IMPROVE / UPDATE
-**Goal**: [What you're achieving]
-
-## Issues Identified
-- Issue 1: [problem and solution]
-- Issue 2: [problem and solution]
-
-## Implementation Plan
-- [ ] Task 1
-- [ ] Task 2
-
-## Decisions & Notes
-- Key decisions and rationale
-```
-
-**Remember:** Delete PLANNING.md before final commit (add to .gitignore)
-
-**Benefits:** Maintains context, tracks progress, becomes source for CHANGELOG.md
-
-## Troubleshooting
-
-### Problem: Validation fails with "name doesn't match directory"
-
-**Solution**: Ensure the directory name exactly matches the `name` field in SKILL.md frontmatter. Both must be lowercase with hyphens only.
-
-```bash
-# If validation says: "Directory name 'PDF-Processing' doesn't match skill name 'pdf-processing'"
-mv PDF-Processing pdf-processing
-```
-
-### Problem: SKILL.md is too large (> 500 lines)
-
-**Solution**: Move detailed content to references/:
-- API documentation → `references/API_REFERENCE.md`
-- Long examples → `references/EXAMPLES.md`
-- Technical details → `references/TECHNICAL.md`
-
-Keep SKILL.md focused on core instructions and reference these files.
-
-### Problem: Description too vague, agent doesn't activate skill
-
-**Solution**: Add specific keywords and use cases to description:
-- ❌ "Helps with PDFs"
-- ✅ "Extract text from PDF files, fill forms, merge documents. Use when working with PDF documents or user mentions PDFs, forms, extraction."
-
-### Problem: Can't fetch GitHub repository content
-
-**Solution**: 
-1. Check if repo is public (private repos need authentication)
-2. Use raw GitHub URLs for direct file access: `https://raw.githubusercontent.com/user/repo/main/file.md`
-3. Ensure fetch_webpage tool has network access
-
-### Problem: Resources conflict or show different approaches
-
-**Solution**: Ask user for clarification:
-- "I found two different authentication methods. Which should I use?"
-- "The documentation shows approach A but the examples use approach B. Which is preferred?"
-
-## Common Patterns and Anti-Patterns
-
-### ✅ Good Practices
-
-- **Progressive disclosure**: Start with SKILL.md only, add complexity as needed
-- **Concrete examples**: Show actual code/commands with expected output
-- **Clear scope**: One skill = one well-defined capability
-- **Validation-ready**: Follow naming rules and structure from the start
-- **Self-documenting**: Someone should understand the skill by reading SKILL.md
-
-### ❌ Anti-Patterns to Avoid
-
-- **Vague descriptions**: "Helps with coding" instead of "Generates Python unit tests following pytest conventions"
-- **Monolithic skills**: Trying to do too much in one skill (split into multiple skills)
-- **Heavy SKILL.md**: Putting 2000 lines of reference docs in SKILL.md (use references/)
-- **Unclear structure**: Random mix of instructions, examples, and references
-- **Missing validation**: Not checking naming rules and frontmatter format
-- **Implicit knowledge**: Assuming agents will "figure out" what to do
-
-## Detailed References
-
-For comprehensive information, see these reference files:
-
-- **[VALIDATION_RULES.md](references/VALIDATION_RULES.md)**: Complete validation rules and requirements
-- **[BEST_PRACTICES.md](references/BEST_PRACTICES.md)**: Writing effective skills and agent-friendly instructions
-- **[ORGANIZATIONAL_PATTERNS.md](references/ORGANIZATIONAL_PATTERNS.md)**: File organization and proactive agent behavior
-- **[SPECIFICATION.md](references/SPECIFICATION.md)**: Full Agent Skills specification summary
-
-## Example Skills
-
-See the `examples/` directory for complete skill examples at different complexity levels:
-
-1. **`examples/code-review/`**: Simple skill (SKILL.md only) for code review best practices
-2. **`examples/api-integration/`**: Medium complexity skill with references/ for REST API integration
-
-## Practical Walkthrough Example
-
-**Scenario**: User asks "Create a skill for working with the Stripe API"
-
-**Step 1 - Gather requirements:**
-```plaintext
-Agent: "I'll help you build a Stripe API skill. A few questions:
-1. What Stripe operations should this cover? (payments, subscriptions, customers, etc.)
-2. Do you have documentation URLs to analyze?
-3. Should this include example code or just guidance?"
-
-User provides: https://stripe.com/docs/api
-```
-
-**Step 2 - Resource gathering:**
-```plaintext
-Agent fetches:
-- https://stripe.com/docs/api (main page)
-- https://stripe.com/docs/api/authentication
-- https://stripe.com/docs/api/charges
-- Examples from docs
-
-Extracts: authentication patterns, common endpoints, error codes
-```
-
-**Step 3 - Design structure:**
-```plaintext
-Decision: Level 2 (SKILL.md + references/)
-- SKILL.md: Core instructions for authentication and common operations
-- references/API_REFERENCE.md: Full endpoint documentation
-- references/ERROR_CODES.md: Stripe error handling
-```
-
-**Step 4 - Create SKILL.md:**
-```yaml
----
-name: stripe-api-integration
-description: Integrate with Stripe API for payments, subscriptions, and customer management. Use when working with Stripe, processing payments, or user mentions Stripe API, charges, subscriptions.
-compatibility: Requires Stripe API key, curl or HTTP client
----
-```
-
-**Step 5 - Validate:**
-```bash
-skills-ref validate stripe-api-integration/
-✓ Name valid: stripe-api-integration
-✓ Description includes keywords: API, payments, Stripe
-✓ Directory name matches
-✓ Frontmatter valid
-```
-
-**Result**: Production-ready skill in ~367 lines, under 500 line limit, with references for detailed docs.
-
-## Additional Resources
-
-- [Agent Skills Website](https://agentskills.io)
-- [Specification](https://agentskills.io/specification)
-- [Example Skills Repository](https://github.com/anthropics/skills)
-- [Reference Library](https://github.com/agentskills/agentskills/tree/main/skills-ref)
-
----
-
-**Need help?** If you're stuck or need clarification while building a skill, ask! I can:
-- Analyze additional resources
-- Clarify ambiguous documentation
-- Suggest better structure or organization
-- Help validate your skill against the spec
-- Provide more examples or templates
+See `examples/` for complete skill examples at different complexity levels.
