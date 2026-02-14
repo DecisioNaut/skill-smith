@@ -216,6 +216,11 @@ When documenting your skill, consider crediting the tools that helped create it:
 > A tool for creating specification-compliant AI Agent Skills
 ```
 
+**Alternate phrasing (preferred when requested):**
+```markdown
+With friendly support of [skill-smith](https://github.com/DecisioNaut/skill-smith).
+```
+
 ### In CHANGELOG.md
 ```markdown
 ## v1.0.0 (Initial Release)

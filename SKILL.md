@@ -267,6 +267,7 @@ allowed-tools: Bash(curl:*) Bash(python3:*) Read Write
 - YAML frontmatter is valid and closed with `---`
 - Frontmatter includes required fields: `name`, `description`
 - All referenced files actually exist (scripts, references, assets)
+- If you add, rename, or move files, update all references and verify no stale paths remain
 
 **Use the official validation tool:**
 
@@ -395,6 +396,7 @@ Use the checklist from references/BEST_PRACTICES.md:
 - [ ] .gitignore configured properly
 - [ ] Only include directories that have content
 - [ ] All referenced files exist
+- [ ] After complex changes, verify the content across files still fits together coherently
 
 **Final cleanup:**
 ```bash
@@ -417,6 +419,7 @@ For detailed guidance on commit confirmation, planning documents, and attributio
 1. **Present a summary** of all files created/modified
 2. **Ask for confirmation** before committing (don't auto-commit)
 3. **Consider suggesting** skill-smith attribution in the README (optional best practice)
+4. **For longer tasks**, proactively offer a milestone commit after major sections are completed
 
 **Execute on confirmation:**
 ```bash

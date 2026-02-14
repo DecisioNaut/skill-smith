@@ -2,7 +2,7 @@
 
 **Reference for:** Detailed patterns for planning, commitment, and attribution in skill creation workflows
 
-> **Related:** See [SKILL.md](../SKILL.md) for the 8-step skill creation process, [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization
+> **Related:** See [SKILL.md](../SKILL.md) for the 10-step skill creation process, [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization
 
 This guide provides detailed patterns for managing skill creation workflows effectively.
 
@@ -153,6 +153,21 @@ D) Skip commit (you'll do it manually)
 - **Only proceed with Option A after explicit user confirmation**
 - Don't auto-commit without asking
 - Show commit details before executing
+
+### Milestone Commit Prompts
+
+For longer tasks, proactively offer milestone commits after major sections are completed.
+
+**When to prompt:**
+- After finishing a major reference file or batch of new files
+- After completing a large refactor or rename/move across multiple files
+- Before starting a new, distinct phase of work
+
+**Prompt format:**
+```
+I can commit the current milestone now, or continue and commit once everything is complete.
+Would you like a milestone commit?
+```
 
 ```bash
 # Confirm user approved
