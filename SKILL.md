@@ -32,7 +32,7 @@ Agent Skills are folders containing a `SKILL.md` file with instructions that tea
 
 ### Directory Structure
 
-```
+```plaintext
 skill-name/
 ├── SKILL.md          # Required: metadata + instructions (< 500 lines)
 ├── scripts/          # Optional: executable code
@@ -576,8 +576,9 @@ Keep SKILL.md focused on core instructions and reference these files.
 
 For comprehensive information, see these reference files:
 
-- **[VALIDATION.md](references/VALIDATION.md)**: Complete validation rules and requirements
+- **[VALIDATION_RULES.md](references/VALIDATION_RULES.md)**: Complete validation rules and requirements
 - **[BEST_PRACTICES.md](references/BEST_PRACTICES.md)**: Writing effective skills and agent-friendly instructions
+- **[ORGANIZATIONAL_PATTERNS.md](references/ORGANIZATIONAL_PATTERNS.md)**: File organization and proactive agent behavior
 - **[SPECIFICATION.md](references/SPECIFICATION.md)**: Full Agent Skills specification summary
 
 ## Example Skills
@@ -592,7 +593,7 @@ See the `examples/` directory for complete skill examples at different complexit
 **Scenario**: User asks "Create a skill for working with the Stripe API"
 
 **Step 1 - Gather requirements:**
-```
+```plaintext
 Agent: "I'll help you build a Stripe API skill. A few questions:
 1. What Stripe operations should this cover? (payments, subscriptions, customers, etc.)
 2. Do you have documentation URLs to analyze?
@@ -602,7 +603,7 @@ User provides: https://stripe.com/docs/api
 ```
 
 **Step 2 - Resource gathering:**
-```
+```plaintext
 Agent fetches:
 - https://stripe.com/docs/api (main page)
 - https://stripe.com/docs/api/authentication
@@ -613,7 +614,7 @@ Extracts: authentication patterns, common endpoints, error codes
 ```
 
 **Step 3 - Design structure:**
-```
+```plaintext
 Decision: Level 2 (SKILL.md + references/)
 - SKILL.md: Core instructions for authentication and common operations
 - references/API_REFERENCE.md: Full endpoint documentation

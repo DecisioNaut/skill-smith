@@ -2,7 +2,7 @@
 
 **Reference for:** Patterns and strategies for refactoring existing Agent Skills
 
-> **Related:** See [BEST_PRACTICES.md](./BEST_PRACTICES.md) for file organization patterns and [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for validation
+> **Related:** See [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization patterns and [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for validation
 
 ## When to Refactor
 
@@ -261,6 +261,7 @@ See [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for complete checklis
 
 ## Resources
 
-- [BEST_PRACTICES.md](./BEST_PRACTICES.md) - File organization patterns
+- [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) - File organization patterns
+- [BEST_PRACTICES.md](./BEST_PRACTICES.md) - Writing guidance and structure patterns
 - [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) - Validation checklist
 - [SPECIFICATION.md](./SPECIFICATION.md) - Agent Skills specification

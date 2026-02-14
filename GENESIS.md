@@ -30,7 +30,7 @@ The agent used its natural capabilities - reading web resources, analyzing speci
 
 ### What We Built
 - Complete SKILL.md with 7-step process (611 lines)
-- References directory (SPECIFICATION.md, VALIDATION.md, BEST_PRACTICES.md)
+- References directory (SPECIFICATION.md, VALIDATION_RULES.md, BEST_PRACTICES.md)
 - Scripts directory with custom validation scripts
 - Assets with resource templates
 - Examples directory with sample skills
@@ -160,7 +160,7 @@ This meta-test validated the approach while simultaneously improving it. The bet
 - **Key change**: Reference skills-ref library instead of custom validation scripts
 
 **Step 4: Create References**
-- `VALIDATION.md` (7,362 bytes) - Complete validation rules
+- `VALIDATION_RULES.md` (7,362 bytes) - Complete validation rules
 - `SPECIFICATION.md` (9,277 bytes) - Spec summary with progressive disclosure diagram
 - `BEST_PRACTICES.md` (11,834 bytes) - Agent-friendly writing patterns
 
@@ -266,7 +266,7 @@ skill-smith/
 ├── SKILL.md                           # 487 lines (✅ < 500)
 ├── references/
 │   ├── SPECIFICATION.md               # Progressive disclosure, directory structure
-│   ├── VALIDATION.md                  # Naming rules, frontmatter requirements
+│   ├── VALIDATION_RULES.md            # Naming rules, frontmatter requirements
 │   └── BEST_PRACTICES.md              # Agent-friendly writing patterns
 ├── assets/
 │   └── resource-templates.md          # Multi-page gathering templates

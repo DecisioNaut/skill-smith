@@ -88,8 +88,9 @@ skill-smith/
 ├── SKILL.md                    # Main instructions (< 500 lines)
 ├── references/                 # Detailed references
 │   ├── SPECIFICATION.md        # Agent Skills spec summary
-│   ├── VALIDATION.md           # Validation rules
-│   └── BEST_PRACTICES.md       # Agent-friendly writing tips
+│   ├── VALIDATION_RULES.md     # Validation rules
+│   ├── BEST_PRACTICES.md       # Agent-friendly writing tips
+│   └── ORGANIZATIONAL_PATTERNS.md # File organization patterns
 ├── assets/                     # Templates and resources
 │   └── resource-templates.md   # GitHub/docs/API analysis templates
 ├── examples/                   # Example skills
@@ -188,7 +189,7 @@ skills-ref read-properties path/to/skill
 skills-ref to-prompt path/to/skill
 ```
 
-See [references/VALIDATION.md](references/VALIDATION.md) for complete rules.
+See [references/VALIDATION_RULES.md](references/VALIDATION_RULES.md) for complete rules.
 
 ## FAQ
 
@@ -349,8 +350,9 @@ Quick contribution workflow:
 
 ### This Skill's Resources
 - [Specification Summary](references/SPECIFICATION.md)
-- [Validation Rules](references/VALIDATION.md)
+- [Validation Rules](references/VALIDATION_RULES.md)
 - [Best Practices](references/BEST_PRACTICES.md)
+- [Organizational Patterns](references/ORGANIZATIONAL_PATTERNS.md)
 - [Resource Templates](assets/resource-templates.md)
 - [Code Review Example](examples/code-review-helper/)
 - [Stripe API Example](examples/stripe-api-integration/)

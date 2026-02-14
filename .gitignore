@@ -75,6 +75,7 @@ IMPROVEMENT_PLAN.md
 IMPLEMENTATION_ISSUE_*.md
 
 # Validation artifacts (per File Structure Conventions)
+# Note: references/VALIDATION_RULES.md is a reference doc and should be tracked
 VALIDATION.md
 .validation-cache/
 
