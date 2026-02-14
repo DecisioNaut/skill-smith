@@ -5,38 +5,65 @@ All notable changes to Skill Smith will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.0.0] - 2026-02-13
-
-### Changed
-- **BREAKING**: Updated validation approach to use official skills-ref library instead of custom scripts
-- Clarified scripts/ directory purpose: domain-specific code only, not spec validation
-- Enhanced resource gathering instructions with explicit multi-page exploration guidance
-- Improved description with specific trigger keywords
-- Restructured to follow own improved methodology
+## [2.0.0] - 2026-02-14
 
 ### Added
-- Comprehensive troubleshooting section (5 common problems with solutions)
-- Security considerations section
-- Practical Stripe API walkthrough example
-- Complete reference documentation (SPECIFICATION.md, VALIDATION.md, BEST_PRACTICES.md)
-- Resource gathering templates for GitHub, docs sites, APIs, CLIs
-- Two complete example skills (code-review-helper, stripe-api-integration)
-- Progressive disclosure diagram and explanation
-- Best practices for agent-friendly writing
-- FAQ section in README
-- Contributing guidelines
+- **Multiple workflow modes** in SKILL.md:
+  - UPDATE workflow for refreshing skills from changed resources
+  - REFACTOR workflow for improving skill structure
+  - IMPROVE workflow for adding content/features
+  - VALIDATE workflow for quick compliance checks
+  - Planning Document Pattern for complex multi-session work
+- **New reference files:**
+  - references/REFACTORING_GUIDE.md - Refactoring patterns and examples
+  - references/CONSISTENCY_CHECKLIST.md - Cross-file validation checklist
+  - references/STANDARD_RESOURCES.md - Official templates and authoritative sources
+- **Proactive agent behavior patterns** in references/BEST_PRACTICES.md:
+  - Automatic checking triggers
+  - Compliance Overview Pattern for presenting complete file status
+  - Mode-specific behaviors for each workflow
+  - Example interactions showing proactive recommendations
+- **File structure guidance** in references/BEST_PRACTICES.md:
+  - Required, recommended, and forbidden files clearly listed
+  - Pre-commit file structure checklist
+  - .gitignore template with all common artifacts
+- **Reference organization patterns** in references/BEST_PRACTICES.md:
+  - Naming conventions (ALL_CAPS.md format)
+  - Size guidelines (150-1000 lines per file)
+  - Splitting strategies (by complexity, functional area, use case)
+  - Cross-referencing best practices
+  - Real-world examples from devcontainer-expert and uv-expert
+- **Resource documentation requirements**:
+  - README.md resources section format
+  - CHANGELOG.md resource tracking
+- **Final validation step** added to all workflows
+
+### Changed
+- **BREAKING**: "When to Use This Skill" section now explicitly lists all workflow modes
+- **BREAKING**: Agent behavior expectations changed - agents now check compliance proactively
+- **BREAKING**: Validation now covers ALL files (SKILL.md, references/, assets/, examples/)
+- Step 8 renamed to "8. Document and Package" with file structure validation
+- Step 9 renamed to "9. Test and Final Validation" with comprehensive checks
+- Step 3 enhanced with reference organization guidance
+- SKILL.md size increased to 657 lines (justified by new workflows)
+- Progressive disclosure now includes validation of reference file sizes
 
 ### Fixed
-- Removed unnecessary custom validation scripts
-- Clarified file reference guidelines (one level deep)
-- Updated all examples to use skills-ref validate
-- Improved SKILL.md to stay under 500 line guideline (487 lines)
+- Clarified that VALIDATION.md should NOT be committed (added to .gitignore template)
+- Specified exact .gitignore patterns for skill-smith artifacts
+- Added guidance on when NOT to split reference files
 
-### Improved
-- Step-by-step process now more explicit about using fetch_webpage for multi-page docs
-- Validation step references official tools with installation instructions
-- Description now includes comprehensive "when to use" keywords
-- Better distinction between references/ (docs) and assets/ (templates)
+### Breaking Changes
+- Skills created with v1.0.0 won't benefit from new workflows without manual adoption
+- Agent behavior expectations changed from reactive to proactive
+- Workflow invocation patterns expanded (now 5 modes instead of 1)
+
+### Migration Guide
+If you have existing skills:
+1. Add .gitignore with artifact exclusions
+2. Check reference file organization against new patterns
+3. Validate file structure against new checklist
+4. Consider which workflow mode applies when making changes
 
 ## [1.0.0] - 2026-02-13
 

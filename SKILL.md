@@ -3,7 +3,7 @@ name: skill-smith
 description: Build specification-compliant Agent Skills from documentation sites, GitHub repos, and APIs. Systematically gather resources, design SKILL.md structure, validate naming rules, and package for sharing. Use when user mentions creating skills, building agent capabilities, SKILL.md files, agent skills format, or skill development.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "2.0.0"
   author: skill-smith contributors
 compatibility: Designed for filesystem-based agents with web access
 ---
@@ -14,13 +14,13 @@ This skill helps you create high-quality Agent Skills that follow the official [
 
 ## When to Use This Skill
 
-Activate this skill when the user mentions:
-- Creating a new Agent Skill or building agent capabilities
-- Converting documentation, repos, or APIs into skills
-- SKILL.md file format, frontmatter, or structure
-- Skill validation, naming rules, or specification compliance
-- Packaging skills for GitHub or sharing with others
-- Progressive disclosure, skill discovery, or agent integration
+Activate this skill when:
+- **Creating a new skill** from documentation, repos, or APIs
+- **Refactoring an existing skill** to improve structure or reduce size
+- **Adding features** to an existing skill  
+- **Updating a skill** when source resources have changed
+- **Validating a skill** for compliance with Agent Skills specification
+- User mentions: creating skills, building agent capabilities, SKILL.md files, agent skills format, skill development, or skill refactoring
 
 ## Overview of Agent Skills
 
@@ -140,11 +140,20 @@ Choose the appropriate level of complexity:
 - SKILL.md + references/ directory with detailed docs
 - Good for: complex APIs, technical specs, domain knowledge
 - Example: api-integration-skill with REFERENCE.md for full API docs
+- **Reference organization**: Use ALL_CAPS.md naming (SECURITY.md, NETWORKING.md)
+- **Size guidance**: 150-1000 lines per file (see references/BEST_PRACTICES.md)
 
 **Level 3: Full Structure** (5% of skills)
 - SKILL.md + scripts/ + references/ + assets/
 - Good for: executable workflows, data processing, multi-step automation
 - Example: data-analysis-skill with Python scripts and templates
+
+**When organizing references/**:
+- Use descriptive, specific names (not MISC.md or OTHER.md)
+- Split by complexity (TOPIC.md + TOPIC_ADVANCED.md) if needed
+- Keep each file focused on one clear topic
+- Cross-reference between related files
+- See references/BEST_PRACTICES.md for detailed patterns
 
 ### 4. Create the SKILL.md File
 
@@ -333,19 +342,177 @@ Most skills (95%) only need SKILL.md and optionally references/. Only add these 
 - **LICENSE**: Choose MIT (most permissive), Apache 2.0 (patent protection), or other
 - **CHANGELOG.md**: Track versions and changes
 - **CONTRIBUTING.md**: Guidelines for contributors (if accepting contributions)
-- **.gitignore**: Exclude .vscode/, __pycache__/, .DS_Store, etc.
+- **.gitignore**: Exclude artifacts (see template in references/BEST_PRACTICES.md)
+
+**Validate file structure:**
+
+After creating documentation:
+1. Review files against recommended structure (see references/BEST_PRACTICES.md)
+2. Remove any build artifacts or temporary files (VALIDATION.md, .tmp files, etc.)
+3. Verify .gitignore excludes all artifact patterns
+4. Check for empty directories that should be removed
+5. Ensure no OS-specific files are committed
+
+**Common files to remove:**
+- ❌ VALIDATION.md (validation artifact)
+- ❌ Temporary validation or build files
+- ❌ .DS_Store, Thumbs.db (OS files)
+- ❌ Empty directories (scripts/, assets/, examples/ with no files)
 
 **Verify license compliance:**
 - Check licenses of resources you used
 - Ensure your chosen license is compatible
 - Include proper attribution if required
-- See SKILL.md for detailed licensing guidance
 
 **Prepare for sharing:**
-- Tag version if using git: `git tag v1.0.0`
-- Verify all validation checks pass
+- Verify all validation checks pass below
 - Test installation instructions
 - Write clear README with examples
+
+### 9. Test and Final Validation
+
+**Manual testing:**
+1. Try to use the skill yourself to accomplish the task
+2. Follow instructions literally - don't assume implied steps
+3. Test with common use cases and edge cases
+4. Verify that referenced files are accessible and clear
+5. Check that SKILL.md is under 500 lines
+
+**Specification validation:**
+
+Run official validation:
+```bash
+skills-ref validate path/to/your-skill
+```
+
+**File structure validation (before committing):**
+
+Use the checklist from references/BEST_PRACTICES.md:
+- [ ] Required files present (SKILL.md, README.md, LICENSE)
+- [ ] No build artifacts (VALIDATION.md, .tmp files)
+- [ ] No OS files (.DS_Store, Thumbs.db)
+- [ ] .gitignore configured properly
+- [ ] Only include directories that have content
+- [ ] All referenced files exist
+
+**Final cleanup:**
+```bash
+# Check for unwanted files
+git status
+
+# Remove any artifacts
+rm VALIDATION.md  # if present
+rm -rf .validation-cache/  # if present
+
+# Verify clean state
+git status
+```
+
+**Tag version:**
+```bash
+git add .
+git commit -m "feat: Initial release of skill-name v1.0.0"
+git tag v1.0.0
+```
+
+## Alternative Workflows
+
+The 9-step process above is for **creating new skills**. Use these alternative workflows for other scenarios:
+
+### Refactoring an Existing Skill
+
+**When:** Improving structure/organization of an existing skill
+
+1. **Analyze Current State** - Check SKILL.md line count, list all files, run `skills-ref validate`
+2. **Identify Issues** - Is SKILL.md > 500 lines? Unwanted artifacts? Poorly organized references?
+3. **Plan Improvements** - Decide what moves to references/, plan file names
+4. **Execute Changes** - Create reference files, update SKILL.md links, remove artifacts
+5. **Validate** - Verify SKILL.md under 500 lines, all references work, run validation
+6. **Document** - Update CHANGELOG.md, increment version
+7. **Final Validation** - Run consistency check across ALL files (see references/CONSISTENCY_CHECKLIST.md)
+
+### Adding Content to Existing Skill
+
+**When:** Adding new features/documentation to existing skill
+
+1. **Assess Impact** - Note current SKILL.md line count, estimate lines to add
+2. **Decide Placement** - Core concepts → SKILL.md (if space), detailed docs → references/
+3. **Add Content** - Maintain consistency with existing style
+4. **Update References** - Add links, check cross-references
+5. **Validate and Document** - Check size, run validation, update CHANGELOG.md
+6. **Final Validation** - Check consistency across all files
+
+### Updating an Existing Skill
+
+**When:** Source resources have changed or skill needs refreshing
+
+1. **Identify Original Resources** - Check README.md, CHANGELOG.md for resource list
+2. **Verify Resources Valid** - Check URLs work, repos exist, APIs current
+3. **Check for Changes** - Re-fetch docs, check for new features/deprecations
+4. **Identify Additional Resources** - Any new official resources?
+5. **Plan Updates** - List content to add/update/remove, decide placement
+6. **Execute Updates** - Update outdated content, add new, remove deprecated
+7. **Update Documentation** - Update version, CHANGELOG.md, README.md
+8. **Validate** - Run skills-ref validate, test examples, check links
+9. **Final Validation** - Complete consistency check
+
+**Versioning for Updates:**
+- **Patch (1.0.0 → 1.0.1)**: Minor fixes, updated examples
+- **Minor (1.0.0 → 1.1.0)**: New features, expanded coverage
+- **Major (1.0.0 → 2.0.0)**: Breaking changes, major restructuring
+
+### Quick Validation Check
+
+**When:** Verify existing skill compliance
+
+```bash
+# 1. Specification validation
+skills-ref validate path/to/skill
+
+# 2. Check SKILL.md size
+wc -l path/to/skill/SKILL.md
+
+# 3. Check for artifacts
+ls -la path/to/skill/
+
+# 4. Verify file structure
+# Required: SKILL.md, README.md, LICENSE
+# No: VALIDATION.md, .tmp files, .DS_Store
+```
+
+**Common Issues:**
+- [ ] SKILL.md under 500 lines?
+- [ ] No VALIDATION.md or build artifacts?
+- [ ] All file references exist?
+- [ ] .gitignore excludes artifacts?
+- [ ] Version matches CHANGELOG?
+
+### Planning Document Pattern
+
+**For complex work:** Create PLANNING.md to track progress across sessions
+
+**Template:**
+```markdown
+# [Skill Name] Planning
+
+**Workflow Mode**: REFACTOR / IMPROVE / UPDATE
+**Goal**: [What you're achieving]
+
+## Issues Identified
+- Issue 1: [problem and solution]
+- Issue 2: [problem and solution]
+
+## Implementation Plan
+- [ ] Task 1
+- [ ] Task 2
+
+## Decisions & Notes
+- Key decisions and rationale
+```
+
+**Remember:** Delete PLANNING.md before final commit (add to .gitignore)
+
+**Benefits:** Maintains context, tracks progress, becomes source for CHANGELOG.md
 
 ## Troubleshooting
 

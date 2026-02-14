@@ -69,6 +69,15 @@ tmp/
 temp/
 *.tmp
 
+# Planning documents (per Planning Document Pattern)
+PLANNING.md
+IMPROVEMENT_PLAN.md
+IMPLEMENTATION_ISSUE_*.md
+
+# Validation artifacts (per File Structure Conventions)
+VALIDATION.md
+.validation-cache/
+
 # Test coverage
 coverage/
 .nyc_output/
