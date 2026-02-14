@@ -2,6 +2,16 @@
 
 Guide for writing effective Agent Skills that work reliably with AI agents.
 
+## Table of Contents
+
+- [Core Principles](#core-principles)
+- [File Structure Validation](#file-structure-validation)
+- [File Size Guidelines](#file-size-guidelines)
+- [Skill Attribution (Best Practice)](#skill-attribution-best-practice)
+- [Writing Agent-Friendly Instructions](#writing-agent-friendly-instructions)
+- [Structure Patterns](#structure-patterns)
+- [Description Writing](#description-writing)
+
 ## Core Principles
 
 ### 1. Progressive Disclosure

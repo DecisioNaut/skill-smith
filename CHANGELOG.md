@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Step 8 renamed to "8. Document and Package" with file structure validation
 - Step 9 renamed to "9. Test and Final Validation" with comprehensive checks
 - Step 3 enhanced with reference organization guidance
-- SKILL.md size increased to 657 lines (justified by new workflows)
+- SKILL.md size increased to 465 lines (justified by new workflows)
 - Progressive disclosure now includes validation of reference file sizes
 
 ### Fixed

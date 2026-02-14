@@ -104,16 +104,18 @@ skill-smith/
 
 ## How It Works
 
-### The 8-Step Process
+### The 10-Step Process
 
-1. **Clarify Requirements** - Understand what the skill should do
-2. **Gather Resources** - Systematically collect documentation, examples, code
-3. **Design Structure** - Plan SKILL.md with progressive disclosure
-4. **Write SKILL.md** - Create clear, agent-friendly instructions
-5. **Validate** - Check compliance with specification
-6. **Add Optional Components** - Scripts, references, assets, examples
-7. **Create Documentation** - README, LICENSE, etc.
-8. **Final Validation** - Verify everything works
+1. **Gather Context and Requirements** - Clarify goals, resources, audience, and complexity
+2. **Analyze Resources Thoroughly** - Explore docs, examples, and references in depth
+3. **Design the Skill Structure** - Choose the right complexity level and layout
+4. **Create the SKILL.md File** - Write clear, agent-friendly instructions
+5. **Validate the Skill** - Check naming, structure, and references
+6. **Add Optional Components** - Scripts, references, and assets as needed
+7. **Test the Skill** - Manual and agent testing for clarity and edge cases
+8. **Document and Package** - README, LICENSE, CHANGELOG, .gitignore
+9. **Test and Final Validation** - Run validation and clean up artifacts
+10. **Confirm and Commit Changes** - Summarize, request confirmation, and commit
 
 See [SKILL.md](SKILL.md) for complete details.
 

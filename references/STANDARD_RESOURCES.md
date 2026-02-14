@@ -8,6 +8,19 @@
 
 When creating or validating skills, use these official external resources to ensure compliance with standards and best practices.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [License Templates](#license-templates)
+- [Changelog Format](#changelog-format)
+- [Semantic Versioning](#semantic-versioning)
+- [Agent Skills Specification](#agent-skills-specification)
+- [README.md Best Practices](#readmemd-best-practices)
+- [.gitignore Templates](#gitignore-templates)
+- [Resource Documentation in Skills](#resource-documentation-in-skills)
+- [Using These Resources](#using-these-resources)
+- [Resources](#resources)
+
 ## License Templates
 
 ### MIT License

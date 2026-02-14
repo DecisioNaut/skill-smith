@@ -2,9 +2,7 @@
 name: stripe-api-integration
 description: Integrate Stripe payment processing including customers, payment intents, subscriptions, webhooks. Use when implementing payments, working with Stripe API, or when user mentions Stripe, payments, subscriptions, or billing.
 license: MIT
-compatibility:
-  - python>=3.7
-  - requires: stripe python library
+compatibility: Requires Python 3.7+ and the Stripe Python library
 ---
 
 # Stripe API Integration

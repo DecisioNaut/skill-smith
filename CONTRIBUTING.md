@@ -35,8 +35,9 @@ For new features or improvements:
 1. **Fork the repository**
 2. **Clone your fork**:
    ```bash
-git clone https://github.com/your-username/skill-smith.git
-cd skill-smith
+   git clone https://github.com/your-username/skill-smith.git
+   cd skill-smith
+   ```
 
 3. **Create a branch**:
    ```bash

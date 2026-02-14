@@ -8,6 +8,23 @@
 
 This checklist ensures consistency across ALL skill files: SKILL.md, references/, assets/, and examples/. Use this before finalizing any skill or after major changes.
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Cross-File Consistency](#cross-file-consistency)
+- [Terminology Consistency](#terminology-consistency)
+- [Code and Example Consistency](#code-and-example-consistency)
+- [SKILL.md Validation](#skillmd-validation)
+- [Reference Files Validation](#reference-files-validation)
+- [Assets and Examples](#assets-and-examples)
+- [Link and Reference Validation](#link-and-reference-validation)
+- [Git and Distribution](#git-and-distribution)
+- [Version Control](#version-control)
+- [Final Validation](#final-validation)
+- [Pre-Commit Validation](#pre-commit-validation)
+- [Compliance Overview Pattern](#compliance-overview-pattern)
+- [Resources](#resources)
+
 ## Cross-File Consistency
 
 ### Skill Name
