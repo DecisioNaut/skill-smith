@@ -35,14 +35,14 @@ Every skill MUST contain a `SKILL.md` file at the root of the skill directory.
   - Must be NFKC normalized
 - **Directory Match**: Directory name must exactly match the skill name
 
-**Valid Examples:**
+**Valid Samples:**
 ```yaml
 name: pdf-processing
 name: data-analysis-v2
 name: api-client
 ```
 
-**Invalid Examples:**
+**Invalid Samples:**
 ```yaml
 name: PDF-Processing      # Uppercase not allowed
 name: -my-skill           # Cannot start with hyphen
@@ -73,32 +73,111 @@ description: Extract text and tables from PDF files, fill PDF forms, merge docum
 description: Helps with PDFs.  # Too vague, missing keywords
 ```
 
-### Optional Fields
-
-#### license
+### Repository-level LICENSE File
 
 **Requirements:**
-- **Type**: String
-- **No length limit**
+- LICENSE file must exist at repository root (NOT in the skill package folder)
+- Must be an industry-standard, open-source license from https://opensource.org/licenses
+- Must be complete and unmodified from the authoritative source
+- All placeholders must be filled in (copyright holder, year, company name, etc.)
 
-**Examples:**
-```yaml
-license: MIT
-license: Apache-2.0
-license: Proprietary. See LICENSE.txt
+**Common License Choices:**
+
+**MIT License (Most Common)**
+```
+File: LICENSE (at repository root)
+- Simplest open-source license
+- Minimal restrictions on use
+- Recommended for most public skills
+- Get template: https://opensource.org/licenses/MIT
+- SPDX identifier: MIT
 ```
 
-#### compatibility
+**Apache License 2.0**
+```
+File: LICENSE (at repository root)
+- Like MIT but includes patent protection
+- Good for enterprise/commercial projects
+- Slightly more restrictive
+- Get template: https://opensource.org/licenses/Apache-2.0
+- SPDX identifier: Apache-2.0
+```
 
-**Requirements:**
-- **Type**: String  
-- **Length**: 1-500 characters (if provided)
+**GPL v2 or v3 (Copyleft)**
+```
+File: LICENSE (at repository root)
+- Requires derivatives to be open source
+- Stronger open-source commitment
+- Get template: https://www.gnu.org/licenses/
+- SPDX identifier: GPL-2.0-only or GPL-3.0-only
+```
 
-**When to Use:**
-- Only include if skill has specific environment requirements
-- Most skills do not need this field
+**License Compatibility & Attribution**
 
-**Examples:**
+**Verify compatibility with source materials:**
+- [ ] Check license of ALL resources used (dependencies, code samples, documentation)
+- [ ] Verify no license conflicts:
+  - MIT → Can go into any open-source project ✓
+  - Apache 2.0 → Can go into MIT projects (with attribution) ✓
+  - GPL → Requires entire project to be GPL ✗ (unless exception)
+  - Proprietary → Cannot redistribute without permission ✗
+- [ ] Use https://choosealicense.com/appendix/ for compatibility matrix
+- [ ] Document all source licenses in README "Attribution" section
+
+**Attribution for Derived or Reused Code:**
+```markdown
+## Attribution
+
+- [Component/Code]: Original source URL, licensed under [License]
+  - Original author: [Author Name]
+  - Changes: [What was changed/adapted]
+```
+
+**Validation Checklist for Repository LICENSE:**
+```
+✓ LICENSE file exists at repository root
+✓ LICENSE is NOT in skill package subfolder
+✓ License text is from authoritative source (opensource.org)
+✓ License text is complete (no lines removed)
+✓ Copyright year filled in (e.g., 2026)
+✓ Copyright holder name filled in
+✓ README.md mentions license type
+✓ README.md has "Attribution" section for source materials
+✓ All dependencies' licenses verified for compatibility
+✓ CHANGELOG.md first entry mentions license choice
+✓ License type documented in GitHub/GitLab settings if applicable
+```
+
+**Where to Get Authoritative License Templates:**
+- https://opensource.org/licenses/ (Official OSI licenses)
+- https://choosealicense.com/ (Interactive license selector)
+- https://github.com/licenses/license-templates (GitHub's official templates)
+- https://www.gnu.org/licenses/ (GPL licenses)
+
+**Common License Errors to Avoid:**
+- ❌ Using modified/altered LICENSE text (must be original)
+- ❌ Forgetting to fill in copyright holder name
+- ❌ Including LICENSE in skill package (should be in repository root only)
+- ❌ Using GPL code without GPL license
+- ❌ Using proprietary code without explicit permission
+- ❌ Forgetting to document source material licenses
+- ❌ License file named differently (should be LICENSE, not LICENSE.md or LICENSE.txt)
+
+### Optional Fields
+
+⚠️ **Important Note:** Per the Agent Skills specification, do NOT include optional fields in SKILL.md frontmatter. Only `name` and `description` should be in the YAML frontmatter.
+
+Repository-level documentation (README.md, LICENSE, CHANGELOG.md) should be managed separately from the skill package and configured at the repository level, not in frontmatter.
+
+The following samples show obsolete patterns that are NO LONGER RECOMMENDED:
+
+#### license (DEPRECATED - Use repository-level LICENSE file)
+
+**Note**: License information should be managed in a repository-level LICENSE file, not in the skill package YAML frontmatter.
+
+#### compatibility (DEPRECATED - Rarely used)
+
+**Samples:**
 ```yaml
 compatibility: Requires Python 3.8+, requests library
 compatibility: Designed for Claude Code (or similar products)
@@ -155,7 +234,7 @@ When referencing other files from SKILL.md:
 - Keep references "one level deep" - avoid nested chains
 - Ensure referenced files exist
 
-**Examples:**
+**Samples:**
 ```markdown
 See `references/API.md` for details.          ✓ Good
 Run `scripts/process.py` to extract data.     ✓ Good

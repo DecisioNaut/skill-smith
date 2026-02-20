@@ -33,7 +33,7 @@ The agent used its natural capabilities - reading web resources, analyzing speci
 - References directory (SPECIFICATION.md, VALIDATION_RULES.md, BEST_PRACTICES.md)
 - Scripts directory with custom validation scripts
 - Assets with resource templates
-- Examples directory with sample skills
+- Samples directory with sample skills
 - MIT License
 - Complete documentation (README, CONTRIBUTING, CHANGELOG)
 
@@ -46,7 +46,6 @@ skill-smith/ (Alpha)
 │   ├── validate_skill.py      # Custom validation
 │   └── generate_skill.py      # Custom generation
 ├── assets/
-├── examples/
 └── Documentation files
 ```
 
@@ -74,7 +73,7 @@ This was the moment of truth: turning the skill on itself. Could the instruction
 The agent now followed the skill's own instructions to analyze and refactor the alpha build:
 
 1. ✅ Analyzed existing SKILL.md structure
-2. ✅ Examined references and examples
+2. ✅ Examined references and samples
 3. ✅ Applied validation rules from the skill's own guidance
 4. ✅ Identified gaps using the skill's best practices
 5. ✅ Generated improvements
@@ -112,17 +111,16 @@ Alpha bundled custom validation scripts. Beta discovered the [skills-ref](https:
 **6. Exceeded Size Guidelines**
 611 lines in SKILL.md violated the <500 line guideline for progressive disclosure.
 
-**7. Lacked Practical Examples**
+**7. Lacked Practical Samples**
 Added detailed Stripe API walkthrough showing the complete process from resource gathering through validation.
 
 ### Beta Version Improvements
 ```
 skill-smith/ (Beta)
 ├── SKILL.md (still 611 lines, but identified for reduction)
-├── references/ (enhanced with better examples)
+├── references/ (enhanced with clearer guidance)
 ├── scripts/ (marked as optional, not default)
 ├── assets/ (added multi-page gathering templates)
-├── examples/ (added richer walkthroughs)
 └── Documentation files (enhanced)
 ```
 
@@ -167,7 +165,7 @@ This meta-test validated the approach while simultaneously improving it. The bet
 **Step 5: Create Assets**
 - `resource-templates.md` (16,228 bytes) - Multi-page gathering templates
 
-**Step 6: Create Examples**
+**Step 6: Create Sample Skills**
 - `code-review-helper/` - Simple skill (single SKILL.md)
 - `stripe-api-integration/` - Complex skill with references
 
@@ -184,7 +182,6 @@ skill-smith/ (Final)
 ├── SKILL.md                    # 487 lines (✅ < 500) - IMPROVED
 ├── references/                 # Complete references
 ├── assets/                     # Multi-page templates
-├── examples/                   # Two complete examples
 ├── scripts/                    # Empty (intentional) - CLEANER
 └── Documentation files         # Complete
 ```
@@ -230,7 +227,7 @@ skills-ref validate my-skill/
 | Multi-page guidance | Vague | Enhanced | Explicit ✅ |
 | Troubleshooting | Missing | Added | Complete ✅ |
 | Security | Missing | Added | Complete ✅ |
-| Examples | Basic | Enhanced | Rich ✅ |
+| Samples | Basic | Enhanced | Rich ✅ |
 
 ---
 
@@ -270,13 +267,6 @@ skill-smith/
 │   └── BEST_PRACTICES.md              # Agent-friendly writing patterns
 ├── assets/
 │   └── resource-templates.md          # Multi-page gathering templates
-├── examples/
-│   ├── code-review-helper/
-│   │   └── SKILL.md                   # Simple example
-│   └── stripe-api-integration/
-│       ├── SKILL.md                   # Complex example
-│       └── references/
-│           └── WEBHOOK_EVENTS.md
 ├── scripts/                           # Empty (intentional)
 ├── README.md                          # Installation, FAQ, structure
 ├── LICENSE                            # MIT
@@ -334,8 +324,8 @@ skill-smith/
 
 ### Content Created
 - **12 markdown files** from scratch in final build
-- **~78KB** of documentation and examples
-- **2 complete example skills** (simple + complex)
+- **~78KB** of documentation and samples
+- **2 complete sample skills** (simple + complex)
 - **3 comprehensive reference files**
 - **All specification checks**: ✅
 

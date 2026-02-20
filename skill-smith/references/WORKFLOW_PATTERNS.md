@@ -6,6 +6,15 @@
 
 This guide provides detailed patterns for managing skill creation workflows effectively.
 
+## Table of Contents
+
+- [Planning Document Pattern](#planning-document-pattern)
+- [Commission Confirmation Pattern](#commission-confirmation-pattern)
+- [Attribution Recommendation Pattern](#attribution-recommendation-pattern)
+- [Versioning](#versioning)
+- [About This Skill](#about-this-skill)
+- [Proactive Agent Behavior During Workflows](#proactive-agent-behavior-during-workflows)
+
 ## Planning Document Pattern
 
 ### When to Create PLANNING.md
@@ -72,13 +81,13 @@ This guide provides detailed patterns for managing skill creation workflows effe
 ## Requirements
 - [x] TM1py package version 2.0+
 - [x] Connection patterns (SSL, MDX, performance)
-- [x] Real-world examples from documentation
+- [x] Real-world samples from documentation
 - [x] Data operation patterns
 
 ## Implementation Checklist
 - [x] SKILL.md outline (core concepts)
 - [x] Create API_REFERENCE.md from TM1py docs
-- [x] Create CONNECTION_GUIDE.md with examples
+- [x] Create CONNECTION_GUIDE.md with samples
 - [x] Create DATA_OPERATIONS.md (MDX, views)
 - [x] Review file sizes (warn at 800 lines)
 - [ ] Validate with skills-ref
@@ -93,7 +102,7 @@ This guide provides detailed patterns for managing skill creation workflows effe
    - Rationale: TM1py supports both, real work uses both
 
 3. **File size exceeded 1000 lines**
-   - Decision: Keep single EXAMPLES.md file (1094 lines)
+   - Decision: Keep single SAMPLES.md file (1094 lines)
    - Rationale: User approved keeping together for easy reference
    - Note: Should have been proactively split at 850 lines!
 
@@ -121,7 +130,7 @@ Summary of files created/modified:
 - README.md (created) ← user-facing documentation
 - LICENSE (MIT) ← usage terms
 - references/REFERENCE.md (134 lines) ← detailed docs
-- references/EXAMPLES.md (156 lines) ← example code
+- references/SAMPLES.md (156 lines) ← sample code
 - .gitignore (created) ← artifact exclusion
 - CHANGELOG.md (created) ← version tracking
 
@@ -208,10 +217,10 @@ When a skill is created with skill-smith, suggest crediting the tool:
 
 - Include in Step 8 (Document and Package) guidelines
 - Present as **optional best practice**, not requirement
-- Provide copy-paste examples for ease
+- Provide copy-paste samples for ease
 - Share GitHub link: https://github.com/DecisioNaut/skill-smith
 
-### Example Suggestions
+### Sample Suggestions
 
 **In README.md footer:**
 ```markdown

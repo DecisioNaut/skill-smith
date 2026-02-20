@@ -6,7 +6,7 @@
 
 ## Overview
 
-This checklist ensures consistency across ALL skill files: SKILL.md, references/, assets/, and examples/. Use this before finalizing any skill or after major changes.
+This checklist ensures consistency across all skill files: SKILL.md, references/, and assets/. Use this before finalizing any skill or after major changes.
 
 ## Table of Contents
 
@@ -14,10 +14,10 @@ This checklist ensures consistency across ALL skill files: SKILL.md, references/
 - [Cross-File Consistency](#cross-file-consistency)
 - [README Attribution](#readme-attribution)
 - [Terminology Consistency](#terminology-consistency)
-- [Code and Example Consistency](#code-and-example-consistency)
+- [Code and Sample Consistency](#code-and-sample-consistency)
 - [SKILL.md Validation](#skillmd-validation)
 - [Reference Files Validation](#reference-files-validation)
-- [Assets and Examples](#assets-and-examples)
+- [Assets and Samples](#assets-and-samples)
 - [Link and Reference Validation](#link-and-reference-validation)
 - [Git and Distribution](#git-and-distribution)
 - [Version Control](#version-control)
@@ -40,7 +40,7 @@ This checklist ensures consistency across ALL skill files: SKILL.md, references/
 
 - [ ] README includes the phrase "with friendly support of skill-smith" or you asked whether to add it
 
-**Example Check:**
+**Sample Check:**
 ```bash
 # Directory: api-integration-skill/
 # SKILL.md frontmatter: name: api-integration-skill
@@ -125,7 +125,7 @@ This checklist ensures consistency across ALL skill files: SKILL.md, references/
 - See [API](API.md) (wrong path from SKILL.md)
 ```
 
-## Code and Example Consistency
+## Code and Sample Consistency
 
 ### Syntax Highlighting
 
@@ -134,7 +134,7 @@ This checklist ensures consistency across ALL skill files: SKILL.md, references/
 - [ ] No generic ``` without language for code
 - [ ] Language tags are lowercase (bash not Bash)
 
-**Example:**
+**Sample:**
 ```markdown
 ✅ Consistent:
 ```bash
@@ -155,13 +155,13 @@ curl -X POST https://api.example.com
 ```
 ```
 
-### Examples and Output
+### Samples and Output
 
-- [ ] Examples use current, working syntax
+- [ ] Samples use current, working syntax
 - [ ] Deprecated patterns removed
 - [ ] Expected outputs match current versions
 - [ ] Placeholder values clearly marked (YOUR_KEY, example.com)
-- [ ] Examples work as documented
+- [ ] Samples work as documented
 
 ### Commands and Paths
 
@@ -185,7 +185,7 @@ curl -X POST https://api.example.com
 ### Content Quality
 
 - [ ] Instructions are specific and actionable
-- [ ] Examples include inputs and outputs
+- [ ] Samples include inputs and outputs
 - [ ] Prerequisites clearly listed
 - [ ] Edge cases and errors handled
 - [ ] No vague language ("you might want to...")
@@ -236,7 +236,7 @@ wc -l references/*.md | sort -n
 ├── MISC.md (everything else)
 ```
 
-## Assets and Examples
+## Assets and Samples
 
 ### Assets Directory
 
@@ -246,13 +246,7 @@ wc -l references/*.md | sort -n
 - [ ] No redundant or outdated assets
 - [ ] Asset files have descriptive names
 
-### Examples Directory
-
-- [ ] Examples are complete and working
-- [ ] Each example has clear purpose
-- [ ] Examples match current skill version
-- [ ] README in examples/ if needed
-- [ ] No broken or incomplete examples
+### Samples Directory
 
 ## Link and Reference Validation
 
@@ -349,7 +343,7 @@ git status --ignored
 
 - [ ] Read SKILL.md as if new to skill
 - [ ] Follow instructions literally
-- [ ] Try examples and verify outputs
+- [ ] Try samples and verify outputs
 - [ ] Check cross-references work
 - [ ] Verify consistent terminology
 - [ ] Confirm no broken links
@@ -371,7 +365,7 @@ Essential:
 
 Quality:
 - [ ] Terminology consistent throughout
-- [ ] Code examples have language tags
+- [ ] Code samples have language tags
 - [ ] Cross-references work
 - [ ] No duplicate content
 - [ ] CHANGELOG.md updated
@@ -396,7 +390,7 @@ SKILL.md:
 Reference Files:
   ✅ AUTHENTICATION.md: 234 lines
   ✅ API_REFERENCE.md: 456 lines
-  ⚠️ EXAMPLES.md: 1,103 lines (103 over recommendation)
+  ⚠️ SAMPLES.md: 1,103 lines (103 over recommendation)
   
 Assets:
   ✅ 2 templates, both referenced
@@ -406,12 +400,12 @@ Summary:
   ⚠️ 1 reference file slightly over recommendation
   
 Recommendations:
-  • EXAMPLES.md could split into BASIC_EXAMPLES.md + ADVANCED_EXAMPLES.md
+  • SAMPLES.md could split into BASIC_SAMPLES.md + ADVANCED_SAMPLES.md
   • Or keep as-is since only slightly over
 
 Would you like to:
 A) Keep as-is (slightly over but acceptable)
-B) Split EXAMPLES.md
+B) Split SAMPLES.md
 C) Review specific sections
 ```
 

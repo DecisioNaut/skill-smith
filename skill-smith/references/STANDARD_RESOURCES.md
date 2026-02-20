@@ -191,7 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fundamental restructuring
 - Users must adapt their usage
 
-**Examples:**
+**Samples:**
 - Changing required frontmatter fields
 - Removing features users depend on
 - Changing skill invocation pattern
@@ -203,7 +203,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New features or sections
 - Enhanced capabilities
 
-**Examples:**
+**Samples:**
 - Adding new workflow modes
 - Adding new reference files
 - Expanding existing sections
@@ -215,9 +215,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Typo corrections
 - Documentation clarifications
 
-**Examples:**
+**Samples:**
 - Fixing broken links
-- Correcting code examples
+- Correcting code samples
 - Updating outdated screenshots
 - Minor documentation improvements
 
@@ -288,7 +288,7 @@ How to install or use the skill:
 
 ## Usage
 
-Quick examples showing skill activation and basic usage
+Quick samples showing skill activation and basic usage
 
 ## Features
 
@@ -301,7 +301,7 @@ What this skill provides:
 
 **This skill was built from** (last updated: YYYY-MM-DD):
 - [Official Documentation](URL) - What it covers
-- [GitHub Repository](URL) - Examples and patterns
+- [GitHub Repository](URL) - Samples and patterns
 - [API Reference](URL) - API endpoints
 
 See CHANGELOG.md for resource update history.
@@ -322,7 +322,7 @@ Guidelines for contributors (if applicable):
 - Include all standard sections
 - Link to SKILL.md from README
 - Document installation clearly
-- Provide realistic usage examples
+- Provide realistic usage samples
 - List resources used with dates
 - Link to LICENSE file
 
@@ -409,7 +409,7 @@ This skill was built from the following sources (last updated: 2026-02-14):
 
 ### Official Documentation
 - [Main Documentation](URL) - Core concepts and API reference
-- [GitHub Repository](URL) - Examples and patterns
+- [GitHub Repository](URL) - Samples and patterns
 - [API Reference](URL) - Complete endpoint documentation
 
 ### Additional Resources
@@ -425,7 +425,7 @@ This skill was built from the following sources (last updated: 2026-02-14):
 
 ### Changed
 - Updated API documentation from v1.5 to v2.0
-- Refreshed examples to match current patterns
+- Refreshed samples to match current patterns
 
 ### Resources Updated
 - API docs: v1.5 → v2.0 (breaking changes documented)
@@ -474,13 +474,77 @@ This skill was built from the following sources (last updated: 2026-02-14):
 
 ### When Validating Skills
 
-**Verify licenses:**
+**Verify licenses (comprehensive):**
+
+**Step 1: Choose Appropriate License**
+- [ ] License matches skill's purpose and source materials
+- [ ] License is industry-standard (MIT, Apache-2.0, GPL, etc.) from https://opensource.org/licenses
+- [ ] If distributing code: choose permissive (MIT, Apache) or copyleft (GPL) based on requirements
+- [ ] If only documentation: consider Creative Commons or Apache 2.0
+
+**Common License Choices:**
 ```
-1. Check LICENSE file exists
-2. Compare against official template from authoritative source
-3. Verify no text missing or modified
-4. Confirm placeholders filled in
-5. Check frontmatter license field matches
+MIT License
+  - Most permissive, minimal restrictions
+  - Good for: General-purpose skills, libraries, tools
+  - Use when: Maximum adoption desired, risk tolerance is high
+
+Apache 2.0
+  - Permissive with explicit patent protection
+  - Good for: Enterprise tools, code with patents
+  - Use when: Patent indemnification needed
+
+GPL (v2 or v3)
+  - Copyleft: derivatives must also be open source
+  - Good for: Ensuring derivatives stay open
+  - Use when: Strong open-source commitment required
+
+None / Proprietary
+  - All rights reserved, no public use
+  - Good for: Internal-only skills, closed-source projects
+  - Use when: Commercial license needed
+```
+
+**Step 2: Verify License Compatibility with Source Materials**
+- [ ] Check licenses of all dependencies and source materials used
+- [ ] Verify your license is compatible with source licenses:
+  - MIT code can be used in Apache 2.0 projects ✓
+  - GPL code requires your project also use GPL ✗ (unless you are an exception)
+  - Apache 2.0 code can be used in MIT projects (but attribution needed) ✓
+  - Proprietary code cannot be freely redistributed ✗
+- Use https://choosealicense.com/appendix/ for detailed compatibility matrix
+- Use SPDX license identifier: https://spdx.org/licenses/
+
+**Step 3: Get and Verify License File**
+- [ ] LICENSE file exists in repository root (not in skill package)
+- [ ] LICENSE text is complete and unmodified from official source
+- [ ] No lines removed or altered
+- [ ] All placeholders filled in (copyright year, copyright holder name)
+- [ ] For MIT: verify "Permission is hereby granted..." clause is intact
+- [ ] For Apache 2.0: verify all sections present (TERMS AND CONDITIONS, appendix)
+- [ ] Get authoritative templates from:
+  - https://opensource.org/licenses (official texts)
+  - https://github.com/licenses/license-templates/tree/master/templates (GitHub's official templates)
+  - https://choosealicense.com/ (interactive license selector)
+
+**Step 4: Add License Information to Documentation**
+- [ ] README.md mentions license: "This project is licensed under [License Name]. See LICENSE file for details."
+- [ ] CHANGELOG.md first entry mentions license choice
+- [ ] Attribution for reused code documented in README "Attribution" or "Credits" section
+- [ ] Copyright year is current (e.g., "Copyright (c) 2026 [Your Name]")
+
+**Step 5: Comprehensive License Validation Checklist**
+```
+✓ LICENSE file exists at repository root (not in skill package)
+✓ License is from authoritative source (opensource.org or GitHub)
+✓ License text is complete and unchanged
+✓ Copyright holder name is filled in
+✓ Copyright year is current or date range is correct
+✓ License choice documented in README
+✓ All source material licenses verified for compatibility
+✓ Attribution for reused code is documented
+✓ No GPL code used without GPL license (if applicable)
+✓ No proprietary code without explicit permission
 ```
 
 **Verify CHANGELOG:**

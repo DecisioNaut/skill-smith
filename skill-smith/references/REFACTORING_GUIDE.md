@@ -4,6 +4,20 @@
 
 > **Related:** See [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization patterns and [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for validation
 
+## Table of Contents
+
+- [When to Refactor](#when-to-refactor)
+- [Splitting Oversized SKILL.md](#splitting-oversized-skillmd)
+- [Authentication](#authentication)
+- [API Key Authentication](#api-key-authentication)
+- [OAuth 2.0 Flow](#oauth-20-flow)
+- [Reorganizing References](#reorganizing-references)
+- [Removing Artifacts](#removing-artifacts)
+- [Consistency Checking](#consistency-checking)
+- [Before and After Samples](#before-and-after-samples)
+- [Tips for Successful Refactoring](#tips-for-successful-refactoring)
+- [Resources](#resources)
+
 ## When to Refactor
 
 Refactor when you notice:
@@ -25,7 +39,7 @@ Look for sections that:
 
 **Common candidates:**
 - Complete API documentation
-- Extended code examples
+- Extended code samples
 - Detailed error codes
 - Glossaries or terminology
 - Configuration references
@@ -133,7 +147,7 @@ my-skill/
 ├── README.md
 └── references/
     ├── API_REFERENCE.md (280 lines)
-    ├── EXAMPLES.md (150 lines)
+    ├── SAMPLES.md (150 lines)
     └── ERROR_CODES.md (120 lines)
 ```
 
@@ -164,7 +178,6 @@ find . -name "*~" -delete
 # Remove only if empty
 rmdir scripts/    # if no scripts needed
 rmdir assets/     # if no assets
-rmdir examples/   # if no examples
 ```
 
 ### Update .gitignore
@@ -199,7 +212,7 @@ After refactoring, verify consistency across files:
 - [ ] Version number same in SKILL.md frontmatter and CHANGELOG.md
 - [ ] All file references in SKILL.md actually exist
 - [ ] Terminology used consistently (e.g., "API key" not sometimes "api-key")
-- [ ] Code examples use consistent style
+- [ ] Code samples use consistent style
 
 ### Reference File Checks
 
@@ -211,16 +224,16 @@ After refactoring, verify consistency across files:
 
 See [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for complete checklist.
 
-## Before and After Examples
+## Before and After Samples
 
-### Example 1: API Skill Refactoring
+### Sample 1: API Skill Refactoring
 
 **Before (720-line SKILL.md):**
 - Authentication (80 lines)
 - Endpoints (300 lines)
 - Request/Response formats (150 lines)
 - Error codes (120 lines)
-- Examples (70 lines)
+- Samples (70 lines)
 
 **After:**
 - SKILL.md (380 lines): Core instructions + quick start

@@ -2,6 +2,20 @@
 
 Complete, authoritative specification: [https://agentskills.io/specification](https://agentskills.io/specification)
 
+## Table of Contents
+
+- [What is an Agent Skill?](#what-is-an-agent-skill)
+- [Core Concepts](#core-concepts)
+- [Directory Structure](#directory-structure)
+- [SKILL.md Format](#skillmd-format)
+- [Optional Directories](#optional-directories)
+- [File References](#file-references)
+- [Integration with Agents](#integration-with-agents)
+- [Best Practices](#best-practices)
+- [Validation](#validation)
+- [Related Resources](#related-resources)
+- [Quick Reference](#quick-reference)
+
 ## What is an Agent Skill?
 
 An **Agent Skill** is a directory containing instructions, scripts, and resources that teach AI agents how to perform specific tasks. Skills use **progressive disclosure** to load only what's needed, when it's needed.
@@ -45,7 +59,7 @@ my-skill/
 │   └── validate.sh
 ├── references/       # Optional: detailed docs (loaded on demand)
 │   ├── API.md
-│   ├── EXAMPLES.md
+│   ├── SAMPLES.md
 │   └── ERRORS.md
 ├── assets/           # Optional: templates, data, images
 │   ├── templates/
@@ -110,7 +124,7 @@ The Markdown body contains instructions for agents. **No format restrictions** -
 - When to use it
 - Prerequisites
 - Step-by-step instructions
-- Examples with inputs/outputs
+- Samples with inputs/outputs
 - Common edge cases
 - Troubleshooting
 
@@ -149,7 +163,7 @@ Contains additional documentation loaded on demand.
 
 **Common files:**
 - `REFERENCE.md` - Complete API/technical documentation
-- `EXAMPLES.md` - Extended examples
+- `SAMPLES.md` - Extended samples
 - `ERRORS.md` - Error codes and handling
 - Domain-specific: `AUTH.md`, `DATABASE.md`, etc.
 
@@ -242,7 +256,7 @@ As needed, the agent:
 ### For Clarity
 
 - Write for literal interpretation
-- Include concrete examples
+- Include concrete samples
 - Note edge cases explicitly
 - Provide complete error handling
 

@@ -5,6 +5,34 @@ All notable changes to Skill Smith will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-02-20
+
+### Tag
+- v3.0.0
+
+### Added
+- `references/REPOSITORY_README_GUIDE.md` - README writing guide for skill repositories
+- `references/OPTIONAL_DOCUMENTATION.md` - GENESIS.md and .gitignore guidance
+
+### Changed
+- Installable skill payload now lives under `skill-smith/` (repository root is documentation-only)
+- Terminology standardized from "examples" to "samples" across docs, templates, and checklists
+- Resource gathering templates updated with sample-focused URLs and labels
+- README and CONTRIBUTING updated to remove example-skill references
+
+### Removed
+- `examples/` directory and example skill content
+- References to `EXAMPLES.md` and examples-folder guidance in documentation
+
+### Breaking Changes
+- Install path changes: copy the skill from `skill-smith/` instead of repository root
+- Any links or references to `examples/` or `EXAMPLES.md` must be updated to samples-oriented docs
+
+### Migration Guide
+1. Copy the installable payload from `skill-smith/` into your agent skills directory
+2. Update any internal references from "examples" to "samples"
+3. Remove obsolete links to example skills or example folders
+
 ## [2.0.0] - 2026-02-14
 
 ### Added

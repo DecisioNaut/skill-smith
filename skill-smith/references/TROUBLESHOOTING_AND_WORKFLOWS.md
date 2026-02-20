@@ -6,6 +6,12 @@
 
 This guide covers alternative workflows for different scenarios beyond basic skill creation, plus solutions for common problems.
 
+## Table of Contents
+
+- [Alternative Workflows](#alternative-workflows)
+- [Troubleshooting Common Problems](#troubleshooting-common-problems)
+- [Common Patterns and Anti-Patterns](#common-patterns-and-anti-patterns)
+
 ## Alternative Workflows
 
 The 8-step process in SKILL.md is for **creating new skills**. Use these alternative workflows for other scenarios:
@@ -54,11 +60,11 @@ The 8-step process in SKILL.md is for **creating new skills**. Use these alterna
 5. **Plan Updates** - List content to add/update/remove, decide placement
 6. **Execute Updates** - Update outdated content, add new, remove deprecated
 7. **Update Documentation** - Update version, CHANGELOG.md, README.md
-8. **Validate** - Run skills-ref validate, test examples, check links
+8. **Validate** - Run skills-ref validate, test samples, check links
 9. **Commit** - Present summary and ask for confirmation
 
 **Versioning for Updates:**
-- **Patch (1.0.0 → 1.0.1)**: Minor fixes, updated examples
+- **Patch (1.0.0 → 1.0.1)**: Minor fixes, updated samples
 - **Minor (1.0.0 → 1.1.0)**: New features, expanded coverage
 - **Major (1.0.0 → 2.0.0)**: Breaking changes, major restructuring
 
@@ -77,15 +83,19 @@ wc -l path/to/skill/SKILL.md
 # 3. Check for artifacts
 ls -la path/to/skill/
 
-# 4. Verify file structure
-# Required: SKILL.md, README.md, LICENSE
-# No: VALIDATION.md, .tmp files, .DS_Store
+# 4. Verify skill package contents (only these belong in installed skill)
+# Required: SKILL.md only
+# Optional: scripts/, references/, assets/ (only if they have content)
+# Do NOT include: README.md, LICENSE, CHANGELOG.md, CONTRIBUTING.md (these are repository-level)
+# Do NOT include: VALIDATION.md, .tmp files, .DS_Store
 ```
 
 **Quick checklist:**
+- [ ] SKILL.md is present and valid?
 - [ ] SKILL.md under 500 lines?
+- [ ] No README.md, LICENSE, CHANGELOG.md, or CONTRIBUTING.md in the skill package?
 - [ ] No VALIDATION.md or build artifacts?
-- [ ] All file references exist?
+- [ ] All file references (scripts/, references/, assets/) exist and are valid?
 - [ ] .gitignore excludes artifacts?
 - [ ] Version matches CHANGELOG?
 
@@ -128,14 +138,14 @@ mv PDFProcessing pdf-processing
 
 2. **Move to references/**:
    - API documentation → `references/API_REFERENCE.md`
-   - Long examples → `references/EXAMPLES.md`
+   - Long samples → `references/SAMPLES.md`
    - Technical details → `references/TECHNICAL.md`
    - Troubleshooting → `references/TROUBLESHOOTING.md`
 
 3. **Keep in SKILL.md**:
    - Overview and when to use
    - Quick start / core concepts
-   - Basic examples (1-3 short ones)
+   - Basic samples (1-3 short ones)
    - Links to references/ for details
 
 4. **Verify**: Target is < 500 lines, optimal is < 400 lines
@@ -200,7 +210,7 @@ curl -I https://github.com/user/repo
    ```
    I found two authentication approaches:
    A) Bearer token authentication (shown in latest docs)
-   B) API key authentication (shown in examples)
+   B) API key authentication (shown in samples)
    
    Which should this skill focus on?
    ```
@@ -208,7 +218,7 @@ curl -I https://github.com/user/repo
 2. **Check documentation recency**:
    ```
    - Latest docs (2026): Prefers newer approaches
-   - Examples folder: Often outdated
+   - Samples folder: Often outdated
    - README: Usually reflects current best practice
    ```
 
@@ -227,7 +237,7 @@ curl -I https://github.com/user/repo
 1. **Check multiple sources**:
    - Official API docs
    - Blog posts / tutorials
-   - GitHub examples
+   - GitHub samples
    - Community forums
 
 2. **Note the gap**:
@@ -300,7 +310,7 @@ curl -I https://github.com/user/repo
 ### ✅ Good Practices
 
 - **Progressive disclosure**: Start with SKILL.md only, add complexity as needed
-- **Concrete examples**: Show actual code/commands with expected output
+- **Concrete samples**: Show actual code/commands with expected output
 - **Clear scope**: One skill = one well-defined capability
 - **Validation-ready**: Follow naming rules and structure from the start
 - **Self-documenting**: Someone should understand the skill by reading SKILL.md
@@ -313,7 +323,7 @@ curl -I https://github.com/user/repo
 - **Vague descriptions**: "Helps with coding" instead of specific capabilities
 - **Monolithic skills**: Trying to do too much in one skill (split into multiple)
 - **Heavy SKILL.md**: 2000 lines of reference docs in SKILL.md (use references/)
-- **Unclear structure**: Random mix of instructions, examples, and references
+- **Unclear structure**: Random mix of instructions, samples, and references
 - **Missing validation**: Not checking naming rules and frontmatter
 - **Implicit knowledge**: Assuming agents will "figure out" what to do
 - **Passive file management**: Letting files grow to 1200+ lines before splitting

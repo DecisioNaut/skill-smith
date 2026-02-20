@@ -40,24 +40,22 @@ Keep skills clean and professional by including only necessary files.
 #### Required Files
 - ✅ **SKILL.md** - The skill itself (< 500 lines recommended)
 
-#### Highly Recommended Files
-- ✅ **README.md** - Installation instructions, usage examples, overview
-- ✅ **LICENSE** - MIT, Apache-2.0, or other open source license
-
-#### Recommended Files
-- ✅ **CHANGELOG.md** - Version history following Keep a Changelog format
+#### Repository Documentation Files
+- ✅ **README.md** - Installation instructions, usage samples, overview (repository-level, not in skill package)
+- ✅ **LICENSE** - MIT, Apache-2.0, or other open source license (repository-level, not in skill package)
+- ✅ **CHANGELOG.md** - Version history (repository-level, not in skill package)
 - ✅ **.gitignore** - Exclude artifacts and temporary files
 
-#### Optional Files
+#### Optional Repository Files
 - ✅ **CONTRIBUTING.md** - Guidelines for contributors (if accepting PRs)
 
-#### Optional Directories
+#### Skill Package Directories
 - ✅ **references/** - Detailed documentation (loaded on-demand)
 - ✅ **scripts/** - Domain-specific executable code (only if needed)
 - ✅ **assets/** - Templates, data files, diagrams (only if needed)
-- ✅ **examples/** - Example skills or usage patterns (only if applicable)
 
-#### Files to EXCLUDE (Never Include)
+#### Files to EXCLUDE from Skill Package
+- ❌ README.md, LICENSE, CHANGELOG.md - These are repository files, not part of installed skill
 - ❌ **VALIDATION.md** - Build artifact, not part of skill distribution
 - ❌ **.validation-cache/** - Temporary validation files
 - ❌ **build/**, **dist/** - Build and distribution artifacts
@@ -113,17 +111,20 @@ Use this checklist before committing:
 ```markdown
 ## File Structure Validation
 
-Required:
+Required in skill package:
 - [ ] SKILL.md exists and is under 500 lines (or justified if over)
-- [ ] README.md exists with installation/usage instructions
-- [ ] LICENSE file exists (MIT recommended)
+
+Repository-level files (separate from skill package):
+- [ ] README.md exists in repository root with installation/usage instructions
+- [ ] LICENSE file exists in repository root (MIT recommended)
 
 Clean-up:
+- [ ] No README.md, LICENSE, CHANGELOG.md in skill package (these belong in repository)
 - [ ] No VALIDATION.md in repository
 - [ ] No temporary or build artifacts
 - [ ] No OS-specific files (.DS_Store, Thumbs.db)
 - [ ] .gitignore properly excludes artifacts
-- [ ] No unnecessary directories (empty scripts/, assets/, examples/)
+- [ ] No unnecessary directories (empty scripts/, assets/)
 
 Quality:
 - [ ] All files referenced in SKILL.md exist
@@ -158,7 +159,7 @@ A skill should be understandable by reading SKILL.md alone.
 **Good indicators:**
 - New users can understand the skill without external docs
 - Instructions are complete and unambiguous
-- Examples show actual inputs and outputs
+- Samples show actual inputs and outputs
 - Edge cases are explicitly noted
 
 ### 5. File References One Level Deep
@@ -169,7 +170,7 @@ Reference files directly from SKILL.md. Avoid nested chains.
 ```markdown
 <!-- In SKILL.md -->
 See `references/API.md` for authentication
-See `references/EXAMPLES.md` for code samples
+See `references/SAMPLES.md` for code samples
 ```
 
 **❌ Bad (nested chain)**:
@@ -256,7 +257,7 @@ Edit the configuration file:
 3. Save the file
 ```
 
-### Provide Concrete Examples
+### Provide Concrete Samples
 
 **❌ Abstract:**
 ```markdown
@@ -343,7 +344,7 @@ Read the file and process it.
 **Don't use scripts/ for:**
 - Spec validation (use `skills-ref` library)
 - Simple commands (put inline in SKILL.md)
-- One-off examples (put in SKILL.md examples section)
+- One-off samples (put in SKILL.md samples section)
 
 **Example structure:**
 ```
@@ -365,7 +366,7 @@ scripts/
 ```
 references/
 ├── API.md              # Complete API documentation
-├── EXAMPLES.md         # Extended code examples
+├── SAMPLES.md          # Extended code samples
 ├── ERRORS.md           # Error codes reference
 ├── AUTH.md             # Authentication details
 └── GLOSSARY.md         # Domain terminology
@@ -501,7 +502,7 @@ Expects CSV with columns: id, name, value
    print(f"Processed {len(df)} rows")
    ```
 
-## Examples
+## Samples
 
 Input:
 ```csv
@@ -539,7 +540,7 @@ This skill handles file processing, API calls, database operations, reporting, a
 
 **Better**: Split into focused skills (file-processing, api-client, database-ops, etc.)
 
-### ❌ Missing Examples
+### ❌ Missing Samples
 
 ```markdown
 ## Usage
@@ -582,7 +583,7 @@ See auth/oauth.md
 - [ ] Test edge cases (empty input, missing files, etc.)
 - [ ]Test error conditions (invalid input, network errors, etc.)
 - [ ] Verify all referenced files exist
-- [ ] Check that examples actually work
+- [ ] Check that samples actually work
 - [ ] Confirm SKILL.md is under 500 lines
 
 ### Agent Testing (if possible)
@@ -640,7 +641,7 @@ description: ...
 ## Instructions
 [...]
 
-## Examples
+## Samples
 [...]
 
 For detailed API reference, see `references/PDF_API.md`.
@@ -678,6 +679,7 @@ For guidance on organizing reference files, managing file structures, and proact
 ---
 
 **Next Steps:**
--See [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization patterns
+- See [ORGANIZATIONAL_PATTERNS.md](./ORGANIZATIONAL_PATTERNS.md) for file organization patterns
+- See [REPOSITORY_README_GUIDE.md](./REPOSITORY_README_GUIDE.md) for creating README.md files
+- See [OPTIONAL_DOCUMENTATION.md](./OPTIONAL_DOCUMENTATION.md) for .gitignore and GENESIS.md guidance
 - See [REFACTORING_GUIDE.md](./REFACTORING_GUIDE.md) for refactoring existing skills
-- See [CONSISTENCY_CHECKLIST.md](./CONSISTENCY_CHECKLIST.md) for validation checklists

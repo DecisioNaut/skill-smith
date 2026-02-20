@@ -2,6 +2,8 @@
 
 Build specification-compliant Agent Skills from documentation sites, GitHub repos, and APIs. Systematically gather resources, design SKILL.md structure, validate naming rules, and package for sharing.
 
+**Install (from repository root):** `mkdir -p .agents/skills && cp -r skill-smith/skill-smith .agents/skills/`
+
 ## What is This?
 
 This skill helps AI agents (and developers) create high-quality [Agent Skills](https://agentskills.io) that follow the v1.0 specification. It provides step-by-step guidance for:
@@ -10,7 +12,7 @@ This skill helps AI agents (and developers) create high-quality [Agent Skills](h
 - Designing clear, agent-friendly instructions
 - Structuring skills with progressive disclosure
 - Validating compliance with the specification
-- Creating examples, references, and scripts
+- Creating references and scripts
 
 ## Features
 
@@ -19,18 +21,23 @@ This skill helps AI agents (and developers) create high-quality [Agent Skills](h
 - ✅ **Progressive disclosure**: Efficient context management
 - ✅ **Validation support**: Uses official skills-ref library
 - ✅ **Best practices**: Agent-friendly writing patterns
-- ✅ **Examples included**: Simple and complex skill examples
 - ✅ **Templates provided**: GitHub, docs, API analysis templates
 
 ## Quick Start
+
+**TL;DR (from repository root):**
+```bash
+mkdir -p .agents/skills
+cp -r skill-smith/skill-smith .agents/skills/
+```
 
 ### Installation
 
 1. **Add to your agent skills folder**:
    ```bash
-   # Clone or copy this skill to your workspace
+   # Clone this repository, then copy only the installable payload
    mkdir -p .agents/skills
-   cp -r skill-smith .agents/skills/
+   cp -r skill-smith/skill-smith .agents/skills/
    ```
 
 2. **Verify installation**:
@@ -53,7 +60,7 @@ When an agent has access to this skill, it will automatically activate when you 
 - "Help me develop a skill..."
 - "I need a skill that..."
 
-The agent will follow the 8-step process defined in `SKILL.md`.
+The agent will follow the process defined in the installed skill's `SKILL.md`.
 
 #### For Developers
 
@@ -62,18 +69,14 @@ The agent will follow the 8-step process defined in `SKILL.md`.
    cat .agents/skills/skill-smith/SKILL.md
    ```
 
-2. **Review examples**:
-   - Simple: `examples/code-review-helper/SKILL.md`
-   - Complex: `examples/stripe-api-integration/SKILL.md`
-
-3. **Use resource templates**:
+2. **Use resource templates**:
    ```bash
-   cat assets/resource-templates.md
+   cat skill-smith/assets/resource-templates.md
    ```
 
 4. **Check best practices**:
    ```bash
-   cat references/BEST_PRACTICES.md
+   cat skill-smith/references/BEST_PRACTICES.md
    ```
 
 5. **Validate your skill**:
@@ -85,21 +88,15 @@ The agent will follow the 8-step process defined in `SKILL.md`.
 
 ```
 skill-smith/
-├── SKILL.md                    # Main instructions (< 500 lines)
-├── references/                 # Detailed references
-│   ├── SPECIFICATION.md        # Agent Skills spec summary
-│   ├── VALIDATION_RULES.md     # Validation rules
-│   ├── BEST_PRACTICES.md       # Agent-friendly writing tips
-│   └── ORGANIZATIONAL_PATTERNS.md # File organization patterns
-├── assets/                     # Templates and resources
-│   └── resource-templates.md   # GitHub/docs/API analysis templates
-├── examples/                   # Example skills
-│   ├── code-review-helper/     # Simple example
-│   └── stripe-api-integration/ # Complex example with references
-├── README.md                   # This file
+├── README.md                   # Repository overview and usage
 ├── LICENSE                     # MIT License
 ├── CONTRIBUTING.md             # Contribution guidelines
-└── CHANGELOG.md                # Version history
+├── CHANGELOG.md                # Version history
+├── GENESIS.md                  # Build history
+└── skill-smith/                # Installable skill payload
+   ├── SKILL.md                # Main instructions (< 500 lines)
+   ├── references/             # Detailed references
+   └── assets/                 # Templates and resources
 ```
 
 ## How It Works
@@ -107,7 +104,7 @@ skill-smith/
 ### The 10-Step Process
 
 1. **Gather Context and Requirements** - Clarify goals, resources, audience, and complexity
-2. **Analyze Resources Thoroughly** - Explore docs, examples, and references in depth
+2. **Analyze Resources Thoroughly** - Explore docs and references in depth
 3. **Design the Skill Structure** - Choose the right complexity level and layout
 4. **Create the SKILL.md File** - Write clear, agent-friendly instructions
 5. **Validate the Skill** - Check naming, structure, and references
@@ -117,7 +114,7 @@ skill-smith/
 9. **Test and Final Validation** - Run validation and clean up artifacts
 10. **Confirm and Commit Changes** - Summarize, request confirmation, and commit
 
-See [SKILL.md](SKILL.md) for complete details.
+See [skill-smith/SKILL.md](skill-smith/SKILL.md) for complete details.
 
 ### Progressive Disclosure
 
@@ -129,28 +126,14 @@ Agent Skills use progressive disclosure for efficient context management:
 
 This allows agents to discover skills quickly without loading full documentation upfront.
 
-## Examples
+## Skill Levels
 
-### Simple Skill: Code Review Helper
+### Skill Complexity Levels
 
-A minimal skill showing basic structure:
-- Single SKILL.md file
-- No external references
-- Direct, actionable instructions
-- Common language-specific patterns
-
-See: [examples/code-review-helper/](examples/code-review-helper/)
-
-### Complex Skill: Stripe API Integration
-
-A comprehensive skill demonstrating:
-- SKILL.md with references
-- Separate reference files
-- Multiple examples
-- Error handling patterns
-- Testing strategies
-
-See: [examples/stripe-api-integration/](examples/stripe-api-integration/)
+Skills can range from simple to complex:
+- **Level 1**: Single SKILL.md file with direct, actionable instructions
+- **Level 2**: SKILL.md with optional references/ directory
+- **Level 3**: Full structure with references/, scripts/, and assets/ directories
 
 ## Key Concepts
 
@@ -161,7 +144,7 @@ Write instructions for literal interpretation:
 ❌ **Vague**: "You might want to check if the file exists."
 ✅ **Clear**: "1. Check if file exists: `test -f filename`"
 
-See [references/BEST_PRACTICES.md](references/BEST_PRACTICES.md) for more patterns.
+See [skill-smith/references/BEST_PRACTICES.md](skill-smith/references/BEST_PRACTICES.md) for more patterns.
 
 ### File Size Guidelines
 
@@ -192,7 +175,7 @@ skills-ref read-properties path/to/skill
 skills-ref to-prompt path/to/skill
 ```
 
-See [references/VALIDATION_RULES.md](references/VALIDATION_RULES.md) for complete rules.
+See [skill-smith/references/VALIDATION_RULES.md](skill-smith/references/VALIDATION_RULES.md) for complete rules.
 
 ## FAQ
 
@@ -251,13 +234,12 @@ Don't write custom validation scripts - use the official tool.
 1. Follow the instructions literally (don't assume steps)
 2. Test with an AI agent if possible
 3. Run: `skills-ref validate path/to/skill`
-4. Check that examples actually work
 
 ### Q: How do I share my skill?
 
 **A**: 
 1. Create a Git repository
-2. Include README, LICENSE, examples
+2. Include README, LICENSE, and CHANGELOG
 3. Validate with skills-ref
 4. Share the repository URL
 5. Users can clone to their `.agents/skills/` directory
@@ -277,7 +259,7 @@ Don't write custom validation scripts - use the official tool.
 4. Fetch sub-pages (don't stop at index pages)
 5. Continue until comprehensive
 
-See [assets/resource-templates.md](assets/resource-templates.md) for detailed templates.
+See [skill-smith/assets/resource-templates.md](skill-smith/assets/resource-templates.md) for detailed templates.
 
 ## Troubleshooting
 
@@ -317,7 +299,7 @@ Example: `my-api-skill` ✅, `My-API-Skill` ❌, `my_api_skill` ❌
 **Solution**: Move detailed content to `references/`:
 - API documentation → `references/API.md`
 - Error codes → `references/ERRORS.md`
-- Extended examples → `references/EXAMPLES.md`
+- Troubleshooting → `references/TROUBLESHOOTING.md`
 - Best practices → `references/BEST_PRACTICES.md`
 
 ### Unclear When Skill Should Activate
@@ -349,16 +331,15 @@ Quick contribution workflow:
 
 ### Reference Skills
 - [Anthropic Skills Repository](https://github.com/anthropics/skills)
-- [Agent Skills Examples](https://github.com/agentskills/agentskills/tree/main/examples)
 
 ### This Skill's Resources
-- [Specification Summary](references/SPECIFICATION.md)
-- [Validation Rules](references/VALIDATION_RULES.md)
-- [Best Practices](references/BEST_PRACTICES.md)
-- [Organizational Patterns](references/ORGANIZATIONAL_PATTERNS.md)
-- [Resource Templates](assets/resource-templates.md)
-- [Code Review Example](examples/code-review-helper/)
-- [Stripe API Example](examples/stripe-api-integration/)
+- [Specification Summary](skill-smith/references/SPECIFICATION.md)
+- [Validation Rules](skill-smith/references/VALIDATION_RULES.md)
+- [Best Practices](skill-smith/references/BEST_PRACTICES.md)
+- [Organizational Patterns](skill-smith/references/ORGANIZATIONAL_PATTERNS.md)
+- [Resource Templates](skill-smith/assets/resource-templates.md)
+- [Repository README Guide](skill-smith/references/REPOSITORY_README_GUIDE.md)
+- [Optional Documentation](skill-smith/references/OPTIONAL_DOCUMENTATION.md)
 
 ## License
 

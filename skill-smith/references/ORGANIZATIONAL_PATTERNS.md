@@ -19,7 +19,7 @@ When skills grow complex, organize reference files systematically based on real-
 - Descriptive and specific (not generic)
 - Related files use same prefix
 
-**Examples:**
+**Samples:**
 - ✅ AUTHENTICATION.md - Clear single topic
 - ✅ DOCKER_COMPOSE.md - Specific feature
 - ✅ NETWORKING.md + NETWORKING_ADVANCED.md - Progressive complexity
@@ -85,7 +85,7 @@ When skills grow complex, organize reference files systematically based on real-
 
 ## Main Content
 
-Clear hierarchical organization with examples...
+Clear hierarchical organization with samples...
 ```
 
 **Key Elements:**
@@ -93,7 +93,7 @@ Clear hierarchical organization with examples...
 2. **Purpose Statement** - "**Reference for:** [what this covers]"
 3. **Cross-References** - Link prerequisites and related files
 4. **Table of Contents** - For files > 400 lines
-5. **Content** - Clear hierarchy, code examples with language tags
+5. **Content** - Clear hierarchy, code samples with language tags
 
 ### Cross-Referencing
 
@@ -155,12 +155,12 @@ Clear hierarchical organization with examples...
 ## Requirements Analysis
 - [x] TM1py package version 2.0+
 - [x] Connection patterns (SSL, MDX, performance)
-- [x] Real-world examples from documentation
+- [x] Real-world samples from documentation
 
 ## Implementation Checklist
 - [ ] SKILL.md outline (core concepts)
 - [ ] Create API_REFERENCE.md from TM1py docs
-- [ ] Create CONNECTION_GUIDE.md with examples
+- [ ] Create CONNECTION_GUIDE.md with samples
 - [ ] Create DATA_OPERATIONS.md (MDX, views)
 - [ ] Review file sizes (warn at 800 lines)
 - [ ] Validate with skills-ref
@@ -175,8 +175,8 @@ Clear hierarchical organization with examples...
    - Rationale: TM1py supports both, real work uses both
 
 ## Notes
-- File size warning at line 800 triggered for EXAMPLES.md
-- Suggested split: BASIC_EXAMPLES.md + ADVANCED_EXAMPLES.md
+- File size warning at line 800 triggered for SAMPLES.md
+- Suggested split: BASIC_SAMPLES.md + ADVANCED_SAMPLES.md
 - User approved keeping as single file (1094 lines acceptable)
 ```
 
@@ -268,7 +268,7 @@ Current Structure:
 
 Refactoring Recommendations:
 1. Move API documentation (230 lines) → references/API_REFERENCE.md
-2. Move examples (120 lines) → references/EXAMPLES.md
+2. Move samples (120 lines) → references/SAMPLES.md
 3. Remove VALIDATION.md artifact
 4. Add .gitignore to exclude artifacts
 
@@ -300,10 +300,10 @@ LICENSE created successfully with correct current year.
 
 **During content creation (proactive file size check):**
 ```
-User: "Add data validation examples to API_REFERENCE.md"
+User: "Add data validation samples to API_REFERENCE.md"
 
 Agent:
-✅ Adding examples...
+✅ Adding samples...
 
 ⚠️ File Size Check:
 - API_REFERENCE.md was 687 lines
@@ -334,7 +334,7 @@ SKILL.md:
 Reference Files:
   ✅ AUTHENTICATION.md: 234 lines
   ✅ API_REFERENCE.md: 456 lines
-  ⚠️ EXAMPLES.md: 1,103 lines (103 over 1000-line recommendation)
+  ⚠️ SAMPLES.md: 1,103 lines (103 over 1000-line recommendation)
   
 Assets:
   ✅ 2 templates, both referenced
@@ -344,12 +344,12 @@ Summary:
   ⚠️ 1 reference file slightly over recommendation
   
 Recommendations:
-  • EXAMPLES.md could split into BASIC_EXAMPLES.md + ADVANCED_EXAMPLES.md
+  • SAMPLES.md could split into BASIC_SAMPLES.md + ADVANCED_SAMPLES.md
   • Or keep as-is since only slightly over
 
 Would you like to:
 A) Keep as-is (slightly over but acceptable)
-B) Split EXAMPLES.md
+B) Split SAMPLES.md
 C) Review specific sections to decide"
 ```
 
@@ -391,7 +391,7 @@ C) Review specific sections to decide"
 - Run full compliance check immediately
 - Present comprehensive findings
 - Prioritize issues by severity
-- Suggest specific fixes with examples
+- Suggest specific fixes with samples
 
 ### Key Principles
 
@@ -457,7 +457,7 @@ Let me know and I'll make the changes."
 
 To improve any skill instantly:
 
-1. **Add concrete examples** with actual inputs/outputs
+1. **Add concrete samples** with actual inputs/outputs
 2. **Break complex instructions** into numbered steps
 3. **Handle errors explicitly** (don't assume success)
 4. **Keep SKILL.md focused** (< 500 lines)
@@ -467,6 +467,13 @@ To improve any skill instantly:
 8. **Keep file references flat** (one level deep)
 9. **Validate with skills-ref** before sharing
 10. **Test by following literally** (don't assume steps)
+
+## Cross-References
+
+For related guidance, see:
+- **[BEST_PRACTICES.md](./BEST_PRACTICES.md)** - Writing and structure best practices
+- **[REPOSITORY_README_GUIDE.md](./REPOSITORY_README_GUIDE.md)** - Creating README.md for skill repositories
+- **[OPTIONAL_DOCUMENTATION.md](./OPTIONAL_DOCUMENTATION.md)** - GENESIS.md, .gitignore, and other optional files
 
 ## Resources
 

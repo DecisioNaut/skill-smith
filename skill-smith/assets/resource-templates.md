@@ -2,6 +2,20 @@
 
 Templates for systematically collecting information when building Agent Skills.
 
+## Table of Contents
+
+- [GitHub Repository Analysis Template](#github-repository-analysis-template)
+- [Documentation Website Analysis Template](#documentation-website-analysis-template)
+- [API Service Analysis Template](#api-service-analysis-template)
+- [Tool/CLI Documentation Analysis Template](#toolcli-documentation-analysis-template)
+- [Library/Package Analysis Template](#librarypackage-analysis-template)
+- [Specification/Standard Analysis Template](#specificationstandard-analysis-template)
+- [Resource Collection Checklist](#resource-collection-checklist)
+- [Common Resource Gathering Mistakes](#common-resource-gathering-mistakes)
+- [Quick Reference: fetch_webpage Flow](#quick-reference-fetch_webpage-flow)
+- [Example: Complete Resource Gathering](#example-complete-resource-gathering)
+- [Resources](#resources)
+
 ## GitHub Repository Analysis Template
 
 When analyzing a GitHub repository to build a skill:
@@ -12,13 +26,13 @@ When analyzing a GitHub repository to build a skill:
    ```
    https://github.com/owner/repo
    ```
-   Look for: Overview, features, installation, usage examples, links to docs
+   Look for: Overview, features, installation, usage samples, links to docs
 
 2. **Fetch repository structure**:
    ```
    https://github.com/owner/repo/tree/main
    ```
-   Identify: Main source directories, example folders, documentation folders
+   Identify: Main source directories, sample folders, documentation folders
 
 3. **Fetch documentation index** (if exists):
    ```
@@ -41,13 +55,13 @@ When analyzing a GitHub repository to build a skill:
    https://github.com/owner/repo/blob/main/docs/usage.md
    https://github.com/owner/repo/blob/main/docs/reference.md
    ```
-   Extract: Core functions, parameters, return values, examples
+   Extract: Core functions, parameters, return values, samples
 
-6. **Examples directory**:
+6. **Samples directory**:
    ```
-   https://github.com/owner/repo/tree/main/examples
+   https://github.com/owner/repo/tree/main/samples
    ```
-   Look for complete examples showing typical usage patterns
+   Look for complete samples showing typical usage patterns
 
 7. **Source code samples** (if needed):
    ```
@@ -61,7 +75,7 @@ When analyzing a GitHub repository to build a skill:
 - [ ] README fetched and reviewed
 - [ ] Installation instructions extracted
 - [ ] Core API/usage patterns identified
-- [ ] At least 2-3 examples found
+- [ ] At least 2-3 samples found
 - [ ] Error handling patterns noted
 - [ ] Dependencies/prerequisites listed
 - [ ] Common troubleshooting documented
@@ -83,7 +97,7 @@ When analyzing a documentation site to build a skill:
    https://docs.example.com/overview
    https://docs.example.com/guides
    https://docs.example.com/reference
-   https://docs.example.com/examples
+   https://docs.example.com/samples
    ```
    Map out complete structure - **don't stop at homepage!**
 
@@ -116,14 +130,14 @@ When analyzing a documentation site to build a skill:
    ```
    Extract: Function signatures, parameters, return types
 
-6. **Fetch examples/recipes**:
+6. **Fetch guides/recipes**:
    ```
-   https://docs.example.com/examples
-   https://docs.example.com/examples/basic
-   https://docs.example.com/examples/advanced
+   https://docs.example.com/guides
+   https://docs.example.com/guides/basic
+   https://docs.example.com/guides/advanced
    https://docs.example.com/recipes
    ```
-   Extract: Complete working code examples
+   Extract: Complete working code samples
 
 7. **Fetch troubleshooting/FAQ**:
    ```
@@ -174,7 +188,7 @@ Homepage
 - [ ] Installation/setup pages fetched (not just overview)
 - [ ] Core guides/tutorials fetched (multiple pages)
 - [ ] API reference fetched (comprehensive)
-- [ ] Examples/recipes fetched
+- [ ] Samples/recipes fetched
 - [ ] Troubleshooting/FAQ fetched
 - [ ] Followed links at least 2 levels deep
 
@@ -197,7 +211,7 @@ When analyzing an API service to build an integration skill:
    https://api-docs.example.com/auth/api-keys
    https://api-docs.example.com/auth/oauth
    ```
-   Extract: How to authenticate, where to get credentials, example requests
+   Extract: How to authenticate, where to get credentials, sample requests
 
 3. **Fetch endpoint documentation** (each major resource):
    ```
@@ -205,7 +219,7 @@ When analyzing an API service to build an integration skill:
    https://api-docs.example.com/endpoints/projects
    https://api-docs.example.com/endpoints/data
    ```
-   Extract: HTTP methods, paths, parameters, request/response examples
+   Extract: HTTP methods, paths, parameters, request/response samples
 
 4. **Fetch error documentation**:
    ```
@@ -229,25 +243,25 @@ When analyzing an API service to build an integration skill:
    https://api-docs.example.com/libraries/python
    https://api-docs.example.com/libraries/javascript
    ```
-   Look for: Installation, initialization, example usage
+   Look for: Installation, initialization, sample usage
 
-7. **Fetch code examples**:
+7. **Fetch code samples**:
    ```
-   https://api-docs.example.com/examples
+   https://api-docs.example.com/samples
    https://api-docs.example.com/code-samples
    https://api-docs.example.com/tutorials
    ```
-   Extract: Complete working examples in target language
+   Extract: Complete working samples in target language
 
 ### Quality Checks
 
 - [ ] Base URL and API version identified
-- [ ] Authentication method documented with examples
+- [ ] Authentication method documented with samples
 - [ ] Core endpoints documented (at least 3-5)
 - [ ] Request/response formats shown
 - [ ] Error codes and handling documented
 - [ ] Rate limits documented
-- [ ] Code examples in at least one language
+- [ ] Code samples in at least one language
 - [ ] SDK/library information (if available)
 
 ## Tool/CLI Documentation Analysis Template
@@ -284,9 +298,9 @@ When analyzing a command-line tool to build a skill:
    ```
    Extract: Config file format, environment variables, precedence
 
-5. **Fetch usage examples** (multiple pages):
+5. **Fetch usage samples** (multiple pages):
    ```
-   https://tool-docs.example.com/examples
+   https://tool-docs.example.com/samples
    https://tool-docs.example.com/tutorials
    https://tool-docs.example.com/guides
    ```
@@ -297,7 +311,7 @@ When analyzing a command-line tool to build a skill:
 - [ ] Installation methods documented
 - [ ] All major commands listed with flags
 - [ ] Configuration options documented
-- [ ] At least 3 usage examples extracted
+- [ ] At least 3 usage samples extracted
 - [ ] Error messages and troubleshooting noted
 - [ ] Prerequisites and dependencies listed
 
@@ -350,7 +364,7 @@ When analyzing a library/package to build a skill:
 - [ ] Installation command extracted
 - [ ] Import/initialization documented
 - [ ] Core classes/functions documented
-- [ ] Working examples fetched (3+ scenarios)
+- [ ] Working samples fetched (3+ scenarios)
 - [ ] Configuration options noted
 - [ ] Common usage patterns extracted
 - [ ] Error handling patterns noted
@@ -376,12 +390,12 @@ When analyzing a specification or standard to build a skill:
    ```
    Read through entire specification
 
-3. **Fetch examples/samples**:
+3. **Fetch samples**:
    ```
-   https://spec.example.org/examples
    https://spec.example.org/samples
+   https://spec.example.org/quickstart
    ```
-   Extract: Valid examples, common patterns
+   Extract: Valid samples, common patterns
 
 4. **Fetch validation rules**:
    ```
@@ -402,7 +416,7 @@ When analyzing a specification or standard to build a skill:
 - [ ] Complete specification read
 - [ ] Key concepts extracted
 - [ ] Validation rules documented
-- [ ] Examples collected
+- [ ] Samples collected
 - [ ] Implementation guidance noted
 - [ ] Edge cases identified
 
@@ -413,7 +427,7 @@ After gathering resources for a skill, verify:
 ### Coverage
 - [ ] Installation/setup process clear
 - [ ] Core functionality documented
-- [ ] Common use cases covered (3-5 examples minimum)
+- [ ] Common use cases covered (3-5 samples minimum)
 - [ ] Error handling documented
 - [ ] Prerequisites/dependencies listed
 
@@ -426,14 +440,14 @@ After gathering resources for a skill, verify:
 
 ### Quality
 - [ ] Instructions are concrete and actionable
-- [ ] Code examples are complete and runnable
+- [ ] Code samples are complete and runnable
 - [ ] Configuration options are explained
 - [ ] Troubleshooting guidance available
 - [ ] Version/compatibility noted
 
 ### Synthesis Readiness
 - [ ] Enough info to write SKILL.md without guessing
-- [ ] Can write concrete examples from gathered info
+- [ ] Can write concrete samples from gathered info
 - [ ] Can create troubleshooting section
 - [ ] Can list prerequisites accurately
 - [ ] Can explain when to use the skill
@@ -463,14 +477,14 @@ After gathering resources for a skill, verify:
 ```
 ✗ Skip installation docs (assume obvious)
 ✗ Skip error handling docs (will figure out)
-✗ Skip examples (can make them up)
+✗ Skip samples (can make them up)
 ```
 
 **Fix**: Be exhaustive
 ```
 ✓ Fetch installation (all methods)
 ✓ Fetch error docs (all codes)
-✓ Fetch examples (all scenarios)
+✓ Fetch samples (all scenarios)
 ```
 
 ### ❌ Shallow Navigation
@@ -479,14 +493,14 @@ After gathering resources for a skill, verify:
 ```
 ✗ See "Guides" section → don't click
 ✗ See "API Reference" → assume simple
-✗ See "Examples" → skip it
+✗ See "Samples" → skip it
 ```
 
 **Fix**: Click through systematically
 ```
 ✓ Guides → Fetch all guide pages
 ✓ API Reference → Fetch all endpoint docs
-✓ Examples → Collect all examples
+✓ Samples → Collect all samples
 ```
 
 ### ❌ Incomplete API Coverage
@@ -525,14 +539,14 @@ For documentation sites with good navigation:
 6. Verify coverage against checklist
 ```
 
-## Example: Complete Resource Gathering
+## Sample: Complete Resource Gathering
 
-**Task**: Build skill for "ExampleAPI" service
+**Task**: Build skill for "SampleAPI" service
 
 **Execution**:
 ```
 1. fetch_webpage("https://docs.exampleapi.com/")
-   → Found sections: Intro, Auth, Endpoints, Errors, Examples
+   → Found sections: Intro, Auth, Endpoints, Errors, Samples
 
 2. fetch_webpage("https://docs.exampleapi.com/introduction")
    → Extracted: Base URL, version, overview
@@ -558,14 +572,14 @@ For documentation sites with good navigation:
 9. fetch_webpage("https://docs.exampleapi.com/errors")
    → Extracted: Error codes 400, 401, 403, 404, 429, 500
 
-10. fetch_webpage("https://docs.exampleapi.com/examples")
-    → Found examples: Basic auth, Create user, List projects
+10. fetch_webpage("https://docs.exampleapi.com/samples")
+   → Found samples: Basic auth, Create user, List projects
 
 11. Verify coverage:
     ✓ Auth methods: 3 pages fetched
     ✓ Endpoints: 2 resources documented
     ✓ Errors: All codes documented
-    ✓ Examples: 3+ scenarios collected
+   ✓ Samples: 3+ scenarios collected
     
 12. Proceed to writing SKILL.md with comprehensive understanding
 ```

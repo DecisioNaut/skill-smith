@@ -47,20 +47,20 @@ For new features or improvements:
 #### Making Changes
 
 1. **Follow the specification**: All changes must comply with Agent Skills v1.0
-2. **Keep SKILL.md focused**: Stay under 500 lines
-3. **Use progressive disclosure**: Move details to references/
+2. **Keep SKILL.md focused**: Keep `skill-smith/SKILL.md` under 500 lines
+3. **Use progressive disclosure**: Move details to `skill-smith/references/`
 4. **Write agent-friendly prose**: Clear, literal, actionable instructions
-5. **Include examples**: Show concrete usage patterns
+5. **Include samples**: Show concrete usage patterns
 6. **Test your changes**: Follow the instructions literally
 
 #### Testing Checklist
 
 Before submitting:
 
-- [ ] SKILL.md is under 500 lines
-- [ ] Validation passes: `skills-ref validate .`
+- [ ] `skill-smith/SKILL.md` is under 500 lines
+- [ ] Validation passes: `skills-ref validate skill-smith`
 - [ ] All referenced files exist
-- [ ] Examples are complete and correct
+- [ ] Samples are complete and correct
 - [ ] Instructions are clear and unambiguous
 - [ ] Followed the instructions yourself to verify they work
 - [ ] No typos or formatting errors
@@ -74,10 +74,10 @@ Always validate your changes:
 pip install -e git+https://github.com/agentskills/agentskills.git#egg=skills-ref&subdirectory=skills-ref
 
 # Validate the skill
-skills-ref validate .
+skills-ref validate skill-smith
 
 # Check properties
-skills-ref read-properties .
+skills-ref read-properties skill-smith
 ```
 
 #### Commit Messages
@@ -89,7 +89,7 @@ feat: add troubleshooting section for API errors
 
 - Added common API error patterns
 - Included resolution steps
-- Added examples for each error type
+- Added samples for each error type
 ```
 
 **Format**:
@@ -111,7 +111,7 @@ feat: add troubleshooting section for API errors
    - Clear title describing the change
    - Detailed description of what and why
    - Link to related issues
-   - Screenshots/examples if applicable
+   - Screenshots/samples if applicable
    - Confirmation that validation passes
 
 3. **Respond to feedback**: Be open to suggestions and iterate
@@ -121,7 +121,7 @@ feat: add troubleshooting section for API errors
 Improvements to documentation are always welcome:
 
 - Fix typos or unclear instructions
-- Add examples or use cases
+- Add samples or use cases
 - Improve explanations
 - Expand references
 
@@ -168,7 +168,7 @@ If the file doesn't exist:
 
 - **Stay focused**: One topic per file
 - **Use headers**: Clear hierarchy with ##, ###
-- **Include examples**: Show, don't just tell
+- **Include samples**: Show, don't just tell
 - **Keep under 1000 lines**: Split if longer
 - **Link back to SKILL.md**: Reference where it's used
 
@@ -178,11 +178,6 @@ For scripts/:
 - **Python**: Follow PEP 8, use type hints
 - **Shell**: Use bash, include error checking
 - **JavaScript**: Use modern ES6+ syntax
-
-For examples/:
-- **Complete**: Can be run as-is
-- **Commented**: Explain non-obvious parts
-- **Realistic**: Show real-world usage
 
 ## Review Process
 
@@ -207,7 +202,7 @@ For examples/:
 
 - **Specification compliance** is non-negotiable
 - **Agent-friendly writing** is essential
-- **Working examples** are required
+- **Working samples** are required
 - **Clear instructions** are paramount
 
 ### Help Others
@@ -240,9 +235,8 @@ By contributing, you agree that your contributions will be licensed under the MI
 If you're stuck:
 
 1. **Read the specification**: https://agentskills.io
-2. **Check references/**: Detailed guides are there
-3. **Look at examples/**: See how it's done
-4. **Open an issue**: We're happy to help!
+2. **Check skill-smith/references/**: Detailed guides are there
+3. **Open an issue**: We're happy to help!
 
 ## Thank You!
 
